@@ -5,7 +5,6 @@ const morgan = require('morgan');
 
 const PORT = 8888;
 
-
 express()
 .use(function(req, res, next) {
     res.header(
@@ -25,9 +24,8 @@ express()
 .use('/', express.static(__dirname + '/'))
 
 // REST endpoints
-
 .get("/test",(req,res) => {
-    res.status(200).json({status: 200, message: "this worked?"})
+    res.status(200).json({status: 200, message: "Test" })
 })
 
 // this is our catch all endpoint.
