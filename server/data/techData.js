@@ -1,0 +1,18 @@
+const technologies = [
+    {techName:"Light/Wave Deflector" , techColor:"Blue", techText:"Your ships can move through systems that contain other player's ships.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Fleet Logistics" , techColor:"Blue", techText:"During each of your turns of the action phase, you may perform 2 actions instead of 1.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Gravity Drive" , techColor:"Blue", techText:"After you activate a ssystem, apply +1 to the move value of 1 of your ships during this tactical action", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Antimass Deflectors" , techColor:"Blue", techText:"Your ships can move into and through asteroid fields. When other players' units use SPACE CANNON against your units, apply -1 to the result of each die roll", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Integrated Economy" , techColor:"Yellow", techText:"After you gain control of a planet, you may produce any number of units on that planet that have a combined cost equal to or less than that planet's ressource value.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Transit Diodes" , techColor:"Yellow", techText:"You may exhaust this card at the start of your turn during the action phase; remove up to 4 of your ground forces from the game board and place them on 1 or more planets you control", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Graviton Laser System" , techColor:"Yellow", techText:"You may exhaust this card before 1 or more of your units use SPACE CANNON; hits produced by those units must be assigned to non-fighter ships if able.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Sarween Tools" , techColor:"Yellow", techText:"When 1 or more of your units use PRODUCTION, reduce the combined cost of the produced units by 1.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Assault Cannon" , techColor:"Red", techText:"At the start of a space combat in a system thyat contains 3 or more of your non-fighter ships, your opponent must destroy 1 of his non-fighter ships.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Duranium Armor" , techColor:"Red", techText:"During each combat round, after you assign hits to your units, repair 1 of your damaged units that did not use SUSTAIN DAMAGE during this combat round.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Magen Defense Grid" , techColor:"Red", techText:"You may exhaust this card at the start of a round of ground units that have PLANETARY SHIELD; your opponent cannot make combat rolls this combat round.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Plasma Scoring" , techColor:"Red", techText:"When 1 or more of your units use BOMBARDMENT or SPACE CANNON, 1 of those rolls may roll 1 additional die.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"X-89 Bacterial Weapon" , techColor:"Green", techText:"ACTION: Exhaust this carad and choose 1 planet in a system that contains 1 or more of your ships that have BOMBARDMENT; destroy all infantry on that planet.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Hyper Metabolism" , techColor:"Green", techText:"During the status phase, gain 3 command tokens instead of 2.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Dacxive Animators" , techColor:"Green", techText:"Adter you win a ground combat, you may place 1 infantry from your reinforcements on that planet.", techGlobal:"Yes", techUnique:"No",},
+    {techName:"Neural Motivator" , techColor:"Green", techText:"During the status phase, draw 2 action cards instead of 1.", techGlobal:"Yes", techUnique:"No",},
+]
