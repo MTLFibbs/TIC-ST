@@ -22,8 +22,10 @@ const getFaction = async (req,res) => {
       const result = await db.collection("Factions").aggregate([{$unwind: "$factions"}, {$match:{"factions.nickname":{$eq: faction}}}, {$replaceRoot:{newRoot: "$factions"}}]).toArray();
       res.status(200).json({ status: 200, data: result, message: `Faction ${faction} found!`});
   }catch(err){
-
+    console.log(err.stack);
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
   }
   client.close();
 };
+
 module.exports = {getFaction};
