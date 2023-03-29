@@ -15,6 +15,7 @@ const {getUnits} = require("./handlers/getUnits")
 const {getGlobalUnits} = require("./handlers/getGlobalUnits")
 const {getFactionUnits} = require("./handlers/getFactionUnits")
 const {getUnit} = require("./handlers/getUnit")
+const {addLiveGame} = require("./handlers/addLiveGame")
 
 
 
@@ -37,7 +38,7 @@ express()
 .use('/', express.static(__dirname + '/'))
 
 // REST endpoints
-
+//All these endpoints gather initial data from the database
 .get("/api/get-factions", getFactions )
 .get("/api/get-faction/:faction", getFaction )
 .get("/api/get-techs", getTechs )
@@ -49,7 +50,9 @@ express()
 .get("/api/get-faction-units/:faction", getFactionUnits )
 .get("/api/get-specific-unit/:unit", getUnit )
 
+// These endpoints are related to the live game tracker
 
+.post("/api/add-new-live-game", addLiveGame)
 
 
 // this is our catch all endpoint.
