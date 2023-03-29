@@ -15,6 +15,8 @@ const {getUnits} = require("./handlers/getUnits")
 const {getGlobalUnits} = require("./handlers/getGlobalUnits")
 const {getFactionUnits} = require("./handlers/getFactionUnits")
 const {getUnit} = require("./handlers/getUnit")
+
+const {getLiveGames} = require("./handlers/getLiveGames")
 const {addLiveGame} = require("./handlers/addLiveGame")
 
 
@@ -32,10 +34,10 @@ express()
     next();
 })
 .use(morgan('tiny'))
-.use(express.static('./server/assets'))
+//.use(express.static('./server/assets'))
 .use(express.json())
 .use(express.urlencoded({ extended: false }))
-.use('/', express.static(__dirname + '/'))
+//.use('/', express.static(__dirname + '/'))
 
 // REST endpoints
 //All these endpoints gather initial data from the database
@@ -51,6 +53,8 @@ express()
 .get("/api/get-specific-unit/:unit", getUnit )
 
 // These endpoints are related to the live game tracker
+.get("api/get-live-game/:_id", getLiveGame)
+.get("/api/get-live-games/:host", getLiveGames)
 
 .post("/api/add-new-live-game", addLiveGame)
 

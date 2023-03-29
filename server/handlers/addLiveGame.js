@@ -18,6 +18,7 @@ const addLiveGame = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);
 
     const host = req.body.host;
+    const gameName = req.body.gameName;
     const playerCount = req.body.playerCount;
     const playersObject = req.body.players;
     const playersList = Object.keys(playersObject);
@@ -29,6 +30,7 @@ const addLiveGame = async (req,res) => {
             $set:{
             _id: uuidv4(), 
             host: host, 
+            gameName: gameName,
             playerCount: playerCount, 
             roundCount: 0, 
             drawnObjectives:[],
@@ -54,6 +56,7 @@ const addLiveGame = async (req,res) => {
             }),
             
         }}
+        const result = await db.collection("LiveGames").insertOne(newSet.$set)
         res.status(200).json({ status: 200, data: newSet.$set, message: "TEST" });
     }catch(err){
         console.log(err.stack);
