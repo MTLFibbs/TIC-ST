@@ -20,7 +20,7 @@ const getLiveGame = async (req,res) => {
         await client.connect();
         const db = client.db("FinalProject");
         const result = await db.collection("LiveGames").find({_id: _id}).toArray();
-        res.status(200).json({ status: 200, data: result, message: `Live game with id${_id}found!`});
+        res.status(200).json({ status: 200, data: result, message: `Live game with id ${_id} found!`});
 
     }catch(err){
         console.log(err.stack);

@@ -15,9 +15,10 @@ const {getUnits} = require("./handlers/getUnits")
 const {getGlobalUnits} = require("./handlers/getGlobalUnits")
 const {getFactionUnits} = require("./handlers/getFactionUnits")
 const {getUnit} = require("./handlers/getUnit")
-
+const {getLiveGame} = require("./handlers/getLiveGame")
 const {getLiveGames} = require("./handlers/getLiveGames")
 const {addLiveGame} = require("./handlers/addLiveGame")
+const {deleteLiveGame} = require("./handlers/deleteLiveGame")
 
 
 
@@ -53,10 +54,12 @@ express()
 .get("/api/get-specific-unit/:unit", getUnit )
 
 // These endpoints are related to the live game tracker
-.get("api/get-live-game/:_id", getLiveGame)
+.get("/api/get-live-game/:_id", getLiveGame)
 .get("/api/get-live-games/:host", getLiveGames)
 
 .post("/api/add-new-live-game", addLiveGame)
+
+.delete("/api/delete-live-game/:_id", deleteLiveGame)
 
 
 // this is our catch all endpoint.
