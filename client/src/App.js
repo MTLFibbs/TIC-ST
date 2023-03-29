@@ -1,9 +1,27 @@
+import { useState, useEffect, useContext } from "react";
+import styled from "styled-components";
+import React from "react";
+import GlobalStyles from "./GlobalStyles";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Header from "./Header";
+import Home from "./Home";
+import LiveGameList from "./LiveGameList";
+import SpecificLiveGame from "./SpecificLiveGame";
 
 const App = () => {
   return (
-    <main>
-      POG
-    </main>
+    <>
+    <BrowserRouter>
+      <GlobalStyles/>
+      <Header/>
+      <Routes>
+        <Route path = "/" element = {<Home/>}/>
+        <Route path = "/livegames/:host" element = {<LiveGameList/>}/>
+        <Route path = "/livegame/:_id" element = {<SpecificLiveGame/>} />
+      </Routes>
+    </BrowserRouter>
+    </>
   );
 }
 
