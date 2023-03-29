@@ -30,12 +30,12 @@ const factions = [
         factionTechs: technologies.technologies.filter(obj => obj.techUnique.includes("Saar")).map(obj =>obj.techName),
     },
     {
-        nickname: "Muuat",
+        nickname: "Muaat",
         factionName:"The Embers of Muaat", 
-        globalUnits: units.units.filter(obj => obj.unitAttribution.includes("Muuat") && obj.unitGlobal === "Yes" ).map(obj =>obj.unitName),
-        factionUnits: units.units.filter(obj => obj.unitAttribution.includes("Muuat") && obj.unitGlobal === "No" ).map(obj =>obj.unitName),
+        globalUnits: units.units.filter(obj => obj.unitAttribution.includes("Muaat") && obj.unitGlobal === "Yes" ).map(obj =>obj.unitName),
+        factionUnits: units.units.filter(obj => obj.unitAttribution.includes("Muaat") && obj.unitGlobal === "No" ).map(obj =>obj.unitName),
         globalTechs: technologies.technologies.filter(obj => obj.techGlobal === "Yes" ).map(obj =>obj.techName),
-        factionTechs: technologies.technologies.filter(obj => obj.techUnique.includes("Muuat")).map(obj =>obj.techName),
+        factionTechs: technologies.technologies.filter(obj => obj.techUnique.includes("Muaat")).map(obj =>obj.techName),
     },
     {
         nickname: "Hacan",
