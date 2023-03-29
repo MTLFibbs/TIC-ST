@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { NavLink, Link } from "react-router-dom"
 
 const Header = () => {
     return(
         <Wrapper>
-        <HeaderBox> THIS IS A VERY NICE HEADER </HeaderBox>
+        <HeaderBox to ={`/`}> THIS IS A VERY NICE HEADER </HeaderBox>
         </Wrapper>
 
     )
@@ -21,7 +22,7 @@ font-weight: bold;
 background-color: lightblue;
 `
 
-const HeaderBox = styled.div`
+const HeaderBox = styled(Link)`
 `
 
 export default Header;

@@ -24,7 +24,7 @@ const LiveGameList = () => {
 
     return(
         <>
-        { !liveGames
+        {!liveGames
         ? <p>LOADING</p>
         : 
         <Wrapper>
