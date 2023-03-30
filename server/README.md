@@ -7,6 +7,7 @@
 **_Input_**
 ```
 {
+	"gameName": "TESTING GROUNDS",
 	"host": "Fibbs",
 	"playerCount": "4",
 	"players":

@@ -17,8 +17,14 @@ const {getFactionUnits} = require("./handlers/getFactionUnits")
 const {getUnit} = require("./handlers/getUnit")
 const {getLiveGame} = require("./handlers/getLiveGame")
 const {getLiveGames} = require("./handlers/getLiveGames")
+const {getPublicObjective} = require("./handlers/getPublicObjective")
+const {getSecretObjective} = require("./handlers/getSecretObjective")
+const {getObjectives} = require("./handlers/getObjectives")
+
 const {addLiveGame} = require("./handlers/addLiveGame")
 const {deleteLiveGame} = require("./handlers/deleteLiveGame")
+
+const {patchLiveGame} = require("./handlers/patchLiveGame")
 
 
 
@@ -52,12 +58,17 @@ express()
 .get("/api/get-global-units", getGlobalUnits )
 .get("/api/get-faction-units/:faction", getFactionUnits )
 .get("/api/get-specific-unit/:unit", getUnit )
+.get("/api/get-public-objective/:objective", getPublicObjective)
+.get("/api/get-secret-objective/:objective", getSecretObjective)
+.get("/api/get-objectives", getObjectives)
 
 // These endpoints are related to the live game tracker
 .get("/api/get-live-game/:_id", getLiveGame)
 .get("/api/get-live-games/:host", getLiveGames)
 
 .post("/api/add-new-live-game", addLiveGame)
+
+.patch("/api/update-live-game/:_id", patchLiveGame)
 
 .delete("/api/delete-live-game/:_id", deleteLiveGame)
 

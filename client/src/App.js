@@ -8,6 +8,7 @@ import Header from "./Header";
 import Home from "./Home";
 import LiveGameList from "./LiveGameList";
 import SpecificLiveGame from "./SpecificLiveGame";
+import { LiveGameProvider } from "./LiveGameContext";
 
 const App = () => {
   return (
