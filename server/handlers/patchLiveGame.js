@@ -24,6 +24,7 @@ const patchLiveGame = async (req,res) =>{
     const supported = req.body.throneTarget;
     const scorer = req.body.scorerName;
     const scored = req.body.scoredObjective;
+    const round = req.body.roundScore;
 
     try{
         await client.connect();
@@ -80,7 +81,10 @@ const patchLiveGame = async (req,res) =>{
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
                 res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} removed from the public objectives array of player ${scorer}`});
             }
-        
+        }
+        else if(round || round === 0){
+            const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{roundCount: round}});
+            res.status(201).json({ status: 201, data: {result: result,}, message: `Round updated to ${round} in live game ${_id}`});
         }
         
     }catch(err){

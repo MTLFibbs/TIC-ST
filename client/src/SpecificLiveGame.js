@@ -122,7 +122,7 @@ position:absolute;
 background-color:violet;
 width: 18vw;
 height: 14vh;
-margin-left: 80vw;
+margin-left: 80.2vw;
 `
 
 const ObjectivesWrapper = styled.div`

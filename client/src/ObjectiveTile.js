@@ -121,7 +121,7 @@ font-weight:bold;
 font-size:1.2vw;
 margin-top:5px;
 height:10%;
-border-bottom: 2px solid black;
+padding-top:1vh;
 `
 const ObjectiveTextBox = styled.div`
 font-weight:bold;
@@ -138,7 +138,9 @@ const ObjectiveNameText = styled.div`
 const SelectedObjectiveNameText = styled.div`
 display:flex;
 align-items:center;
-font-size:1vw;
+justify-content:center;
+text-align:center;
+font-size:80%;
 `
 const ObjectiveBoxText = styled.button`
 height:98%;
