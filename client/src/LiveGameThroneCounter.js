@@ -5,15 +5,6 @@ import ThroneButtonWrapper from "./ThroneButtonWrapper";
 
 const LiveGameThroneCounter = ({gameData}) => {
 
-    const [toggle, setToggle] = useState(false);
-
-    const handleToggle = () =>{
-        setToggle(!toggle);
-        setTimeout(()=>{
-            console.log(toggle);
-        }, 1000);
-    };
-
 
     return(
         <Wrapper>
@@ -23,7 +14,7 @@ const LiveGameThroneCounter = ({gameData}) => {
             <PlayerBox>
                 {gameData.players.map((e,i)=>{
                     return(
-                        <ThroneButtonWrapper key = {i} name = {e.nickname} gameData = {gameData} />
+                        <ThroneButtonWrapper key = {i} name = {e.nickname} gameData = {gameData} index = {i} />
                     )
                 })}
             </PlayerBox>

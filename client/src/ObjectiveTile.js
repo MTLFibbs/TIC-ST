@@ -70,11 +70,9 @@ const ObjectiveTile = ({gameData, number, objectiveData, drawn}) => {
         falsyChecker();
     }, [handleObjectiveChange]);
 
-
-
     return(
         <Wrapper>
-            {exists === false
+            {exists === false || exists === null
             ?
             <>
             <ObjectiveNameBox>

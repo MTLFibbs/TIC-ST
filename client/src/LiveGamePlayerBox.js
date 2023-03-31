@@ -12,6 +12,7 @@ const LiveGamePlayerBox = ({gameData}) => {
             </PlayerNameBox>
             <PlayerScoreBox>
                 <PlayerScoreText>{gameData.points}</PlayerScoreText>
+                <Supported>Th: {gameData.pointsOrigin.supportedBy.join(" / ")}</Supported>
             </PlayerScoreBox>
         </Wrapper>
     )
@@ -32,8 +33,9 @@ margin-top:5px;
 `
 const PlayerScoreBox = styled.div`
 display:flex;
-flex-direction:row;
+flex-direction:column;
 justify-content:center;
+align-items:center;
 font-weight:bold;
 font-size:18vh;
 `
@@ -43,6 +45,16 @@ const FactionImage = styled.img`
 const PlayerNameText = styled.div`
 `
 const PlayerScoreText = styled.div`
+margin-bottom: -3vh;
+`
+const Supported = styled.div`
+display:flex;
+justify-content:center;
+text-align:center;
+font-size: 1vw;
+width: 8vw;
+height: 2vh;
+font-weight:normal;
 `
 
 export default LiveGamePlayerBox;

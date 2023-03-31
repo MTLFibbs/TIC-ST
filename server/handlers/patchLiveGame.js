@@ -47,7 +47,7 @@ const patchLiveGame = async (req,res) =>{
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].pointsOrigin.mecatolScore": mecatolScore}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
             res.status(201).json({ status: 201, data: {result: result, player: nickname}, message: `Mecatol score for player ${nickname} updated in live game ${_id}`});
         }
-        else if(supporter && target){
+        else if(supporter && supported){
             if(manip === "push"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
                 res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} added to the throne array of player ${supported}`});

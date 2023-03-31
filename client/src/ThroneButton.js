@@ -4,28 +4,32 @@ import { LiveGameContext } from "./LiveGameContext";
 import { useEffect, useState } from "react";
 
 
-const ThroneButton = ({nickname,supportedName, supporterName, gameData}) =>{
+const ThroneButton = ({index,nickname,supportedName, supporterName, gameData}) =>{
 
     const [fetches, setFetches] = useState(false);
     const {assign} = useContext(LiveGameContext)
     const {setAssign} = useContext(LiveGameContext)
-    const [toggle, setToggle] = useState(false);
 
     const handleToggle = () =>{
-        setToggle(!toggle);
+        if(gameData.players[index].pointsOrigin.supportedBy.includes(supporterName)){
+            handleFetch(true)
+        }
+        else{
+            handleFetch(false)
+        }
     };
 
-    useEffect(()=>{
-        /*setFetches(true);
-        if(toggle === true){
+    const handleFetch = (test) => {
+        setFetches(true);
             fetch(`/api/update-live-game/${gameData._id}`, {
                 method: "PATCH",
                 headers:{Accept: "application/json", "Content-Type": "application/json",},
-                body: JSON.stringify({throneSupporter: supporterName , throneTarget: supportedName, manip: "push"}),
+                body: JSON.stringify({throneSupporter: supporterName , throneTarget: supportedName, manip: test === false ? "push" : "pull"}),
             })
             .then((res) => res.json())
             .then((data) => {
                 if(data.status === 400 || data.status === 500){
+                    setFetches(false);
                     throw new Error(data.message);
                 }
                 else{
@@ -42,40 +46,12 @@ const ThroneButton = ({nickname,supportedName, supporterName, gameData}) =>{
                 window.alert(error);
             });
         }
-        else if(toggle === false){
-        if(toggle === true){
-            fetch(`/api/update-live-game/${gameData._id}`, {
-                method: "PATCH",
-                headers:{Accept: "application/json", "Content-Type": "application/json",},
-                body: JSON.stringify({ThroneSupporter: supporterName , ThroneTarget: supportedName, manip: "pull"}),
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                if(data.status === 400 || data.status === 500){
-                    throw new Error(data.message);
-                }
-                else{
-                    if(assign === false){
-                        setAssign(true);
-                    }
-                    else if(assign === true){
-                        setAssign(false)
-                    }
-                    setFetches(false);
-                }
-            })
-            .catch((error) => {
-                window.alert(error);
-            });
-        }
-        }*/
-    }, [handleToggle])
 
     return(
         <>
-        {toggle === false
-        ?<FalseButton onClick = {handleToggle}>{nickname}</FalseButton>
-        :<TrueButton onClick = {handleToggle}>{nickname}</TrueButton>
+        {//toggle === false
+        //?<FalseButton  disabled= {fetches === true} onClick = {handleToggle}>{nickname}</FalseButton>
+        <TrueButton  disabled= {fetches === true} onClick = {handleToggle}>{nickname}</TrueButton>
         }
 
         </>

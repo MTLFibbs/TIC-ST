@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import ThroneButton from "./ThroneButton";
 
-const ThroneButtonWrapper = ({name, gameData}) => {
+const ThroneButtonWrapper = ({name, gameData, index}) => {
     return(
         <MapWrapper >
         <PlayerNameText >{name}</PlayerNameText>
         <ButtonWrapper>
             {gameData.players.filter(el => el.nickname !== name ).map((e,i) =>{
             return (
-                <ThroneButton key = {e.nickname} gameData = {gameData} supportedName = {name} supporterName = {e.nickname} nickname = {e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)} />
+                <ThroneButton key = {e.nickname} index = {index} gameData = {gameData} supportedName = {name} supporterName = {e.nickname} nickname = {e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)} />
         )})}
         </ButtonWrapper>
         </MapWrapper>

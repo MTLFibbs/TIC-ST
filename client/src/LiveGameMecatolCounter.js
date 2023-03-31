@@ -124,7 +124,7 @@ const PlayerScoreText = styled.div`
 `
 
 const ScoreWrapper = styled.div`
-margin-top:-0.6vh;
+margin-top:0vh;
 margin-bottom:0;
 `
 

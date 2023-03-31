@@ -10,16 +10,6 @@ const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
     const {assign} = useContext(LiveGameContext)
     const {setAssign} = useContext(LiveGameContext)
 
-    /*const fetchObjectiveData = async () => {
-        const selectedObjective = await fetch(`/api/get-public-objective/${objective.objective}`).then((res)=> res.json());
-        console.log(selectedObjective.data[0])
-        setObjectiveText(selectedObjective.data[0])
-        if(selectedObjective.status !== 200) {
-            window.alert(selectedObjective.message);
-            throw new Error(selectedObjective.message);
-        }
-    };*/
-
     useEffect(() => {
         fetch(`/api/get-public-objective/${objective}`)
         .then(res => res.json())
