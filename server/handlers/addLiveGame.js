@@ -45,8 +45,7 @@ const addLiveGame = async (req,res) => {
                         {
                             mecatolScore: 0,
                             riderScore: 0,
-                            publicObjectivesValueOne:[],
-                            publicObjectivesValueTwo:[],
+                            publicObjectives:[],
                             secretObjectives:[],
                             supportedBy:[]
                         },

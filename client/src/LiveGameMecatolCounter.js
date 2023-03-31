@@ -13,11 +13,10 @@ const LiveGameMecatolCounter = ({gameData}) => {
 
     const handleMecatolChange = ( change, name, score) => {
         setIsFetching(true);
-            if(change === "plus"){
                 fetch(`/api/update-live-game/${gameData._id}`, {
                     method: "PATCH",
                     headers:{Accept: "application/json", "Content-Type": "application/json",},
-                    body: JSON.stringify({nickname: name , mecatolScore: (parseInt(score) + 1), manip: "update"}),
+                    body: JSON.stringify({nickname: name , mecatolScore: change === increment ? (parseInt(score) + 1) : (parseInt(score) - 1) , manip: "update"}),
                 })
                 .then((res) => res.json())
                 .then((data) => {
@@ -37,32 +36,6 @@ const LiveGameMecatolCounter = ({gameData}) => {
                 .catch((error) => {
                     window.alert(error);
                 });
-            }
-            else if(change === "minus"){
-                fetch(`/api/update-live-game/${gameData._id}`, {
-                    method: "PATCH",
-                    headers:{Accept: "application/json", "Content-Type": "application/json",},
-                    body: JSON.stringify({nickname: name , mecatolScore: (parseInt(score) + -1), manip: "update"}),
-                })
-                .then((res) => res.json())
-                .then((data) => {
-                    if(data.status === 400 || data.status === 500){
-                        throw new Error(data.message);
-                    }
-                    else{
-                        if(assign === false){
-                            setAssign(true);
-                        }
-                        else if(assign === true){
-                            setAssign(false)
-                        }
-                        setIsFetching(false);
-                    }
-                })
-                .catch((error) => {
-                    window.alert(error);
-                });
-            }
         };
     
 

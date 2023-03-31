@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 
 import { LiveGameContext } from "./LiveGameContext";
+import ObjectiveButtonWrapper from "./ObjectiveButtonWrapper";
 
 const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
     
@@ -58,6 +59,7 @@ const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
             :
             <>
             <LoadedText>{objectiveText[0].objectiveText}</LoadedText>
+            <ObjectiveButtonWrapper objectiveTitle = {objectiveText[0].objectiveName}gameData = {gameData} />
             <DeleteButton onClick = {handleDeletion}>D</DeleteButton>
             </>
         }
@@ -66,41 +68,43 @@ const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
 };
 
 const Wrapper = styled.div`
-display:table;
 margin-left:18px;
 height:95%;
 width:100%;
-text-align:center;
-padding-bottom: 20px;
 margin:0;
 font-size:1.3vw;
 padding-right:4px;
 padding-left:4px;
 `
 const Text = styled.div`
-display:table-cell;
 justify-content:center;
 text-align:center;
 width:170px;
 overflow-wrap: break-word;
 `
 const LoadedText = styled.div`
-display:table-cell;
-vertical-align:middle;
+display:flex;
+height: 22vh;
+justify-content:center;
+align-items:center;
 text-align:center;
 cursor:pointer;
 `
 
 const DeleteButton = styled.button`
 position:absolute;
-margin-top:24vh;
-margin-left:-1.3vw;
+margin-top:-25.5vh;
+margin-left:0vw;
 border-radius:30px;
 width:1.2vw;
 height:2vh;
 font-size: 0.8vw;
 background-color:red;
 border:none;
+display:flex;
+text-align:center;
+justify-content:center;
+align-items:center;
 cursor:pointer;
 `
 

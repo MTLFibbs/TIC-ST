@@ -2,16 +2,17 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const LiveGamePlayerBox = ({gameData}) => {
+const LiveGamePlayerBox = ({gameData, index}) => {
     
-
+    
     return(
         <Wrapper>
             <PlayerNameBox>
                 <PlayerNameText>{gameData.nickname}</PlayerNameText>
             </PlayerNameBox>
             <PlayerScoreBox>
-                <PlayerScoreText>{gameData.points}</PlayerScoreText>
+                <PlayerScoreText>{parseInt(gameData.pointsOrigin.mecatolScore)+parseInt(gameData.pointsOrigin.riderScore)+gameData.pointsOrigin.supportedBy.length+gameData.pointsOrigin.secretObjectives.length+gameData.pointsOrigin.publicObjectives.length}
+</PlayerScoreText>
                 <Supported>Th: {gameData.pointsOrigin.supportedBy.join(" / ")}</Supported>
             </PlayerScoreBox>
         </Wrapper>

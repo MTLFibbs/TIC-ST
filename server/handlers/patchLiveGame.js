@@ -21,7 +21,9 @@ const patchLiveGame = async (req,res) =>{
     const mecatolScore = req.body.mecatolScore;
     const nickname = req.body.nickname;
     const supporter = req.body.throneSupporter;
-    const supported = req.body.throneTarget
+    const supported = req.body.throneTarget;
+    const scorer = req.body.scorerName;
+    const scored = req.body.scoredObjective;
 
     try{
         await client.connect();
@@ -30,20 +32,32 @@ const patchLiveGame = async (req,res) =>{
         if(gameObjective){
             const included = await db.collection("LiveGames").find({_id:_id}).project({"players":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
             const targetIncluded = included[0].drawnObjectives
-    
+            const playerCheck = await db.collection("LiveGames").find({_id:_id}).project({"drawnObjectives":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
+            const mappedPlayerCheck = playerCheck[0].players.map((e,i) => e.pointsOrigin.publicObjectives).flat();
+            //res.status(201).json({ status: 201, data: playerCheck[0].players[0].nickname, message: `TEST`});
+            
             if(targetIncluded.includes(gameObjective) === true && manip ==="push"){
                 res.status(400).json({ status: 400, data: {Objective:gameObjective, alreadyIncludedObjectives: targetIncluded}, message: `Objective ${gameObjective} cannot be added to live game ${_id} as it already exists within the game`});
             }
-            else if(gameObjective && manip === "push"){
+            else if(manip === "push"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{drawnObjectives: gameObjective}});
                 res.status(201).json({ status: 201, data: {result:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} added to live game ${_id}`});
             }
-            else if(gameObjective && manip === "pull"){
+            else if(manip === "pull" && mappedPlayerCheck.includes(gameObjective)){
+                let i = 0;
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnObjectives: gameObjective}});
-                res.status(201).json({ status: 201, data: {result:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} removed from live game ${_id}`});
+                for(i = 0; i < playerCheck[0].players.length; i++){
+                    const deleteResult = await db.collection("LiveGames").updateOne({_id:_id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": gameObjective}},{arrayFilters:[{"elem.nickname": playerCheck[0].players[i].nickname}]})
+                }
+                res.status(201).json({ status: 201, data: {removeObjective:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} removed from live game ${_id} && players had their points deducted`});
             }
+            else if(manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnObjectives: gameObjective}});
+                res.status(201).json({ status: 201, data: {removeObjective:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} removed from live game ${_id}`});
+            }
+            
         }
-        else if(mecatolScore){
+        else if(mecatolScore || mecatolScore === 0){
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].pointsOrigin.mecatolScore": mecatolScore}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
             res.status(201).json({ status: 201, data: {result: result, player: nickname}, message: `Mecatol score for player ${nickname} updated in live game ${_id}`});
         }
@@ -56,6 +70,17 @@ const patchLiveGame = async (req,res) =>{
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
                 res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} removed from the throne array of player ${supported}`});
             }
+        }
+        else if(scorer && scored){
+            if(manip === "push"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
+                res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} added to the public objectives array of player ${scorer}`});
+            }
+            else if(manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
+                res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} removed from the public objectives array of player ${scorer}`});
+            }
+        
         }
         
     }catch(err){

@@ -8,6 +8,7 @@ import LiveGamePlayerBox from "./LiveGamePlayerBox";
 import LiveGameMecatolCounter from "./LiveGameMecatolCounter";
 import LiveGameThroneCounter from "./LiveGameThroneCounter";
 import ObjectiveTile from "./ObjectiveTile";
+import RoundCounter from "./RoundCounter";
 
 const SpecificLiveGame = () => {
 
@@ -58,9 +59,12 @@ const SpecificLiveGame = () => {
             <>
             <PlayersWrapper>
             {gameData[0].players.map((e,i)=>{
-                return <LiveGamePlayerBox key = {i} gameData = {gameData[0].players[i]}></LiveGamePlayerBox>
+                return <LiveGamePlayerBox key = {i} index = {i} gameData = {gameData[0].players[i]}></LiveGamePlayerBox>
             })}
             </PlayersWrapper>
+            <RoundWrapper>
+                <RoundCounter gameData = {gameData}/>
+            </RoundWrapper>
             <FieldWrapper>
                 {objectiveAmount.map((e,i)=>{
                     return(
@@ -102,7 +106,7 @@ width:58vw;
 height:68vh;
 margin-left: 2vw;
 margin-right: 2vw;
-margin-top:16vh;
+margin-top:20.7vh;
 background-color:blue;
 color:white;
 display:grid;
@@ -113,6 +117,14 @@ grid-row-gap: 20px;
 
 `
 
+const RoundWrapper = styled.div`
+position:absolute;
+background-color:violet;
+width: 18vw;
+height: 14vh;
+margin-left: 80vw;
+`
+
 const ObjectivesWrapper = styled.div`
 background-color: blue;
 color:white;
@@ -121,11 +133,15 @@ height: 100%;
 `
 
 const MecatolWrapper = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:end;
 background-color:lightblue;
 width:18vw;
 height:80vh;
-margin-top:4vh;
+margin-top:6vh;
 margin-right: 1vw;
+margin-bottom: -1vw;
 `
 
 
