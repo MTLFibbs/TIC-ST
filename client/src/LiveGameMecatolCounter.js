@@ -1,6 +1,71 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { LiveGameContext } from "./LiveGameContext";
+import { useEffect, useState } from "react";
 
 const LiveGameMecatolCounter = ({gameData}) => {
+
+    const [isFetching, setIsFetching] = useState(false);
+    const {assign} = useContext(LiveGameContext)
+    const {setAssign} = useContext(LiveGameContext)
+    const increment = "plus"
+    const decrement = "minus"
+
+    const handleMecatolChange = ( change, name, score) => {
+        setIsFetching(true);
+            if(change === "plus"){
+                fetch(`/api/update-live-game/${gameData._id}`, {
+                    method: "PATCH",
+                    headers:{Accept: "application/json", "Content-Type": "application/json",},
+                    body: JSON.stringify({nickname: name , mecatolScore: (parseInt(score) + 1), manip: "update"}),
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    if(data.status === 400 || data.status === 500){
+                        throw new Error(data.message);
+                    }
+                    else{
+                        if(assign === false){
+                            setAssign(true);
+                        }
+                        else if(assign === true){
+                            setAssign(false)
+                        }
+                        setIsFetching(false);
+                    }
+                })
+                .catch((error) => {
+                    window.alert(error);
+                });
+            }
+            else if(change === "minus"){
+                fetch(`/api/update-live-game/${gameData._id}`, {
+                    method: "PATCH",
+                    headers:{Accept: "application/json", "Content-Type": "application/json",},
+                    body: JSON.stringify({nickname: name , mecatolScore: (parseInt(score) + -1), manip: "update"}),
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    if(data.status === 400 || data.status === 500){
+                        throw new Error(data.message);
+                    }
+                    else{
+                        if(assign === false){
+                            setAssign(true);
+                        }
+                        else if(assign === true){
+                            setAssign(false)
+                        }
+                        setIsFetching(false);
+                    }
+                })
+                .catch((error) => {
+                    window.alert(error);
+                });
+            }
+        };
+    
+
     return(
         <Wrapper>
             <MecatolNameBox>
@@ -9,7 +74,13 @@ const LiveGameMecatolCounter = ({gameData}) => {
             <PlayerBox>
                 {gameData.players.map((e,i)=>{
                     return(
-                        <PlayerNameText key = {i}>{e.nickname}: {e.pointsOrigin.mecatolScore}</PlayerNameText>
+                        <MapWrapper key={i}>
+                        <PlayerNameText >{e.nickname}: {e.pointsOrigin.mecatolScore}</PlayerNameText>
+                        <ScoreWrapper >
+                            <ScoreDecrementer key = {`decrementer number ${i}`}  disabled = {e.pointsOrigin.mecatolScore === 0 || isFetching} onClick = {() => handleMecatolChange(decrement, e.nickname, e.pointsOrigin.mecatolScore)}> - </ScoreDecrementer>
+                            <ScoreIncrementer key = {`incrementer number ${i}`} disabled = {e.pointsOrigin.mecatolScore === 10 || isFetching} onClick = {() => handleMecatolChange(increment, e.nickname, e.pointsOrigin.mecatolScore)}> + </ScoreIncrementer>
+                        </ScoreWrapper>
+                        </MapWrapper>
                     )
                 })}
             </PlayerBox>
@@ -28,25 +99,48 @@ const MecatolNameBox = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:center;
+align-items:center;
 `
 const TitleText = styled.div`
 font-weight:bold;
-font-size: 24px;
-margin-top: 8px;
+font-size: 1.5vw;;
+margin-top: 0.5vh;
 `
 const PlayerBox = styled.div`
-display:flex;
+display:grid;
 flex-direction:column;
 justify-content:space-between;
+grid-template-columns: repeat(2, 2fr);
+grid-template-rows: repeat(3,2fr);
 height: 80%;
-margin-top: 15px;
-margin-left: 15px;
-font-size:24px;
+margin-top: 1vh;
+margin-left: 1vw;
+font-size:1.3vw;
 `
 const PlayerNameText = styled.div`
 
 `
 const PlayerScoreText = styled.div`
+`
+
+const ScoreWrapper = styled.div`
+margin-top:-0.6vh;
+margin-bottom:0;
+`
+
+const MapWrapper = styled.div`
+`
+
+const ScoreIncrementer = styled.button`
+width: 1.6vw;
+cursor:pointer;
+background-color:transparent;
+
+`
+const ScoreDecrementer = styled.button`
+width:1.6vw;
+cursor:pointer;
+background-color:transparent;
 `
 
 export default LiveGameMecatolCounter;

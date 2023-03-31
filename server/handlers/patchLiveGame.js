@@ -18,24 +18,32 @@ const patchLiveGame = async (req,res) =>{
     const {_id} = req.params;
     const gameObjective = req.body.gameObjective;
     const manip = req.body.manip;
+    const mecatolScore = req.body.mecatolScore;
+    const nickname = req.body.nickname;
 
     try{
         await client.connect();
         const db = client.db("FinalProject");
 
-        const included = await db.collection("LiveGames").find({_id:_id}).project({"players":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
-        const targetIncluded = included[0].drawnObjectives
-
-        if(targetIncluded.includes(gameObjective) === true && manip ==="push"){
-            res.status(400).json({ status: 400, data: {Objective:gameObjective, alreadyIncludedObjectives: targetIncluded}, message: `Objective ${gameObjective} cannot be added to live game ${_id} as it already exists within the game`});
+        if(gameObjective){
+            const included = await db.collection("LiveGames").find({_id:_id}).project({"players":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
+            const targetIncluded = included[0].drawnObjectives
+    
+            if(targetIncluded.includes(gameObjective) === true && manip ==="push"){
+                res.status(400).json({ status: 400, data: {Objective:gameObjective, alreadyIncludedObjectives: targetIncluded}, message: `Objective ${gameObjective} cannot be added to live game ${_id} as it already exists within the game`});
+            }
+            else if(gameObjective && manip === "push"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{drawnObjectives: gameObjective}});
+                res.status(201).json({ status: 201, data: {result:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} added to live game ${_id}`});
+            }
+            else if(gameObjective && manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnObjectives: gameObjective}});
+                res.status(201).json({ status: 201, data: {result:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} removed from live game ${_id}`});
+            }
         }
-        else if(gameObjective && manip === "push"){
-            const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{drawnObjectives: gameObjective}});
-            res.status(201).json({ status: 201, data: {result:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} added to live game ${_id}`});
-        }
-        else if(gameObjective && manip === "pull"){
-            const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnObjectives: gameObjective}});
-            res.status(201).json({ status: 201, data: {result:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} removed from live game ${_id}`});
+        else if(mecatolScore){
+            const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].pointsOrigin.mecatolScore": mecatolScore}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
+            res.status(201).json({ status: 201, data: {result: result, player: nickname}, message: `Mecatol score for player ${nickname} updated in live game ${_id}`});
         }
         
     }catch(err){

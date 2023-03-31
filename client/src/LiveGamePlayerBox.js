@@ -27,7 +27,7 @@ display:flex;
 flex-direction:row;
 justify-content:center;
 font-weight:bold;
-font-size:34px;
+font-size:2vw;
 margin-top:5px;
 `
 const PlayerScoreBox = styled.div`

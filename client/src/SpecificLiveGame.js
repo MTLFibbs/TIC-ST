@@ -99,16 +99,17 @@ grid-gap: 5px;
 
 const FieldWrapper = styled.div`
 width:58vw;
-height:80vh;
+height:68vh;
 margin-left: 2vw;
 margin-right: 2vw;
-margin-top:4vh;
+margin-top:16vh;
 background-color:blue;
 color:white;
 display:grid;
 grid-template-columns: repeat(5, 5fr);
 grid-template-rows: repeat(2, 45%);
-grid-gap: 5px;
+grid-column-gap: 15px;
+grid-row-gap: 20px;
 
 `
 

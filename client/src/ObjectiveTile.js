@@ -6,7 +6,7 @@ import { LiveGameContext } from "./LiveGameContext";
 import Select from 'react-select'
 import ObjectiveSelectedTile from "./ObjectiveSelectedTile";
 
-const ObjectiveTile = ({assigned, setAssigned, gameData, number, objectiveData, drawn}) => {
+const ObjectiveTile = ({gameData, number, objectiveData, drawn}) => {
 
     const {assign} = useContext(LiveGameContext)
     const {setAssign} = useContext(LiveGameContext)
@@ -120,7 +120,7 @@ display:flex;
 flex-direction:row;
 justify-content:center;
 font-weight:bold;
-font-size:30px;
+font-size:1.2vw;
 margin-top:5px;
 height:10%;
 border-bottom: 2px solid black;
@@ -145,14 +145,14 @@ font-size:1vw;
 const ObjectiveBoxText = styled.button`
 height:100%;
 width: 100%;
-font-size:15px;
+font-size:1vw;
 background-color: transparent;
 border-color:transparent;
 cursor:pointer;
 `
 const NameList = styled.select`
 list-style-type: none;
-font-size:15px;
+font-size:0.5vw;
 width: 100%;
 `
 

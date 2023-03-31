@@ -103,9 +103,12 @@ cursor:pointer;
 
 const DeleteButton = styled.button`
 position:absolute;
-margin-top:285px;
-margin-left:-25px;
+margin-top:24vh;
+margin-left:-1.3vw;
 border-radius:30px;
+width:1.2vw;
+height:2vh;
+font-size: 0.8vw;
 background-color:red;
 border:none;
 cursor:pointer;
