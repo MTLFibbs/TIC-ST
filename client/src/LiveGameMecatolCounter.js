@@ -135,12 +135,17 @@ const ScoreIncrementer = styled.button`
 width: 1.6vw;
 cursor:pointer;
 background-color:transparent;
-
+&:hover{
+    background-color:pink;
+}
 `
 const ScoreDecrementer = styled.button`
 width:1.6vw;
 cursor:pointer;
 background-color:transparent;
+&:hover{
+    background-color:pink;
+}
 `
 
 export default LiveGameMecatolCounter;

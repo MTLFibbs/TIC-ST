@@ -121,7 +121,7 @@ height: 100%;
 `
 
 const MecatolWrapper = styled.div`
-background-color:grey;
+background-color:lightblue;
 width:18vw;
 height:80vh;
 margin-top:4vh;
