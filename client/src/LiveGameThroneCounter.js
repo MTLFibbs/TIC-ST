@@ -1,6 +1,20 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+
+import ThroneButtonWrapper from "./ThroneButtonWrapper";
 
 const LiveGameThroneCounter = ({gameData}) => {
+
+    const [toggle, setToggle] = useState(false);
+
+    const handleToggle = () =>{
+        setToggle(!toggle);
+        setTimeout(()=>{
+            console.log(toggle);
+        }, 1000);
+    };
+
+
     return(
         <Wrapper>
             <ThroneNameBox>
@@ -9,17 +23,7 @@ const LiveGameThroneCounter = ({gameData}) => {
             <PlayerBox>
                 {gameData.players.map((e,i)=>{
                     return(
-                        <MapWrapper>
-                        <PlayerNameText key = {i}>{e.nickname}: {e.pointsOrigin.supportedBy}</PlayerNameText>
-                        <ButtonWrapper>
-                            {gameData.players.filter(el => el.nickname !== e.nickname ).map((e,i) =>{
-                            return (<>
-                                <PlayerButtons>{e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)}</PlayerButtons>
-                            </>
-                        )})}
-                        </ButtonWrapper>
-                        </MapWrapper>
-
+                        <ThroneButtonWrapper key = {i} name = {e.nickname} gameData = {gameData} />
                     )
                 })}
             </PlayerBox>
@@ -57,11 +61,13 @@ margin-left: 1vw;
 font-size:1.3vw;
 `
 const PlayerNameText = styled.div`
-
+display:flex;
+justify-content:center;
 `
 const PlayerScoreText = styled.div`
 `
 const MapWrapper = styled.div`
+width:70%;
 `
 
 const ButtonWrapper = styled.div`
@@ -71,14 +77,6 @@ grid-template-columns: repeat(3, 2vw);
 grid-template-rows: repeat(2,5fr);
 `
 const PlayerButtons = styled.button`
-cursor:pointer;
-width: 1.8vw;
-height: 2.2vh;
-margin-bottom: 0.4vh;
-background-color:transparent;
-&:hover{
-    background-color:pink;
-}
 `
 
 export default LiveGameThroneCounter;

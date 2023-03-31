@@ -81,7 +81,7 @@ const ObjectiveTile = ({gameData, number, objectiveData, drawn}) => {
                 <ObjectiveNameText>Objective {number}</ObjectiveNameText>
             </ObjectiveNameBox>
             <ObjectiveTextBox>
-                <ObjectiveBoxText onClick = {handleOpen}>
+                <ObjectiveBoxText disabled = {drawn[(parseInt(number) -2)] === undefined && number != 1} onClick = {handleOpen}>
                     {open === false
                         ?
                         <>
@@ -143,12 +143,27 @@ align-items:center;
 font-size:1vw;
 `
 const ObjectiveBoxText = styled.button`
-height:100%;
+height:98%;
 width: 100%;
 font-size:1vw;
 background-color: transparent;
 border-color:transparent;
+border-radius:15px;
 cursor:pointer;
+&:disabled{
+background: repeating-linear-gradient(
+-45deg,
+transparent,
+transparent 4px,
+transparent 1px,
+green 7px
+),
+linear-gradient(
+to bottom,
+transparent,
+transparent
+)
+}
 `
 const NameList = styled.select`
 list-style-type: none;

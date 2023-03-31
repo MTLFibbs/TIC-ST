@@ -20,6 +20,8 @@ const patchLiveGame = async (req,res) =>{
     const manip = req.body.manip;
     const mecatolScore = req.body.mecatolScore;
     const nickname = req.body.nickname;
+    const supporter = req.body.throneSupporter;
+    const supported = req.body.throneTarget
 
     try{
         await client.connect();
@@ -44,6 +46,16 @@ const patchLiveGame = async (req,res) =>{
         else if(mecatolScore){
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].pointsOrigin.mecatolScore": mecatolScore}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
             res.status(201).json({ status: 201, data: {result: result, player: nickname}, message: `Mecatol score for player ${nickname} updated in live game ${_id}`});
+        }
+        else if(supporter && target){
+            if(manip === "push"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
+                res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} added to the throne array of player ${supported}`});
+            }
+            else if(manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
+                res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} removed from the throne array of player ${supported}`});
+            }
         }
         
     }catch(err){
