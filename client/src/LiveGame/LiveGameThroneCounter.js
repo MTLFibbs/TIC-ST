@@ -9,7 +9,7 @@ const LiveGameThroneCounter = ({gameData}) => {
     return(
         <Wrapper>
             <ThroneNameBox>
-                <TitleText>THRONE SUPPORT COUNTER</TitleText>
+                <TitleText>👑 THRONE SUPPORT COUNTER 👑</TitleText>
             </ThroneNameBox>
             <PlayerBox>
                 {gameData.players.map((e,i)=>{

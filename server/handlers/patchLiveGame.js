@@ -25,6 +25,9 @@ const patchLiveGame = async (req,res) =>{
     const scorer = req.body.scorerName;
     const scored = req.body.scoredObjective;
     const round = req.body.roundScore;
+    const unit = req.body.unit;
+    const tech = req.body.tech;
+    const player = req.body.player;
 
     try{
         await client.connect();
@@ -85,6 +88,26 @@ const patchLiveGame = async (req,res) =>{
         else if(round || round === 0){
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{roundCount: round}});
             res.status(201).json({ status: 201, data: {result: result,}, message: `Round updated to ${round} in live game ${_id}`});
+        }
+        else if(unit){
+            if(manip === "push"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].unitsUpgraded": unit}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                res.status(201).json({ status: 201, data: {result:result, unit: unit, player: player}, message: `Unit ${unit} added to the unit array of player ${player}`});
+            }
+            else if(manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].unitsUpgraded": unit}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                res.status(201).json({ status: 201, data: {result:result, unit: unit, player: player}, message: `Unit ${unit} removed from the unit array of player ${player}`});
+            }
+        }
+        else if(tech){
+            if(manip === "push"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].techsUpgraded": tech}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                res.status(201).json({ status: 201, data: {result:result, tech: tech, player: player}, message: `Tech ${tech} added to the tech array of player ${player}`});
+            }
+            else if(manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].techsUpgraded": tech}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                res.status(201).json({ status: 201, data: {result:result, tech: tech, player: player}, message: `Tech ${tech} removed from the tech array of player ${player}`});
+            }
         }
         
     }catch(err){

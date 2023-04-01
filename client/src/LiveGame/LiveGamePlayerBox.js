@@ -9,11 +9,12 @@ const LiveGamePlayerBox = ({gameData, index}) => {
         <Wrapper>
             <PlayerNameBox>
                 <PlayerNameText>{gameData.nickname}</PlayerNameText>
+                <PlayerFactionText>{gameData.faction}</PlayerFactionText>
             </PlayerNameBox>
             <PlayerScoreBox>
                 <PlayerScoreText>{parseInt(gameData.pointsOrigin.mecatolScore)+parseInt(gameData.pointsOrigin.riderScore)+gameData.pointsOrigin.supportedBy.length+gameData.pointsOrigin.secretObjectives.length+gameData.pointsOrigin.publicObjectives.length}
 </PlayerScoreText>
-                <Supported>Th: {gameData.pointsOrigin.supportedBy.join(" / ")}</Supported>
+                <Supported>👑: {gameData.pointsOrigin.supportedBy.join(" / ")}</Supported>
             </PlayerScoreBox>
         </Wrapper>
     )
@@ -26,8 +27,9 @@ border-radius: 8px;
 `
 const PlayerNameBox = styled.div`
 display:flex;
-flex-direction:row;
+flex-direction:column;
 justify-content:center;
+align-items:center;
 font-weight:bold;
 font-size:2vw;
 margin-top:5px;
@@ -38,12 +40,15 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 font-weight:bold;
-font-size:18vh;
+font-size:12vh;
 `
 
 const FactionImage = styled.img`
 `
 const PlayerNameText = styled.div`
+`
+const PlayerFactionText = styled.div`
+font-size: 1vw;
 `
 const PlayerScoreText = styled.div`
 margin-bottom: -3vh;
@@ -56,6 +61,7 @@ font-size: 1vw;
 width: 8vw;
 height: 2vh;
 font-weight:normal;
+margin-top:1.5vh;
 `
 
 export default LiveGamePlayerBox;

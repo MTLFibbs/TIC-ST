@@ -8,7 +8,7 @@ const LiveGameBox = ({liveGames}) => {
         <Wrapper to = {`/livegame/${liveGames._id}`}>
         <GameName>{liveGames.gameName}</GameName>
         <HostAndRounds>
-            <Rounds>Rounds Played : {liveGames.roundCount}</Rounds>
+            <Rounds>Round: {liveGames.roundCount}</Rounds>
             <Host>Host: {liveGames.host}</Host>
         </HostAndRounds>
         </Wrapper>

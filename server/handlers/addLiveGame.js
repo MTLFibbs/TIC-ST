@@ -32,7 +32,7 @@ const addLiveGame = async (req,res) => {
             host: host, 
             gameName: gameName,
             playerCount: playerCount, 
-            roundCount: 0, 
+            roundCount: 1, 
             drawnObjectives:[],
             players: Object.keys(playersObject).map((e,i) => {
                 const nick = playersList[i];

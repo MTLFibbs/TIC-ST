@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 
-import { LiveGameContext } from "./LiveGameContext";
+import { LiveGameContext } from "../LiveGameContext";
 import ObjectiveButtonWrapper from "./ObjectiveButtonWrapper";
 
 const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {

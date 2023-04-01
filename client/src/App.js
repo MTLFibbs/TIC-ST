@@ -6,8 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./Header";
 import Home from "./Home";
-import LiveGameList from "./LiveGameList";
-import SpecificLiveGame from "./SpecificLiveGame";
+import LiveGameList from "./LiveGame/LiveGameList";
+import SpecificLiveGame from "./LiveGame/SpecificLiveGame"
 import { LiveGameProvider } from "./LiveGameContext";
 
 const App = () => {

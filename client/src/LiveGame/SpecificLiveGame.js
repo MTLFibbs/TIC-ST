@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 
-import { LiveGameContext } from "./LiveGameContext";
+import { LiveGameContext } from "../LiveGameContext";
 import LiveGamePlayerBox from "./LiveGamePlayerBox";
 import LiveGameMecatolCounter from "./LiveGameMecatolCounter";
 import LiveGameThroneCounter from "./LiveGameThroneCounter";
 import ObjectiveTile from "./ObjectiveTile";
 import RoundCounter from "./RoundCounter";
+import SecretObjectivesWrapper from "./SecretObjectivesWrapper";
+import TechnologyWrapper from "./TechnologyWrapper";
 
 const SpecificLiveGame = () => {
 
@@ -17,6 +19,8 @@ const SpecificLiveGame = () => {
     const {_id} = useParams();
     const [gameData, setGameData] = useState(null);
     const [objectiveData, setObjectiveData] = useState(null);
+    const [techData, setTechData] = useState(null);
+    const [unitData, setUnitData] = useState(null);
 
     const objectiveAmount = [1,2,3,4,5,6,7,8,9,10];
 
@@ -33,19 +37,20 @@ const SpecificLiveGame = () => {
             throw new Error(objectives.message);
         }
         setObjectiveData(objectives.data);
-    };
-
-    const fetchGameData = async () => {
-        const game = await fetch(`/api/get-live-game/${_id}`).then((res)=> res.json());
-        if(game.status !== 200) {
-            window.alert(game.message);
-            throw new Error(game.message);
+        const tech = await fetch(`/api/get-techs`).then((res)=>res.json());
+        if(tech.status !== 200) {
+            window.alert(tech.message);
+            throw new Error(tech.message);
         }
+        setTechData(tech.data);
+        const units = await fetch(`/api/get-units`).then((res)=>res.json());
+        if(units.status !== 200) {
+            window.alert(units.message);
+            throw new Error(units.message);
+        }
+        setUnitData(units.data);
     };
 
-    useEffect(()=> {
-        fetchAll();
-    }, []);
 
     useEffect(()=> {
         fetchAll();
@@ -65,13 +70,19 @@ const SpecificLiveGame = () => {
             <RoundWrapper>
                 <RoundCounter gameData = {gameData}/>
             </RoundWrapper>
-            <FieldWrapper>
-                {objectiveAmount.map((e,i)=>{
-                    return(
-                        <ObjectiveTile key = {i} gameData = {gameData[0]} number = {objectiveAmount[i]} objectiveData = {objectiveData.public} drawn = {gameData[0].drawnObjectives}/>
-                    )
-                })}
-            </FieldWrapper>
+            <MiddleWrapper>
+                <FieldWrapper>
+                    {objectiveAmount.map((e,i)=>{
+                        return(
+                            <ObjectiveTile key = {i} gameData = {gameData[0]} number = {objectiveAmount[i]} objectiveData = {objectiveData.public} drawn = {gameData[0].drawnObjectives}/>
+                        )
+                    })}
+                </FieldWrapper>
+                <SecretAndTechWrapper>
+                    <SecretObjectivesWrapper/>
+                    <TechnologyWrapper gameData = {gameData} techData = {techData} unitData = {unitData}/>
+                </SecretAndTechWrapper>
+            </MiddleWrapper>
             <MecatolWrapper>
             <LiveGameMecatolCounter gameData = {gameData[0]} />
             <LiveGameThroneCounter gameData = {gameData[0]}/>
@@ -101,12 +112,22 @@ grid-template-rows: repeat(3, 33%);
 grid-gap: 5px;
 `
 
+const MiddleWrapper = styled.div`
+display:flex;
+flex-direction:column;
+`
+
+const SecretAndTechWrapper = styled.div`
+display:flex;
+flex-direction:row;
+`
+
 const FieldWrapper = styled.div`
 width:58vw;
 height:68vh;
 margin-left: 2vw;
 margin-right: 2vw;
-margin-top:20.7vh;
+margin-top:4vh;
 background-color:blue;
 color:white;
 display:grid;
@@ -121,8 +142,9 @@ const RoundWrapper = styled.div`
 position:absolute;
 background-color:violet;
 width: 18vw;
-height: 14vh;
-margin-left: 80.2vw;
+height: 12vh;
+margin-top: 4vh;
+margin-left: 81vw;
 `
 
 const ObjectivesWrapper = styled.div`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import { LiveGameContext } from "./LiveGameContext";
+import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
 
