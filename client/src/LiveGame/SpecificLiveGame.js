@@ -97,7 +97,7 @@ const SpecificLiveGame = () => {
                     <SecretObjectivesWrapper gameData = {gameData[0]} secretData = {objectiveData.secret} secretsDrawn = {gameData[0].drawnSecretObjectives}/>
                     <TechnologyWrapper gameData = {gameData[0]} techData = {techData} unitData = {unitData}/>
                     <DeleteButton gameData = {gameData[0]} />
-                    <PostButton/>
+                    <PostButton gameData = {gameData[0]}/>
                 </SecretAndTechWrapper>
             </MiddleWrapper>
             <MecatolWrapper>

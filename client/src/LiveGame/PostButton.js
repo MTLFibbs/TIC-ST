@@ -20,40 +20,68 @@ const PostButton = ({gameData}) => {
         }
     }
 
-    const handlePoints = () => {
+    const handlePoints = (e) => {
+        if(e.target.id === "wrapper"){
+            setIsFetching(true)
+            let i = 0;
+            for(i =0; i< gameData.players.length; i++){
+                fetch(`/api/update-live-game/${gameData._id}`, {
+                    method: "PATCH",
+                    headers:{Accept: "application/json", "Content-Type": "application/json",},
+                    body: JSON.stringify({
+                        points:parseInt(gameData.players[i].pointsOrigin.mecatolScore)+parseInt(gameData.players[i].pointsOrigin.riderScore)+gameData.players[i].pointsOrigin.supportedBy.length+gameData.players[i].pointsOrigin.secretObjectives.length+gameData.players[i].pointsOrigin.publicObjectives.length, 
+                        nickname: gameData.players[i].nickname,
+                        manip: "update"}),
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    if(data.status === 400 || data.status === 500){
+                        throw new Error(data.message);
+                    }
+                })
+                .catch((error) => {
+                    window.alert(error);
+                });
+            }
+            setIsFetching(false);
+        }
+    };
+
+    const handlePost = () => {
         setIsFetching(true)
-        let i = 0;
-        for(i =0; i< gameData.players.length; i++){
-            fetch(`/api/update-live-game/${gameData._id}`, {
-                method: "PATCH",
-                headers:{Accept: "application/json", "Content-Type": "application/json",},
-                body: JSON.stringify({
-                    points:parseInt(gameData.players[i].pointsOrigin.mecatolScore)+parseInt(gameData.players[i].pointsOrigin.riderScore)+gameData.players[i].pointsOrigin.supportedBy.length+gameData.players[i].pointsOrigin.secretObjectives.length+gameData.players[i].pointsOrigin.publicObjectives.length, 
-                    nickname: gameData.players[i].nickname,
-                    manip: "update"}),
-            })
-            .then((res) => res.json())
+
+        fetch(`/api/add-completed-game/${gameData._id}`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(gameData)
+        })
+            .then(res => res.json())
             .then((data) => {
                 if(data.status === 400 || data.status === 500){
                     throw new Error(data.message);
                 }
+                else{
+                    navigate(`/`)
+                }
             })
             .catch((error) => {
-                window.alert(error);
-            });
-        }
-        setIsFetching(false);
-    };
+                console.log(error);
+            })
+            setIsFetching(false);
+        };
 
     return (
-        <Wrapper onClick = {() => {handlePopup();}}>
+        <Wrapper id = "wrapper" disabled = {isFetching === true} onClick = {(e) => {handlePoints(e);handlePopup(e);}}>
             <TitleText>Post</TitleText>
             {show === true && isFetching === false
-            ?<PopUpHandler>
-                <PopUp>
+            ?<PopUpHandler id = "popUpHandler">
+                <PopUp id = "popUp" >
                     <PopUpText>Are you sure you want to complete this live game?</PopUpText>
-                    <PopUpPost >Post</PopUpPost>
-                    <PopUpButton id = "closeButton" onClick = {(e) => handlePopup(e)}>Cancel</PopUpButton>
+                    <PopUpPost disabled = {isFetching === true} onClick = {handlePost} id = "postButton">Post</PopUpPost>
+                    <PopUpButton disabled = {isFetching === true} id = "closeButton" onClick = {(e) => handlePopup(e)}>Cancel</PopUpButton>
                 </PopUp>
             </PopUpHandler>
             : <></>
