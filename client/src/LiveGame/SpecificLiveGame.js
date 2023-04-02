@@ -11,6 +11,8 @@ import ObjectiveTile from "./ObjectiveTile";
 import RoundCounter from "./RoundCounter";
 import SecretObjectivesWrapper from "./SecretObjectivesWrapper";
 import TechnologyWrapper from "./TechnologyWrapper";
+import DeleteButton from "./DeleteButton";
+import PostButton from "./PostButton";
 
 const SpecificLiveGame = () => {
 
@@ -52,10 +54,12 @@ const SpecificLiveGame = () => {
             if(data.status === 400 || data.status === 500){
                 throw new Error(data.message);
             }
-            setGameData(data.data)
-            .catch((error)=>{
-                window.alert(error);
-            })
+            else{
+                setGameData(data.data)
+            }
+        })
+        .catch((error)=>{
+            window.alert(error);
         })
     };
 
@@ -92,6 +96,8 @@ const SpecificLiveGame = () => {
                 <SecretAndTechWrapper>
                     <SecretObjectivesWrapper gameData = {gameData[0]} secretData = {objectiveData.secret} secretsDrawn = {gameData[0].drawnSecretObjectives}/>
                     <TechnologyWrapper gameData = {gameData[0]} techData = {techData} unitData = {unitData}/>
+                    <DeleteButton gameData = {gameData[0]} />
+                    <PostButton/>
                 </SecretAndTechWrapper>
             </MiddleWrapper>
             <MecatolWrapper>
@@ -131,6 +137,7 @@ flex-direction:column;
 const SecretAndTechWrapper = styled.div`
 display:flex;
 flex-direction:row;
+background-color:pink;
 `
 
 const FieldWrapper = styled.div`
@@ -146,7 +153,6 @@ grid-template-columns: repeat(5, 5fr);
 grid-template-rows: repeat(2, 45%);
 grid-column-gap: 15px;
 grid-row-gap: 20px;
-
 `
 
 const RoundWrapper = styled.div`
@@ -176,7 +182,6 @@ margin-top:6vh;
 margin-right: 1vw;
 margin-bottom: -1vw;
 `
-
 
 
 export default SpecificLiveGame

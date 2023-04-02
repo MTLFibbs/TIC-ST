@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom"
+import { LiveGameProvider } from './LiveGameContext';
 
 const Home = () => {
-
-    const liveNavigate = () => {
-
-    }
 
     return(
         <Wrapper>

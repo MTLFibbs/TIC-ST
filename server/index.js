@@ -22,6 +22,7 @@ const {getSecretObjective} = require("./handlers/getSecretObjective")
 const {getObjectives} = require("./handlers/getObjectives")
 
 const {addLiveGame} = require("./handlers/addLiveGame")
+const {addCompletedGame} = require("./handlers/addCompletedGame")
 const {deleteLiveGame} = require("./handlers/deleteLiveGame")
 
 const {patchLiveGame} = require("./handlers/patchLiveGame")
@@ -67,7 +68,7 @@ express()
 .get("/api/get-live-games/:host", getLiveGames)
 
 .post("/api/add-new-live-game", addLiveGame)
-
+.post("/api/add-completed-game/:_id", addCompletedGame)
 .patch("/api/update-live-game/:_id", patchLiveGame)
 
 .delete("/api/delete-live-game/:_id", deleteLiveGame)

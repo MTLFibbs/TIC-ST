@@ -3,14 +3,14 @@ import ObjectiveButton from "./ObjectiveButton";
 import { useEffect, useState } from "react";
 
 
-const ObjectiveButtonWrapper = ({objectiveTitle, gameData}) => {
+const ObjectiveButtonWrapper = ({objectiveTitle, objectiveValue, gameData}) => {
 
 
     return(
         <MapWrapper >
         <ButtonWrapper>
             {gameData.players.map((e,i) =>{
-            return <ObjectiveButton key = {e.nickname} objective = {objectiveTitle} index = {i} gameData = {gameData} scorerName = {e.nickname} nickname = {e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)} />
+            return <ObjectiveButton key = {e.nickname} objectiveValue = {objectiveValue} objective = {objectiveTitle} index = {i} gameData = {gameData} scorerName = {e.nickname} nickname = {e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)} />
         })}
         </ButtonWrapper>
         </MapWrapper>

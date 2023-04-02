@@ -80,7 +80,7 @@ const ObjectiveTile = ({gameData, number, objectiveData, drawn}) => {
             </ObjectiveNameBox>
             <ObjectiveTextBox>
                 <ObjectiveBoxText disabled = {drawn[(parseInt(number) -2)] === undefined && number != 1} onClick = {handleOpen}>
-                    {open === false
+                    {open === false || (drawn[(parseInt(number) -2)] === undefined && number != 1)
                         ?
                         <>
                         </>

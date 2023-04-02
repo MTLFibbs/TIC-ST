@@ -23,13 +23,13 @@ const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
         .catch((error)=>{
             window.alert(error);
         })
-    }, [])
+    }, [objective])
 
     const handleDeletion = (e) =>{
         fetch(`/api/update-live-game/${gameData._id}`, {
             method: "PATCH",
             headers:{Accept: "application/json", "Content-Type": "application/json",},
-            body: JSON.stringify({gameObjective: objective, manip: "pull"}),
+            body: JSON.stringify({gameObjective: objective, objectiveValue: objectiveText[0].objectiveValue, manip: "pull"}),
         })
         .then((res) => res.json())
         .then((data) => {
@@ -59,7 +59,7 @@ const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
             :
             <>
             <LoadedText>{objectiveText[0].objectiveText}</LoadedText>
-            <ObjectiveButtonWrapper objectiveTitle = {objectiveText[0].objectiveName}gameData = {gameData} />
+            <ObjectiveButtonWrapper objectiveTitle = {objectiveText[0].objectiveName} objectiveValue = {objectiveText[0].objectiveValue} gameData = {gameData} />
             <DeleteButton onClick = {handleDeletion}>D</DeleteButton>
             </>
         }

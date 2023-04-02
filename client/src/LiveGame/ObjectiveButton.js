@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
-const ObjectiveButton = ({index, nickname,gameData,scorerName, objective}) => {
+const ObjectiveButton = ({index, objectiveValue, nickname,gameData,scorerName, objective}) => {
     
     const [fetcherino, setFetcherino] = useState(false)
     const {assign} = useContext(LiveGameContext)
@@ -24,7 +24,7 @@ const ObjectiveButton = ({index, nickname,gameData,scorerName, objective}) => {
             fetch(`/api/update-live-game/${gameData._id}`, {
                 method: "PATCH",
                 headers:{Accept: "application/json", "Content-Type": "application/json",},
-                body: JSON.stringify({scorerName: scorerName , scoredObjective: objective, manip: test === false ? "push" : "pull"}),
+                body: JSON.stringify({scorerName: scorerName , scoredObjective: objective, objectiveValue: objectiveValue, manip: test === false ? "push" : "pull"}),
             })
             .then((res) => res.json())
             .then((data) => {

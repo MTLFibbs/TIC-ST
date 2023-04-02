@@ -17,6 +17,7 @@ const patchLiveGame = async (req,res) =>{
 
     const {_id} = req.params;
     const gameObjective = req.body.gameObjective;
+    const objectiveValue = req.body.objectiveValue;
     const manip = req.body.manip;
     const mecatolScore = req.body.mecatolScore;
     const nickname = req.body.nickname;
@@ -30,6 +31,7 @@ const patchLiveGame = async (req,res) =>{
     const player = req.body.player;
     const secret = req.body.secret;
     const playerIndex = req.body.playerIndex;
+    const points = req.body.points;
 
     try{
         await client.connect();
@@ -57,6 +59,7 @@ const patchLiveGame = async (req,res) =>{
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnObjectives: gameObjective}});
                 for(i = 0; i < playerCheck[0].players.length; i++){
                     const deleteResult = await db.collection("LiveGames").updateOne({_id:_id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": gameObjective}},{arrayFilters:[{"elem.nickname": playerCheck[0].players[i].nickname}]})
+                    const deleteResultValue2 = await db.collection("LiveGames").updateOne({_id:_id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": gameObjective}},{arrayFilters:[{"elem.nickname": playerCheck[0].players[i].nickname}]})
                 }
                 res.status(201).json({ status: 201, data: {removeObjective:result, targetedObjective: gameObjective}, message: `Objective ${gameObjective} removed from live game ${_id} && players had their points deducted`});
             }
@@ -94,11 +97,21 @@ const patchLiveGame = async (req,res) =>{
             }
         }
         else if(scorer && scored){
-            if(manip === "push"){
+            if(manip === "push" && objectiveValue === 2){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
+                const resultValue2 = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
+                res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} added to the public objectives array of player ${scorer}`});
+            }
+            else if(manip === "push" && objectiveValue !== 2){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
                 res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} added to the public objectives array of player ${scorer}`});
             }
-            else if(manip === "pull"){
+            else if(manip === "pull" && objectiveValue === 2){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
+                const resultValue2 = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
+                res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} removed from the public objectives array of player ${scorer}`});
+            }
+            else if(manip === "pull" && objectiveValue !== 2){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
                 res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} removed from the public objectives array of player ${scorer}`});
             }
@@ -147,6 +160,10 @@ const patchLiveGame = async (req,res) =>{
                 const globalResult = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnSecretObjectives: secret}});
                 res.status(201).json({ status: 201, data: {result:result, secret: secret, player: player}, message: `Secret objective ${secret} removed from the objectives array of player ${player}`});
             }
+        }
+        else if(points){
+            const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].points": points}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
+            res.status(201).json({status: 201, data: result, message:`Points updated to ${points} for player ${nickname}`});
         }
         
     }catch(err){
