@@ -22,9 +22,12 @@ const LiveGamePlayerBox = ({gameData, index}) => {
 };
 
 const Wrapper = styled.div`
+width: 9vw;
+margin:0;
 border: 2px solid black;
 box-shadow: 4px 5px 5px black;
 border-radius: 8px;
+background-color:blue;
 `
 const PlayerNameBox = styled.div`
 display:flex;

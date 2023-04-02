@@ -124,9 +124,10 @@ margin-top:4vh;
 margin-left: 1vw;
 color:white;
 display:grid;
-grid-template-columns: repeat(2, 1fr);
+grid-template-columns: repeat(2, 9.5vw);
 grid-template-rows: repeat(3, 33%);
-grid-gap: 5px;
+grid-column-gap: 0vw;
+grid-row-gap: 1vh;
 `
 
 const MiddleWrapper = styled.div`

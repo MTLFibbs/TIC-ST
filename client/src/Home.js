@@ -6,7 +6,7 @@ const Home = () => {
 
     return(
         <Wrapper>
-        <StyledButton to = {`/livegames/Fibbs`}> Live Game </StyledButton>
+        <StyledButton to = {`/livegames/Fibbs`}> Live Games </StyledButton>
         <StyledButton> Stats </StyledButton>
         </Wrapper>
 
