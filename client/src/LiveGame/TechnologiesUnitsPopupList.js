@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { useContext } from "react";
-import { LiveGameContext } from "../LiveGameContext";
-import { useEffect, useState } from "react";
 
 import UnitBox from "./UnitBox";
 import TechBox from "./TechBox";
@@ -9,20 +6,19 @@ import TechBox from "./TechBox";
 const TechnologiesUnitsPopupList = ({playerIndex, techData, faction, unitData, gameData}) => {
     
     
-
     return (
         <Wrapper>
             <GlobalWrapper>
                 <TechWrapperGlobal>
                     {techData.filter((e) => e.techGlobal === "Yes").map((e, i) =>{
                     return(
-                        <TechBox key = {e.techName} gameData = {gameData[0]} playerIndex = {playerIndex} tech = {e.techName}/>                    )
+                        <TechBox key = {e.techName} gameData = {gameData} playerIndex = {playerIndex} tech = {e.techName}/>                    )
                     })}
                 </TechWrapperGlobal>
                 <UnitWrapperGlobal>
                     {unitData.filter((e) => e.unitGlobal === "Yes" && e.unitAttribution.includes(faction)).map((e,i)=> {
                         return(
-                            <UnitBox key = {e.unitName} gameData = {gameData[0]} playerIndex = {playerIndex} unit = {e.unitName}/>
+                            <UnitBox key = {e.unitName} gameData = {gameData} playerIndex = {playerIndex} unit = {e.unitName}/>
                         )
                     })}
                 </UnitWrapperGlobal>
@@ -31,14 +27,14 @@ const TechnologiesUnitsPopupList = ({playerIndex, techData, faction, unitData, g
                 <TechWrapperUnique>
                 {techData.filter((e) => e.techGlobal === "No" && e.techUnique === faction).map((e, i) =>{
                     return(
-                        <TechBox key = {e.techName} gameData = {gameData[0]} playerIndex = {playerIndex} tech = {e.techName}/>
+                        <TechBox key = {e.techName} gameData = {gameData} playerIndex = {playerIndex} tech = {e.techName}/>
                     )
                 })}
                 </TechWrapperUnique>
                 <UnitWrapperUnique>
                     {unitData.filter((e) => e.unitGlobal === "No" && e.unitAttribution.includes(faction)).map((e,i)=> {
                         return(
-                            <UnitBox key = {e.unitName} gameData = {gameData[0]} playerIndex = {playerIndex} unit = {e.unitName}/>
+                            <UnitBox key = {e.unitName} gameData = {gameData} playerIndex = {playerIndex} unit = {e.unitName}/>
                         )
                     })}
                 </UnitWrapperUnique>

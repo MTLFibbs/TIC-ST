@@ -25,12 +25,6 @@ const SpecificLiveGame = () => {
     const objectiveAmount = [1,2,3,4,5,6,7,8,9,10];
 
     const fetchAll = async () => {
-        const game = await fetch(`/api/get-live-game/${_id}`).then((res)=> res.json());
-        if(game.status !== 200) {
-            window.alert(game.message);
-            throw new Error(game.message);
-        }
-        setGameData(game.data);
         const objectives = await fetch(`/api/get-objectives`).then((res)=>res.json());
         if(objectives.status !== 200) {
             window.alert(objectives.message);
@@ -48,13 +42,30 @@ const SpecificLiveGame = () => {
             window.alert(units.message);
             throw new Error(units.message);
         }
-        setUnitData(units.data);
+        setUnitData(units.data)
     };
 
+    const fetchGame = () => {
+        fetch(`/api/get-live-game/${_id}`)
+        .then(res => res.json())
+        .then((data) => {
+            if(data.status === 400 || data.status === 500){
+                throw new Error(data.message);
+            }
+            setGameData(data.data)
+            .catch((error)=>{
+                window.alert(error);
+            })
+        })
+    };
+
+    useEffect(() =>{
+        fetchGame();
+    }, [assign])
 
     useEffect(()=> {
         fetchAll();
-    }, [assign]);
+    }, []);
 
     return(
         <Wrapper>
@@ -79,8 +90,8 @@ const SpecificLiveGame = () => {
                     })}
                 </FieldWrapper>
                 <SecretAndTechWrapper>
-                    <SecretObjectivesWrapper/>
-                    <TechnologyWrapper gameData = {gameData} techData = {techData} unitData = {unitData}/>
+                    <SecretObjectivesWrapper gameData = {gameData[0]} secretData = {objectiveData.secret} secretsDrawn = {gameData[0].drawnSecretObjectives}/>
+                    <TechnologyWrapper gameData = {gameData[0]} techData = {techData} unitData = {unitData}/>
                 </SecretAndTechWrapper>
             </MiddleWrapper>
             <MecatolWrapper>

@@ -3,11 +3,19 @@ import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
-const SecretObjectivesWrapper = () => {
+import SecretsButton from "./SecretsButton";
+
+const SecretObjectivesWrapper = ({gameData, secretData, secretsDrawn}) => {
     return (
         <Wrapper>
-        <TitleText>Secret Objectives Attribution List</TitleText>
-    </Wrapper>
+            <TitleText>Secret Objectives Attribution List</TitleText>
+            <ButtonWrapper>
+            {gameData.players.map((e,i) =>{
+            return (
+                <SecretsButton key = {i} playerIndex = {i} secretData = {secretData} gameData = {gameData} playerName = {e.nickname} faction = {e.faction} nickname = {e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)} />
+            )})}
+            </ButtonWrapper>
+        </Wrapper>
     )
 };
 
@@ -24,19 +32,18 @@ box-shadow: 4px 5px 5px black;
 font-style:bold;
 margin-left: 2vw;
 margin-top: -2vh;
-cursor:pointer;
-&:hover{
-    background-color:pink;
-}
-&:disabled{
-    background-color:rgb(200,0,0,0.5);
-}
+background-color: lightblue;
 `
 const TitleText = styled.div`
-font-size: 1vw;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-size: 0.9vw;
 `
-const RoundWrapper = styled.div`
-margin-bottom:0;
+const ButtonWrapper = styled.div`
+display:flex;
+flex-direction:row;
 `
 /*
 const TechButton = styled.button`

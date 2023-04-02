@@ -14,7 +14,8 @@ const LiveGamePlayerBox = ({gameData, index}) => {
             <PlayerScoreBox>
                 <PlayerScoreText>{parseInt(gameData.pointsOrigin.mecatolScore)+parseInt(gameData.pointsOrigin.riderScore)+gameData.pointsOrigin.supportedBy.length+gameData.pointsOrigin.secretObjectives.length+gameData.pointsOrigin.publicObjectives.length}
 </PlayerScoreText>
-                <Supported>👑: {gameData.pointsOrigin.supportedBy.join(" / ")}</Supported>
+                <Supported>👑: {gameData.pointsOrigin.supportedBy.map((e)=> e[0]+e[e.length-1]).join(" / ")}</Supported>
+                <Secrets>S: {gameData.pointsOrigin.secretObjectives.length}</Secrets>
             </PlayerScoreBox>
         </Wrapper>
     )
@@ -57,11 +58,22 @@ const Supported = styled.div`
 display:flex;
 justify-content:center;
 text-align:center;
+font-size: 0.7vw;
+width: 8vw;
+height: 2vh;
+font-weight:normal;
+margin-top:2vh;
+`
+
+const Secrets = styled.div`
+display:flex;
+justify-content:center;
+text-align:center;
 font-size: 1vw;
 width: 8vw;
 height: 2vh;
 font-weight:normal;
-margin-top:1.5vh;
+margin-top:1vh;
 `
 
 export default LiveGamePlayerBox;

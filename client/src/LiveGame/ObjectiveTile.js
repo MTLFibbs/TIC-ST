@@ -143,7 +143,7 @@ text-align:center;
 font-size:80%;
 `
 const ObjectiveBoxText = styled.button`
-height:98%;
+height:96%;
 width: 100%;
 font-size:1vw;
 background-color: transparent;

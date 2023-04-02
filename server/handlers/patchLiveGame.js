@@ -28,18 +28,23 @@ const patchLiveGame = async (req,res) =>{
     const unit = req.body.unit;
     const tech = req.body.tech;
     const player = req.body.player;
+    const secret = req.body.secret;
+    const playerIndex = req.body.playerIndex;
 
     try{
         await client.connect();
         const db = client.db("FinalProject");
 
+        const included = await db.collection("LiveGames").find({_id:_id}).project({"players":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
+        const targetIncluded = included[0].drawnObjectives
+        const playerCheck = await db.collection("LiveGames").find({_id:_id}).project({"drawnObjectives":0,"drawnSecretObjectives":0,"throneSupporters":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
+        const secretObjectivesCheck = await db.collection("LiveGames").find({_id:_id}).project({"drawnObjectives":0,"throneSupporters":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0, "players":0 }).toArray();
+        const mappedPlayerCheck = playerCheck[0].players.map((e,i) => e.pointsOrigin.publicObjectives).flat();
+
+        
+        //res.status(201).json({ status: 201, data: secretsPlayerCheck, message: `TEST`});
+
         if(gameObjective){
-            const included = await db.collection("LiveGames").find({_id:_id}).project({"players":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
-            const targetIncluded = included[0].drawnObjectives
-            const playerCheck = await db.collection("LiveGames").find({_id:_id}).project({"drawnObjectives":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0 }).toArray();
-            const mappedPlayerCheck = playerCheck[0].players.map((e,i) => e.pointsOrigin.publicObjectives).flat();
-            //res.status(201).json({ status: 201, data: playerCheck[0].players[0].nickname, message: `TEST`});
-            
             if(targetIncluded.includes(gameObjective) === true && manip ==="push"){
                 res.status(400).json({ status: 400, data: {Objective:gameObjective, alreadyIncludedObjectives: targetIncluded}, message: `Objective ${gameObjective} cannot be added to live game ${_id} as it already exists within the game`});
             }
@@ -62,16 +67,29 @@ const patchLiveGame = async (req,res) =>{
             
         }
         else if(mecatolScore || mecatolScore === 0){
+            if(mecatolScore >= 10){
+                res.status(400).json({ status: 400, data: {score: mecatolScore, player: player}, message: `A player can only score 10 points with Mecatol Rex`});
+            }
+            else{
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].pointsOrigin.mecatolScore": mecatolScore}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
             res.status(201).json({ status: 201, data: {result: result, player: nickname}, message: `Mecatol score for player ${nickname} updated in live game ${_id}`});
+            }
         }
         else if(supporter && supported){
+            const throneCheck = await db.collection("LiveGames").find({_id:_id}).project({"drawnObjectives":0,"drawnSecretObjectives":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0, "players":0 }).toArray();
             if(manip === "push"){
-                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
-                res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} added to the throne array of player ${supported}`});
+                if(throneCheck[0].throneSupporters.includes(supporter)){
+                    res.status(400).json({ status: 400, data: {supporter: supporter, supported: supported}, message: `A player can only support 1 player for the throne`});
+                }
+                else{
+                    const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
+                    const globalResult = await db.collection("LiveGames").updateOne({_id: _id},{$push:{throneSupporters: supporter}});
+                    res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} added to the throne array of player ${supported}`});    
+                }
             }
             else if(manip === "pull"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.supportedBy": supporter}}, {arrayFilters:[{"elem.nickname":{$eq:supported}}]});
+                const globalResult = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{throneSupporters: supporter}});
                 res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} removed from the throne array of player ${supported}`});
             }
         }
@@ -107,6 +125,27 @@ const patchLiveGame = async (req,res) =>{
             else if(manip === "pull"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].techsUpgraded": tech}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
                 res.status(201).json({ status: 201, data: {result:result, tech: tech, player: player}, message: `Tech ${tech} removed from the tech array of player ${player}`});
+            }
+        }
+        else if(secret){
+            const secretsPlayerCheck = playerCheck[0].players[playerIndex].pointsOrigin.secretObjectives
+            if(manip === "push"){
+                if(secretsPlayerCheck.length >= 3){
+                    res.status(400).json({ status: 400, data: {secret: secret, player: player}, message: `A player can only score 3 points with secret objectives`});
+                }
+                else if(secretObjectivesCheck[0].drawnSecretObjectives.includes(secret)){
+                    res.status(400).json({ status: 400, data: {secret: secret, player: player}, message: `Secret objective ${secret} can only be played once per game`});
+                }
+                else{
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.secretObjectives": secret}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                const globalResult = await db.collection("LiveGames").updateOne({_id: _id},{$push:{drawnSecretObjectives: secret}});
+                res.status(201).json({ status: 201, data: {result:result, secret: secret, player: player}, message: `Secret objective ${secret} added to the objectives array of player ${player}`});
+                }
+            }
+            else if(manip === "pull"){
+                const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].pointsOrigin.secretObjectives": secret}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                const globalResult = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnSecretObjectives: secret}});
+                res.status(201).json({ status: 201, data: {result:result, secret: secret, player: player}, message: `Secret objective ${secret} removed from the objectives array of player ${player}`});
             }
         }
         
