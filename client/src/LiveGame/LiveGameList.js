@@ -7,7 +7,7 @@ import { User, useAuth0 } from "@auth0/auth0-react";
 import LiveGameCreateButton from "./LiveGameCreateButton";
 
 const LiveGameList = () => {
-    const {loginWithRedirect, isAuthenticated, user} = useAuth0();
+    const {user} = useAuth0();
 
     const {host} = useParams();
 

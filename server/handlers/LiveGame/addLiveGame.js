@@ -22,6 +22,7 @@ const addLiveGame = async (req,res) => {
     const playerCount = req.body.playerCount;
     const playersObject = req.body.players;
     const playersList = Object.keys(playersObject);
+    const factionList = Object.values(playersObject);
 
     try{
         await client.connect();
@@ -39,6 +40,7 @@ const addLiveGame = async (req,res) => {
             drawnUnits:[],
             throneSupporters: [],
             playerList: playersList,
+            factionList: factionList,
             players: Object.keys(playersObject).map((e,i) => {
                 const nick = playersList[i];
                 return {position: `player${(parseInt([i])+1)}`, 
