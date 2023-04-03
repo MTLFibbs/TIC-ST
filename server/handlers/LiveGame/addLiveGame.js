@@ -38,6 +38,7 @@ const addLiveGame = async (req,res) => {
             drawnTechnologies:[],
             drawnUnits:[],
             throneSupporters: [],
+            playerList: playersList,
             players: Object.keys(playersObject).map((e,i) => {
                 const nick = playersList[i];
                 return {position: `player${(parseInt([i])+1)}`, 

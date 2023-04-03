@@ -4,30 +4,32 @@ const express = require('express');
 const morgan = require('morgan');
 
 const PORT = 8888;
+//THESE ARE LIVEGAME ENDPOINTS
+const {getFactions} = require("./handlers/LiveGame/getFactions")
+const {getFaction} = require("./handlers/LiveGame/getFaction")
+const {getTechs} = require("./handlers/LiveGame/getTechs")
+const {getGlobalTechs} = require("./handlers/LiveGame/getGlobalTechs")
+const {getFactionTechs} = require("./handlers/LiveGame/getFactionTechs")
+const {getTech} = require("./handlers/LiveGame/getTech")
+const {getUnits} = require("./handlers/LiveGame/getUnits")
+const {getGlobalUnits} = require("./handlers/LiveGame/getGlobalUnits")
+const {getFactionUnits} = require("./handlers/LiveGame/getFactionUnits")
+const {getUnit} = require("./handlers/LiveGame/getUnit")
+const {getLiveGame} = require("./handlers/LiveGame/getLiveGame")
+const {getLiveGames} = require("./handlers/LiveGame/getLiveGames")
+const {getPublicObjective} = require("./handlers/LiveGame//getPublicObjective")
+const {getSecretObjective} = require("./handlers/LiveGame/getSecretObjective")
+const {getObjectives} = require("./handlers/LiveGame/getObjectives")
 
-const {getFactions} = require("./handlers/getFactions")
-const {getFaction} = require("./handlers/getFaction")
-const {getTechs} = require("./handlers/getTechs")
-const {getGlobalTechs} = require("./handlers/getGlobalTechs")
-const {getFactionTechs} = require("./handlers/getFactionTechs")
-const {getTech} = require("./handlers/getTech")
-const {getUnits} = require("./handlers/getUnits")
-const {getGlobalUnits} = require("./handlers/getGlobalUnits")
-const {getFactionUnits} = require("./handlers/getFactionUnits")
-const {getUnit} = require("./handlers/getUnit")
-const {getLiveGame} = require("./handlers/getLiveGame")
-const {getLiveGames} = require("./handlers/getLiveGames")
-const {getPublicObjective} = require("./handlers/getPublicObjective")
-const {getSecretObjective} = require("./handlers/getSecretObjective")
-const {getObjectives} = require("./handlers/getObjectives")
+const {addLiveGame} = require("./handlers/LiveGame/addLiveGame")
+const {addCompletedGame} = require("./handlers/LiveGame/addCompletedGame")
+const {deleteLiveGame} = require("./handlers/LiveGame/deleteLiveGame")
 
-const {addLiveGame} = require("./handlers/addLiveGame")
-const {addCompletedGame} = require("./handlers/addCompletedGame")
-const {deleteLiveGame} = require("./handlers/deleteLiveGame")
+const {patchLiveGame} = require("./handlers/LiveGame/patchLiveGame")
 
-const {patchLiveGame} = require("./handlers/patchLiveGame")
+//THESE ARE STATS PAGE ENDPOINTS
 
-
+const {getFactionPopularity} = require("./handlers/Stats/getFactionPopularity")
 
 express()
 .use(function(req, res, next) {
@@ -72,6 +74,9 @@ express()
 .patch("/api/update-live-game/:_id", patchLiveGame)
 
 .delete("/api/delete-live-game/:_id", deleteLiveGame)
+
+//These endpoints are related to the stats page
+.get("/api/get-faction-popularity", getFactionPopularity)
 
 
 // this is our catch all endpoint.

@@ -9,7 +9,7 @@ const Home = () => {
     return(
         <Wrapper>
         <StyledButton to = {`/livegames/${user.nickname}`}> Live Games </StyledButton>
-        <StyledButton> Stats </StyledButton>
+        <StyledButton to = {`/stats`}> Stats </StyledButton>
         </Wrapper>
 
     )
