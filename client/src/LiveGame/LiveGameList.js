@@ -2,16 +2,19 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LiveGameBox from "./LiveGameBox";
+import { User, useAuth0 } from "@auth0/auth0-react";
 
 import LiveGameCreateButton from "./LiveGameCreateButton";
 
 const LiveGameList = () => {
+    const {loginWithRedirect, isAuthenticated, user} = useAuth0();
 
     const {host} = useParams();
 
     const [liveGames, setLiveGames] = useState(null);
     
     const [factions, setFactions] = useState(null);
+
 
     useEffect(()=>{
         fetch(`/api/get-live-games/${host}`)
@@ -44,7 +47,7 @@ const LiveGameList = () => {
         <Wrapper>
         <ListBox>
             <HeaderWrapper>
-                <HeaderText>Live games hosted by Fibbs</HeaderText>
+                <HeaderText>Live games hosted by {user.nickname}</HeaderText>
                 <LiveGameCreateButton factions = {factions}/>
             </HeaderWrapper>
         {liveGames.map((e, i) => {

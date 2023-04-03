@@ -67,7 +67,7 @@ const SecretsBox = ({gameData, playerIndex, secret}) => {
 
 };
 
-const SecretBoxed = styled.button`
+const SecretBoxed = styled.div`
 display:flex;
 align-items:center;
 justify-content:center;
@@ -86,7 +86,7 @@ color:white;
 }
 `
 
-const ScoredSecretBoxed = styled.button`
+const ScoredSecretBoxed = styled.div`
 display:flex;
 align-items:center;
 justify-content:center;

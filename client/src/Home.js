@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom"
 import { LiveGameProvider } from './LiveGameContext';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Home = () => {
-
+    const {user} = useAuth0();
     return(
         <Wrapper>
-        <StyledButton to = {`/livegames/Fibbs`}> Live Games </StyledButton>
+        <StyledButton to = {`/livegames/${user.nickname}`}> Live Games </StyledButton>
         <StyledButton> Stats </StyledButton>
         </Wrapper>
 

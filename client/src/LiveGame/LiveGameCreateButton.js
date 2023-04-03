@@ -2,10 +2,13 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LiveGameContext } from "../LiveGameContext";
+import { User, useAuth0 } from "@auth0/auth0-react";
 
 import LiveGameCreateForm from "./LiveGameCreateForm";
 
 const LiveGameCreateButton = ({factions}) => {
+    
+    const {user} = useAuth0();
 
     const [isFetching, setIsFetching] = useState(false);
     const [show, setShow] = useState(false);
@@ -14,9 +17,9 @@ const LiveGameCreateButton = ({factions}) => {
     const {setAssign} = useContext(LiveGameContext)
     const [form, setForm] = useState({
         gameName:"",
-        host:"Fibbs",
+        host:`${user.nickname}`,
         playerAmount:"3",
-        player1:"Fibbs",
+        player1:`${user.nickname}`,
 
     });
 
@@ -71,7 +74,7 @@ const LiveGameCreateButton = ({factions}) => {
                     throw new Error(data.message);
                 }
                 else{
-                    navigate(`/`)
+                    navigate(`/home`)
                 }
             })
             .catch((error) => {

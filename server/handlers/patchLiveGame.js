@@ -123,20 +123,24 @@ const patchLiveGame = async (req,res) =>{
         else if(unit){
             if(manip === "push"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].unitsUpgraded": unit}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                const resultGlobal = await db.collection("LiveGames").updateOne({_id: _id},{$push:{drawnUnits: unit}});
                 res.status(201).json({ status: 201, data: {result:result, unit: unit, player: player}, message: `Unit ${unit} added to the unit array of player ${player}`});
             }
             else if(manip === "pull"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].unitsUpgraded": unit}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                const resultGlobal = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnUnits: unit}});
                 res.status(201).json({ status: 201, data: {result:result, unit: unit, player: player}, message: `Unit ${unit} removed from the unit array of player ${player}`});
             }
         }
         else if(tech){
             if(manip === "push"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].techsUpgraded": tech}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                const resultGlobal = await db.collection("LiveGames").updateOne({_id: _id},{$push:{drawnTechnologies: tech}});
                 res.status(201).json({ status: 201, data: {result:result, tech: tech, player: player}, message: `Tech ${tech} added to the tech array of player ${player}`});
             }
             else if(manip === "pull"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{"players.$[elem].techsUpgraded": tech}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
+                const resultGlobal = await db.collection("LiveGames").updateOne({_id: _id},{$pull:{drawnTechnologies: tech}});
                 res.status(201).json({ status: 201, data: {result:result, tech: tech, player: player}, message: `Tech ${tech} removed from the tech array of player ${player}`});
             }
         }

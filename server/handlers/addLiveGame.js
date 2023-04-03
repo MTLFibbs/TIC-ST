@@ -35,6 +35,8 @@ const addLiveGame = async (req,res) => {
             roundCount: 1, 
             drawnObjectives:[],
             drawnSecretObjectives:[],
+            drawnTechnologies:[],
+            drawnUnits:[],
             throneSupporters: [],
             players: Object.keys(playersObject).map((e,i) => {
                 const nick = playersList[i];
