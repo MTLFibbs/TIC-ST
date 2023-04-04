@@ -32,6 +32,7 @@ const {patchLiveGame} = require("./handlers/LiveGame/patchLiveGame")
 const {getFactionPopularity} = require("./handlers/Stats/getFactionPopularity")
 const {getFactionVP} = require("./handlers/Stats/getFactionVP");
 const { getPopularTechs } = require('./handlers/Stats/getPopularTechs');
+const { getPopularUnits } = require('./handlers/Stats/getPopularUnits');
 
 express()
 .use(function(req, res, next) {
@@ -81,6 +82,7 @@ express()
 .get("/api/get-faction-popularity", getFactionPopularity)
 .get("/api/get-faction-vp", getFactionVP)
 .get("/api/get-popular-techs", getPopularTechs)
+.get("/api/get-popular-units", getPopularUnits)
 
 
 // this is our catch all endpoint.
