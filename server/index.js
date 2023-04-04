@@ -33,6 +33,14 @@ const {getFactionPopularity} = require("./handlers/Stats/getFactionPopularity")
 const {getFactionVP} = require("./handlers/Stats/getFactionVP");
 const { getPopularTechs } = require('./handlers/Stats/getPopularTechs');
 const { getPopularUnits } = require('./handlers/Stats/getPopularUnits');
+const { getPopularObjectives } = require('./handlers/Stats/getPopularObjectives');
+const { getPopularSecretObjectives } = require('./handlers/Stats/getPopularSecretObjectives');
+const {getFactionPopularityUser} = require("./handlers/Stats/getFactionPopularityUser")
+const {getFactionVPUser} = require("./handlers/Stats/getFactionVPUser");
+const { getPopularTechsUser } = require('./handlers/Stats/getPopularTechsUser');
+const { getPopularUnitsUser } = require('./handlers/Stats/getPopularUnitsUser');
+const { getPopularObjectivesUser } = require('./handlers/Stats/getPopularObjectivesUser');
+const { getPopularSecretObjectivesUser } = require('./handlers/Stats/getPopularSecretObjectivesUser');
 
 express()
 .use(function(req, res, next) {
@@ -83,6 +91,15 @@ express()
 .get("/api/get-faction-vp", getFactionVP)
 .get("/api/get-popular-techs", getPopularTechs)
 .get("/api/get-popular-units", getPopularUnits)
+.get("/api/get-popular-objectives", getPopularObjectives)
+.get("/api/get-popular-secret-objectives", getPopularSecretObjectives)
+
+.get("/api/get-faction-popularity/:user", getFactionPopularityUser)
+.get("/api/get-faction-vp/:user", getFactionVPUser)
+.get("/api/get-popular-techs/:user", getPopularTechsUser)
+.get("/api/get-popular-units/:user", getPopularUnitsUser)
+.get("/api/get-popular-objectives/:user", getPopularObjectivesUser)
+.get("/api/get-popular-secret-objectives/:user", getPopularSecretObjectivesUser)
 
 
 // this is our catch all endpoint.

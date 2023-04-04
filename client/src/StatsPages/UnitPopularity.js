@@ -40,7 +40,7 @@ const UnitPopularity = ({techCount,globalUnits, unitCount}) => {
 
     return (
         <Wrapper>
-            <TitleText>Top 5 most popular units</TitleText>
+            <TitleText>Most popular units</TitleText>
             {!data
             ?<></>
             :

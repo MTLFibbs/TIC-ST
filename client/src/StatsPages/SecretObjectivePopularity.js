@@ -12,47 +12,37 @@ import {
     Label
   } from "recharts";
 
+const SecretObjectivePopularity = ({techCount,objectiveCount, globalObjectives}) => {
 
-const FactionPopularity = ({popularity, techCount}) => {
-
-    const factions = ["Arborec","Letnev","Muaat", 
-        "Saar","Hacan", "Sol", "Creuss", "L1Z1X", 
-        "Mentak", "Naalu","Nekro","Sardakk","JolNar",
-        "Winnu", "Xxcha", "Yin", "Yssaril"
-    ];
-
+    const objectives = globalObjectives.map ((e,i) => {
+        return e.objectiveName
+    });
     const [data, setData] = useState(null);
 
-    const popularityArr = [];
+    const flatObjectives = objectiveCount.flat();
+    const mapped = objectives.map((e,i) => {
+        return {objectives: e, count:flatObjectives.filter((v)=> (v === e)).length}
+    })
+    const sorted = mapped.sort((a,b) => b.count - a.count)
+    const sliced = sorted.slice(0, 5);
+
     const formattedData = [];
-
-    const flatArr = popularity.flat();
-
-
-    const handleCount = () => {
-        let i = 0;
-        for(i=0; i<factions.length; i++){
-            popularityArr.push((((flatArr.filter((v) => (v === factions[i])).length) / popularity.length))*100);
-        }
-    }
 
     const handleFormat = () => {
         let i = 0;
-        for(i=0; i<factions.length; i++){
-            formattedData.push({name: (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)), faction: factions[i], "%": popularityArr[i]});
+        for(i=0; i<sliced.length; i++){
+            formattedData.push({name: sliced[i].objectives, count: sliced[i].count});
         }
-        setData(formattedData);
     }
-    
 
-    useEffect(()=>{
-        handleCount(); 
+    useEffect(()=> {
         handleFormat();
-    },[popularity,techCount])
+        setData(formattedData);
+    }, [objectiveCount, techCount])
 
     return (
         <Wrapper>
-            <TitleText>Percentage of times a faction is picked</TitleText>
+            <TitleText>Most popular secret objectives</TitleText>
             {!data
             ?<></>
             :
@@ -69,12 +59,12 @@ const FactionPopularity = ({popularity, techCount}) => {
             >
                 
                 <CartesianGrid strokeDasharray="1 1"/>
-                <YAxis dataKey="faction" type = "category" tick = {{fontSize: 17}} interval = {0}></YAxis>
-                <XAxis type = "number" domain = {[0,100]}>
+                <YAxis dataKey="name" type = "category" tick = {{fontSize: 13}} interval = {0}></YAxis>
+                <XAxis  dataKey="count" type = "number">
                 </XAxis>
 
                 <Tooltip />
-                <Bar dataKey="%" fill="#8884d8" />
+                <Bar dataKey="count" fill="#8884d8" />
             </BarChart>
             </ResponsiveContainer>
             }
@@ -103,4 +93,4 @@ font-size: 1.3vw;
 text-decoration: underline;
 `
 
-export default FactionPopularity;
+export default SecretObjectivePopularity;

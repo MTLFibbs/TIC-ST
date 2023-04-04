@@ -40,7 +40,7 @@ const TechPopularity = ({techCount, globalTechs, popularity, vpCount}) => {
 
     return (
         <Wrapper>
-            <TitleText>Top 5 most popular technologies</TitleText>
+            <TitleText>Most popular technologies</TitleText>
             {!data
             ?<></>
             :

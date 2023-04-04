@@ -5,13 +5,19 @@ import FactionPopularity from "./FactionPopularity";
 import FactionVP from "./FactionVP";
 import TechPopularity from "./TechPopularity";
 import UnitPopularity from "./UnitPopularity";
+import ObjectivePopularity from "./ObjectivePopularity";
+import SecretObjectivePopularity from "./SecretObjectivePopularity";
 
 const StatsLanding = () => {
 
     const [globalTechs, setGlobalTechs] = useState(null);
     const [globalUnits, setGlobalUnits] = useState(null);
+    const [globalObjectives, setGlobalObjectives] = useState(null);
+    const [ globalSecret, setGlobalSecret] = useState(null);
     const [techCount, setTechCount] = useState(null);
     const [unitCount, setUnitCount] = useState(null);
+    const [objectiveCount, setObjectiveCount] = useState(null);
+    const [secretCount, setSecretCount] = useState(null);
     const [selector, setSelector] = useState("Global");
     const [popularity, setPopularity] = useState(null);
     const [vpCount, setVpCount] = useState(null);
@@ -46,7 +52,32 @@ const StatsLanding = () => {
                 window.alert(countUnit.message);
                 throw new Error(countUnit.message);
             }
-            setUnitCount(countUnit.data);
+            setUnitCount(countUnit.data);    
+        const objectivesGlobal = await fetch("/api/get-objectives").then((res) => res.json());
+            if(objectivesGlobal.status !== 200){
+                window.alert(objectivesGlobal.message);
+                throw new Error(objectivesGlobal.message);
+            }
+            setGlobalObjectives(objectivesGlobal.data.public);
+        const countObjectives = await fetch("/api/get-popular-objectives").then((res) => res.json());
+            if(countObjectives.status !== 200){
+                window.alert(countObjectives.message);
+                throw new Error(countObjectives.message);
+            }
+            setObjectiveCount(countObjectives.data);
+        const secretGlobal = await fetch("/api/get-objectives").then((res) => res.json());
+            if(secretGlobal.status !== 200){
+                window.alert(secretGlobal.message);
+                throw new Error(secretGlobal.message);
+            }
+            setGlobalSecret(secretGlobal.data.secret);
+        const countSecretObjectives = await fetch("/api/get-popular-secret-objectives").then((res) => res.json());
+            if(countSecretObjectives.status !== 200){
+                window.alert(countSecretObjectives.message);
+                throw new Error(countSecretObjectives.message);
+            }
+            setSecretCount(countSecretObjectives.data);
+
         const countTech = await fetch("/api/get-popular-techs").then((res) => res.json());
             if(techGlobal.status !== 200){
                 window.alert(countTech.message);
@@ -65,7 +96,16 @@ const StatsLanding = () => {
             <IntroText>Global Twilight Imperium Statistics</IntroText>
             <StatsSwitch selector = {selector} setSelector = {setSelector}/>
             <>
-            {(!popularity || !vpCount || !globalTechs || !globalUnits || !unitCount || !techCount)
+            {(!popularity || 
+            !vpCount || 
+            !globalTechs || 
+            !globalUnits || 
+            !unitCount || 
+            !globalObjectives || 
+            !objectiveCount || 
+            !secretCount ||
+            !globalSecret||
+            !techCount)
             ?<IntroText>LOADING</IntroText>
             :           
             <StatsWrapper>
@@ -73,6 +113,8 @@ const StatsLanding = () => {
             <FactionVP vpCount = {vpCount} techCount = {techCount} />
             <TechPopularity globalTechs = {globalTechs} techCount = {techCount}/>
             <UnitPopularity techCount = {techCount} unitCount = {unitCount} globalUnits = {globalUnits}/>
+            <ObjectivePopularity techCount = {techCount}  globalObjectives={globalObjectives} objectiveCount={objectiveCount}/>
+            <SecretObjectivePopularity techCount = {techCount}  globalObjectives={globalSecret} objectiveCount={secretCount}/>
             </StatsWrapper>  
             }
 
