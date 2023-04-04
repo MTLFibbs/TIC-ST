@@ -3,10 +3,12 @@ import StatsSwitch from "./StatsSwitch";
 import { useState, useEffect, useContext } from "react";
 import FactionPopularity from "./FactionPopularity";
 import FactionVP from "./FactionVP";
+import TechPopularity from "./TechPopularity";
 
 const StatsLanding = () => {
 
-    const [flip, setFlip] = useState(false);
+    const [globalTechs, setGlobalTechs] = useState(null);
+    const [techCount, setTechCount] = useState(null);
     const [selector, setSelector] = useState("Global");
     const [popularity, setPopularity] = useState(null);
     const [vpCount, setVpCount] = useState(null);
@@ -24,7 +26,18 @@ const StatsLanding = () => {
                 throw new Error(victoryCount.message);
             }
             setVpCount(victoryCount.data);
-
+        const techGlobal = await fetch("/api/get-global-techs").then((res) => res.json());
+        if(techGlobal.status !== 200){
+            window.alert(techGlobal.message);
+            throw new Error(techGlobal.message);
+        }
+        setGlobalTechs(techGlobal.data);
+        const countTech = await fetch("/api/get-popular-techs").then((res) => res.json());
+        if(techGlobal.status !== 200){
+            window.alert(countTech.message);
+            throw new Error(countTech.message);
+        }
+        setTechCount(countTech.data);
     };
 
     useEffect(() => {
@@ -36,12 +49,13 @@ const StatsLanding = () => {
             <IntroText>Global Twilight Imperium Statistics</IntroText>
             <StatsSwitch selector = {selector} setSelector = {setSelector}/>
             <>
-            {(!popularity || !vpCount)
+            {(!popularity || !vpCount || !globalTechs || !techCount)
             ?<IntroText>LOADING</IntroText>
             :           
             <StatsWrapper>
-            <FactionPopularity popularity = {popularity} vpCount = {vpCount} />
-            <FactionVP popularity = {popularity} vpCount = {vpCount} />
+            <FactionPopularity popularity = {popularity} techCount = {techCount}/>
+            <FactionVP vpCount = {vpCount} techCount = {techCount} />
+            <TechPopularity globalTechs = {globalTechs} techCount = {techCount}/>
             </StatsWrapper>  
             }
 

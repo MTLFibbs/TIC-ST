@@ -13,7 +13,7 @@ import {
   } from "recharts";
 
 
-const FactionVP = ({vpCount, popularity}) => {
+const FactionVP = ({vpCount,techCount}) => {
 
     const factions = ["Arborec","Letnev","Muaat", 
         "Saar","Hacan", "Sol", "Creuss", "L1Z1X", 
@@ -72,7 +72,7 @@ const FactionVP = ({vpCount, popularity}) => {
         handleCleaning();
         handleFormat();
         setData(formattedData);
-    },[vpCount,popularity])
+    },[vpCount,techCount])
     
     return (
         <Wrapper>

@@ -30,7 +30,8 @@ const {patchLiveGame} = require("./handlers/LiveGame/patchLiveGame")
 //THESE ARE STATS PAGE ENDPOINTS
 
 const {getFactionPopularity} = require("./handlers/Stats/getFactionPopularity")
-const {getFactionVP} = require("./handlers/Stats/getFactionVP")
+const {getFactionVP} = require("./handlers/Stats/getFactionVP");
+const { getPopularTechs } = require('./handlers/Stats/getPopularTechs');
 
 express()
 .use(function(req, res, next) {
@@ -79,7 +80,7 @@ express()
 //These endpoints are related to the stats page
 .get("/api/get-faction-popularity", getFactionPopularity)
 .get("/api/get-faction-vp", getFactionVP)
-
+.get("/api/get-popular-techs", getPopularTechs)
 
 
 // this is our catch all endpoint.
