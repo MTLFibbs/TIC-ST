@@ -4,14 +4,41 @@ import { useState, useEffect, useContext } from "react";
 import { User, useAuth0 } from "@auth0/auth0-react";
 
 const StatsSwitch = ({selector, setSelector}) => {
-    const {loginWithRedirect, isAuthenticated, user} = useAuth0();
+
+    const factions = ["Arborec","Letnev","Muaat", 
+    "Saar","Hacan", "Sol", "Creuss", "L1Z1X", 
+    "Mentak", "Naalu","Nekro","Sardakk","JolNar",
+    "Winnu", "Xxcha", "Yin", "Yssaril"
+];
+
+    const handleSelector = (selectorValue) => {
+        setSelector(selectorValue)
+    }
+
+
+
 
     return(
         <Wrapper>
             <SelectorWrapper>
-                <SelectorText to = {"/stats"}>GLOBAL</SelectorText>
-                <SelectorText to = {`/stats/${user.nickname}`}>USER</SelectorText>
+                <WordWrapper onClick = {()=> handleSelector("global")} selector = {selector}>
+                    <SelectorText>GLOBAL</SelectorText>
+                </WordWrapper>
+                <WordWrapperUser onClick = {()=> handleSelector("user")} selector = {selector}>
+                    <SelectorText >USER</SelectorText>
+                </WordWrapperUser>
             </SelectorWrapper>
+            <FactionWrapper>
+                {factions.map((e,i)=> {
+                    return(
+                        <SubSelectorWrapper key = {i} onClick = {()=> handleSelector(e)} >
+                            <SubSelectorText key = {e}>{e}</SubSelectorText>
+                        </SubSelectorWrapper>
+                    ) 
+                })
+
+                }
+            </FactionWrapper>
         </Wrapper>
     )
 };
@@ -21,6 +48,7 @@ width: 100vw;
 height: 10vh;
 background-color:pink;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
 `
@@ -30,21 +58,73 @@ display:flex;
 flex-direction:row;
 justify-content:center;
 align-items:center;
-width: 10vw;
-height: 7vh;
+width: 100%;
+height: 5vh;
 background-color:orange;
-border-radius:16px;
-border: 2px solid black;
+`
+const FactionWrapper = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%;
+background-color:grey;
 `
 
-const SelectorText = styled(NavLink)`
-margin-left:1vw;
-margin-right: 1vw;
-font-size:1vw;
-color:black;
-&:active{
+const WordWrapper = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+height: 100%;
+width: 14vw;
+cursor:pointer;
+&:hover{
+    background-color:white;
+    color:blue;
+}
+background-color: ${props => (props.selector === "global" ? "green" : "transparent")};
+`
+
+const WordWrapperUser = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+height: 100%;
+width: 14vw;
+cursor:pointer;
+&:hover{
+    background-color:white;
+    color:blue;
+}
+background-color: ${props => (props.selector === "user" ? "green" : "transparent")};
+`
+
+const SubSelectorWrapper = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+height: 4vh;
+width: 100%;
+margin-left: 0.6vw;
+margin-right: 0.6vw;
+cursor:pointer;
+&:hover{
+    background-color:white;
     color:blue;
 }
 `
 
+const SelectorText = styled.div`
+margin-left:1vw;
+margin-right: 1vw;
+font-size:1vw;
+color:black;
+border-radius:8px;
+`
+const SubSelectorText = styled.div`
+margin-left:1vw;
+margin-right: 1vw;
+font-size:1vw;
+color:black;
+border-radius:8px;
+`
 export default StatsSwitch;

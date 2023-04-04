@@ -41,6 +41,7 @@ const { getPopularTechsUser } = require('./handlers/Stats/getPopularTechsUser');
 const { getPopularUnitsUser } = require('./handlers/Stats/getPopularUnitsUser');
 const { getPopularObjectivesUser } = require('./handlers/Stats/getPopularObjectivesUser');
 const { getPopularSecretObjectivesUser } = require('./handlers/Stats/getPopularSecretObjectivesUser');
+const { getFactionPlacement } = require('./handlers/Stats/getFactionPlacement');
 
 express()
 .use(function(req, res, next) {
@@ -100,6 +101,8 @@ express()
 .get("/api/get-popular-units/:user", getPopularUnitsUser)
 .get("/api/get-popular-objectives/:user", getPopularObjectivesUser)
 .get("/api/get-popular-secret-objectives/:user", getPopularSecretObjectivesUser)
+
+.get("/api/get-faction-placement", getFactionPlacement)
 
 
 // this is our catch all endpoint.

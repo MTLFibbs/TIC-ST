@@ -13,7 +13,6 @@ import { LiveGameProvider } from "./LiveGameContext";
 import LandingPage from "./LandingPage";
 import ProfilePage from "./ProfilePage";
 import StatsLanding from "./StatsPages/StatsLanding";
-import StatsLandingUser from "./StatsPages/StatsLandingUser";
 
 const App = () => {
 
@@ -34,7 +33,6 @@ const App = () => {
         <Route path = "/livegames/:host" element = {<LiveGameList/>}/>
         <Route path = "/livegame/:_id" element = {<SpecificLiveGame/>} />
         <Route path = "/stats" element = {<StatsLanding/>}/>
-        <Route path = "/stats/:user" element = {<StatsLandingUser/>}/>
         </>
         :<></>
       }
