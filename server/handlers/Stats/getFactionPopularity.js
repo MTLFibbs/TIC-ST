@@ -26,7 +26,7 @@ const getFactionPopularity = async (req,res) => {
         const mapped = result.map((e) => {
             return e.factionList;
         })
-        res.status(200).json({status:200, data: mapped, message: "TEST"});
+        res.status(200).json({status:200, data: mapped, message: "This is the faction popularity"});
 
     }catch(err){
         console.log(err.stack);

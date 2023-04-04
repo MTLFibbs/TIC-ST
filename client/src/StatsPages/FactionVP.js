@@ -13,7 +13,7 @@ import {
   } from "recharts";
 
 
-const FactionPopularity = ({popularity, vpCount}) => {
+const FactionVP = ({vpCount, popularity}) => {
 
     const factions = ["Arborec","Letnev","Muaat", 
         "Saar","Hacan", "Sol", "Creuss", "L1Z1X", 
@@ -23,36 +23,60 @@ const FactionPopularity = ({popularity, vpCount}) => {
 
     const [data, setData] = useState(null);
 
-    const popularityArr = [];
+    const vpArr = [];
     const formattedData = [];
+    
+    const flatArr = vpCount.flat();
 
-    const flatArr = popularity.flat();
-
-
+    
     const handleCount = () => {
         let i = 0;
         for(i=0; i<factions.length; i++){
-            popularityArr.push((((flatArr.filter((v) => (v === factions[i])).length) / popularity.length))*100);
+            vpArr.push(
+                {   faction: factions[i], 
+                    timesPlayed: (flatArr.filter((v) => (v.faction === factions[i])).length),
+                    pointsAccrued: flatArr.map((e,index) => {
+                        if(e.faction === factions[i]){
+                            return e.points;
+                        }
+                        else{
+                            return null
+                        }
+                    })
+                });
         }
     }
-
+    
+    const handleCleaning = () => {
+        let i = 0;
+        for(i=0; i<factions.length; i++){
+            vpArr[i].pointsAccrued =  vpArr[i].pointsAccrued.filter(n => n);
+        }
+    }
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<factions.length; i++){
-            formattedData.push({name: (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)), faction: factions[i], "%": popularityArr[i]});
+            const sum = vpArr[i].pointsAccrued.reduce((partialSum, a) => partialSum + a, 0);
+    
+            if((sum /vpArr[i].timesPlayed).toFixed(2) === "NaN"){
+                formattedData.push({name: factions[i], "VP": "0"});
+            }
+            else{
+                formattedData.push({name: factions[i], "VP": (sum /vpArr[i].timesPlayed).toFixed(1)});
+            }
         }
-        setData(formattedData);
     }
     
-
     useEffect(()=>{
         handleCount(); 
+        handleCleaning();
         handleFormat();
-    },[popularity, vpCount])
-
+        setData(formattedData);
+    },[vpCount,popularity])
+    
     return (
         <Wrapper>
-            <TitleText>Percentage of times a faction is picked</TitleText>
+            <TitleText>Average VP per game for each faction</TitleText>
             {!data
             ?<></>
             :
@@ -68,13 +92,12 @@ const FactionPopularity = ({popularity, vpCount}) => {
                 }}
             >
                 
-                <CartesianGrid strokeDasharray="1 1"/>
-                <YAxis dataKey="faction" type = "category" tick = {{fontSize: 17}} interval = {0}></YAxis>
-                <XAxis type = "number">
+                <CartesianGrid strokeDasharray="3 3"/>
+                <YAxis dataKey="name" type = "category" tick = {{fontSize: 17}} interval = {0}></YAxis>
+                <XAxis scale = "auto" type = "number" domain = {[0,10]}>
                 </XAxis>
-
                 <Tooltip />
-                <Bar dataKey="%" fill="#8884d8" />
+                <Bar dataKey="VP" fill="#8884d8" />
             </BarChart>
             </ResponsiveContainer>
             }
@@ -105,4 +128,4 @@ font-size: 1.3vw;
 text-decoration: underline;
 `
 
-export default FactionPopularity;
+export default FactionVP;

@@ -2,21 +2,33 @@ import styled from "styled-components";
 import StatsSwitch from "./StatsSwitch";
 import { useState, useEffect, useContext } from "react";
 import FactionPopularity from "./FactionPopularity";
+import FactionVP from "./FactionVP";
 
 const StatsLanding = () => {
 
+    const [flip, setFlip] = useState(false);
     const [selector, setSelector] = useState("Global");
     const [popularity, setPopularity] = useState(null);
+    const [vpCount, setVpCount] = useState(null);
     
+    const fetchAll = async () => {
+        const popularityCount = await fetch("/api/get-faction-popularity").then((res) => res.json());
+            if(popularityCount.status !== 200){
+                window.alert(popularityCount.message);
+                throw new Error(popularityCount.message);
+            }
+            setPopularity(popularityCount.data);
+        const victoryCount = await fetch("/api/get-faction-vp").then((res) => res.json());
+            if(victoryCount.status !== 200){
+                window.alert(victoryCount.message);
+                throw new Error(victoryCount.message);
+            }
+            setVpCount(victoryCount.data);
+
+    };
+
     useEffect(() => {
-        fetch("/api/get-faction-popularity")
-        .then(res => res.json())
-        .then((data) => {
-            setPopularity(data.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+        fetchAll();
     }, [])
 
     return (
@@ -24,16 +36,12 @@ const StatsLanding = () => {
             <IntroText>Global Twilight Imperium Statistics</IntroText>
             <StatsSwitch selector = {selector} setSelector = {setSelector}/>
             <>
-            {!popularity
+            {(!popularity || !vpCount)
             ?<IntroText>LOADING</IntroText>
             :           
             <StatsWrapper>
-            <FactionPopularity popularity = {popularity}/>
-            <FactionPopularity popularity = {popularity}/>
-            <FactionPopularity popularity = {popularity}/>
-            <FactionPopularity popularity = {popularity}/>
-            <FactionPopularity popularity = {popularity}/>
-            <FactionPopularity popularity = {popularity}/>
+            <FactionPopularity popularity = {popularity} vpCount = {vpCount} />
+            <FactionVP popularity = {popularity} vpCount = {vpCount} />
             </StatsWrapper>  
             }
 
