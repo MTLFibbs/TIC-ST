@@ -13,7 +13,7 @@ import {
   } from "recharts";
 
 
-const FactionPlacement = ({placement, selector}) => {
+const FactionPlacement = ({placement, selector, switcher}) => {
 
     const place = ["First", "Second", "Third", "Fourth", "Fifth", "Sixth"];
 

@@ -22,10 +22,10 @@ const StatsSwitch = ({selector, setSelector}) => {
         <Wrapper>
             <SelectorWrapper>
                 <WordWrapper onClick = {()=> handleSelector("global")} selector = {selector}>
-                    <SelectorText>GLOBAL</SelectorText>
+                    <SelectorText>ALL GAMES</SelectorText>
                 </WordWrapper>
                 <WordWrapperUser onClick = {()=> handleSelector("user")} selector = {selector}>
-                    <SelectorText >USER</SelectorText>
+                    <SelectorText >YOUR GAMES</SelectorText>
                 </WordWrapperUser>
             </SelectorWrapper>
             <FactionWrapper>

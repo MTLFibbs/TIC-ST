@@ -42,6 +42,9 @@ const { getPopularUnitsUser } = require('./handlers/Stats/getPopularUnitsUser');
 const { getPopularObjectivesUser } = require('./handlers/Stats/getPopularObjectivesUser');
 const { getPopularSecretObjectivesUser } = require('./handlers/Stats/getPopularSecretObjectivesUser');
 const { getFactionPlacement } = require('./handlers/Stats/getFactionPlacement');
+const { getCompletedGames } = require('./handlers/Stats/getCompletedGames');
+const { getFactionTechPopularity } = require('./handlers/Stats/getFactionTechPopularity');
+const { getFactionUnitsPopularity } = require('./handlers/Stats/getFactionUnitsPopularity');
 
 express()
 .use(function(req, res, next) {
@@ -103,6 +106,10 @@ express()
 .get("/api/get-popular-secret-objectives/:user", getPopularSecretObjectivesUser)
 
 .get("/api/get-faction-placement", getFactionPlacement)
+.get("/api/get-faction-tech-popularity", getFactionTechPopularity)
+.get("/api/get-faction-units-popularity", getFactionUnitsPopularity)
+
+.get(`/api/get-completed-games`, getCompletedGames)
 
 
 // this is our catch all endpoint.

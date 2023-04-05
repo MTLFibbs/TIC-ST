@@ -24,7 +24,19 @@ const getFactionPopularityUser = async (req,res) => {
         await client.connect();
         const db = client.db("FinalProject");
 
-        const result = await db.collection("CompletedGames").find({host: user}).project({"_id":0, "host":0, "gameName":0, "playerCount":0, "roundCount":0, "drawnObjectives":0,"drawnSecretObjectives":0, "drawnTechnologies":0,"drawnUnits":0, "throneSupporters":0, "playerList":0, "players":0} ).toArray();
+        const result = await db.collection("CompletedGames").find({host: user}).project({"_id":0, 
+        "host":0, 
+        "gameName":0, 
+        "playerCount":0, 
+        "roundCount":0, 
+        "drawnObjectives":0,
+        "drawnSecretObjectives":0, 
+        "drawnTechnologies":0,
+        "drawnUnits":0, 
+        "throneSupporters":0, 
+        "playerList":0, 
+        "players":0
+        }).toArray();
         const mapped = result.map((e) => {
             return e.factionList;
         })

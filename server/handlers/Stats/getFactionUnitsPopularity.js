@@ -12,33 +12,35 @@ const options = {
     useUnifiedTopology: true,
   };
 
-
-  //This endpoint gets an array of all factions and their average pickrate
-
-const getFactionPopularity = async (req,res) => {
+const getFactionUnitsPopularity = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);
-
+    
     try{
         await client.connect();
         const db = client.db("FinalProject");
 
-        const result = await db.collection("CompletedGames").find({}).project({"_id":0,
+        const result = await db.collection("CompletedGames").find({}).project({"_id":0, 
         "host":0, 
         "gameName":0, 
-        "playerCount":0, 
         "roundCount":0, 
         "drawnObjectives":0,
+        "playerCount":0,
         "drawnSecretObjectives":0, 
         "drawnTechnologies":0,
         "drawnUnits":0, 
         "throneSupporters":0, 
         "playerList":0, 
-        "players":0
-        }).toArray();
-        const mapped = result.map((e) => {
-            return e.factionList;
+        "factionList":0, 
+        "players.position":0, "players.nickname":0, "players.techsUpgraded":0, "players.placementValue":0, "players.pointsOrigin":0, "players.points":0
+        } ).toArray();
+
+        //const players = result[0].players
+        const mapped = result.map((e,i) => {
+            return e.players
         })
-        res.status(200).json({status:200, data: mapped, message: "This is the faction popularity"});
+
+
+        res.status(200).json({status:200, data: mapped, message: "Here are all games separated in arrays with objects containing each faction and their respective researched units for the game"});
 
     }catch(err){
         console.log(err.stack);
@@ -47,4 +49,4 @@ const getFactionPopularity = async (req,res) => {
     client.close();
 };
 
-module.exports = {getFactionPopularity};
+module.exports = {getFactionUnitsPopularity};

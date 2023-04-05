@@ -11,13 +11,20 @@ import UnitPopularity from "./UnitPopularity";
 import ObjectivePopularity from "./ObjectivePopularity";
 import SecretObjectivePopularity from "./SecretObjectivePopularity";
 import FactionPlacement from "./FactionPlacement";
+import FactionTechPopularity from "./FactionTechPopularity";
+import FactionUnitPopularity from "./FactionUnitPopularity";
 
 const StatsLanding = () => {
 
+    const [switcher, setSwitcher] = useState(false);
     const [selector, setSelector] = useState("global");
     const {user} = useAuth0();
 
     const [placement, setPlacement] = useState(null);
+    const [factionTechs, setFactionTechs] = useState(null);
+    const [factionTechSpecific, setFactionTechSpecific] = useState(null);
+    const [factionUnits, setFactionUnits] = useState(null);
+    const [factionUnitSpecific, setFactionUnitSpecific] = useState(null);
 
     const [techCountUser, setTechCountUser] = useState(null);
     const [unitCountUser, setUnitCountUser] = useState(null);
@@ -98,48 +105,66 @@ const StatsLanding = () => {
                 throw new Error(popularityCountUser.message);
             }
             setPopularityUser(popularityCountUser.data);
-
         const victoryCountUser = await fetch(`/api/get-faction-vp/${user.nickname}`).then((res) => res.json());
             if(victoryCountUser.status !== 200){
                 window.alert(victoryCountUser.message);
                 throw new Error(victoryCountUser.message);
             }
             setVpCountUser(victoryCountUser.data);
-
         const countUnitUser = await fetch(`/api/get-popular-units/${user.nickname}`).then((res) => res.json());
             if(countUnitUser.status !== 200){
                 window.alert(countUnitUser.message);
                 throw new Error(countUnitUser.message);
             }
             setUnitCountUser(countUnitUser.data);    
-
         const countObjectivesUser = await fetch(`/api/get-popular-objectives/${user.nickname}`).then((res) => res.json());
             if(countObjectivesUser.status !== 200){
                 window.alert(countObjectivesUser.message);
                 throw new Error(countObjectivesUser.message);
             }
             setObjectiveCountUser(countObjectivesUser.data);
-
         const countSecretObjectivesUser = await fetch(`/api/get-popular-secret-objectives/${user.nickname}`).then((res) => res.json());
             if(countSecretObjectivesUser.status !== 200){
                 window.alert(countSecretObjectivesUser.message);
                 throw new Error(countSecretObjectivesUser.message);
             }
             setSecretCountUser(countSecretObjectivesUser.data);
-
         const countTechUser = await fetch(`/api/get-popular-techs/${user.nickname}`).then((res) => res.json());
             if(countTechUser.status !== 200){
                 window.alert(countTechUser.message);
                 throw new Error(countTechUser.message);
             }
             setTechCountUser(countTechUser.data);
-
         const placementValue = await fetch(`/api/get-faction-placement`).then((res) => res.json());
             if(placementValue.status !== 200){
                 window.alert(placementValue.message);
                 throw new Error(placementValue.message);
             }
             setPlacement(placementValue.data);
+        const techFactionGlobal = await fetch(`/api/get-techs`).then((res) => res.json());
+            if(techFactionGlobal.status !== 200){
+                window.alert(techFactionGlobal.message);
+                throw new Error(techFactionGlobal.message);
+            }
+            setFactionTechs(techFactionGlobal.data);
+        const techFactionSpecific = await fetch(`/api/get-faction-tech-popularity`).then((res) => res.json());
+            if(techFactionSpecific.status !== 200){
+                window.alert(techFactionSpecific.message);
+                throw new Error(techFactionSpecific.message);
+            }
+            setFactionTechSpecific(techFactionSpecific.data);
+        const unitFactionSpecific = await fetch(`/api/get-faction-units-popularity`).then((res) => res.json());
+            if(unitFactionSpecific.status !== 200){
+                window.alert(unitFactionSpecific.message);
+                throw new Error(unitFactionSpecific.message);
+            }
+            setFactionUnitSpecific(unitFactionSpecific.data);
+        const unitFactionGlobal = await fetch(`/api/get-units`).then((res) => res.json());
+            if(unitFactionGlobal.status !== 200){
+                window.alert(unitFactionGlobal.message);
+                throw new Error(unitFactionGlobal.message);
+            }
+            setFactionUnits(unitFactionGlobal.data);
 
         const countTech = await fetch("/api/get-popular-techs").then((res) => res.json());
             if(techGlobal.status !== 200){
@@ -150,9 +175,22 @@ const StatsLanding = () => {
 
     };
 
+    const fetchRender = () => {
+        if(switcher === true){
+            setSwitcher(false)
+        }
+        if(switcher === false){
+            setSwitcher(true)
+        }
+    }
+
     useEffect(() => {
         fetchAll();
-    }, [])
+    }, [user])
+
+    useEffect(()=> {
+        fetchRender();
+    },[selector])
 
     return (
         <Wrapper>
@@ -174,6 +212,10 @@ const StatsLanding = () => {
             !secretCountUser ||
             !techCountUser||
             !placement||
+            !factionTechs ||
+            !factionTechSpecific||
+            !factionUnits ||
+            !factionUnitSpecific ||
             !techCount)
             ?<IntroText>LOADING</IntroText>
             : selector === ("global" || null)
@@ -181,7 +223,7 @@ const StatsLanding = () => {
             <StatsWrapper>
             <FactionPopularity popularity = {popularity} techCount = {techCount}/>
             <FactionVP vpCount = {vpCount} techCount = {techCount} />
-            <TechPopularity globalTechs = {globalTechs} techCount = {techCount}/>
+            <TechPopularity globalTechs = {globalTechs} techCount = {techCount} switcher = {switcher}/>
             <UnitPopularity techCount = {techCount} unitCount = {unitCount} globalUnits = {globalUnits}/>
             <ObjectivePopularity techCount = {techCount}  globalObjectives={globalObjectives} objectiveCount={objectiveCount}/>
             <SecretObjectivePopularity techCount = {techCount}  globalObjectives={globalSecret} objectiveCount={secretCount}/>
@@ -199,9 +241,18 @@ const StatsLanding = () => {
             </StatsWrapper>  
             : selector !== ("global" || null || "user")
             ?
-            <FactionWrapper>
-                <FactionPlacement placement = {placement} selector = {selector} techCount = {techCount}/>
-            </FactionWrapper>
+            <WrapperWrapper>
+                <FactionWrapper1>
+                <FactionPlacement placement = {placement} selector = {selector} switcher = {switcher}/>
+                </FactionWrapper1>
+                <FactionWrapper2>
+                    <FactionTechPopularity selector = {selector} switcher = {switcher} factionTechSpecific = {factionTechSpecific} factionTechs = {factionTechs}/>
+                </FactionWrapper2>
+                <FactionWrapper2>
+                    <FactionUnitPopularity selector = {selector} switcher = {switcher} factionUnitSpecific = {factionUnitSpecific} factionUnits = {factionUnits}/>
+                </FactionWrapper2>
+            </WrapperWrapper>
+
             : <></>
             }
             </>
@@ -231,8 +282,22 @@ grid-gap: 0.5vh;
 margin-left: 2vw;
 margin-right: 0vw;
 `
-
-const FactionWrapper = styled.div`
+const WrapperWrapper = styled.div`
+display:flex;
+flex-direction: row;
+width: 100%;
+height:100%;
+`
+const FactionWrapper1 = styled.div`
+display:flex;
+text-align:center;
+justify-content:center;
+align-items:center;
+height:72vh;
+width: 33%;
+margin-left: 2vw;
+`
+const FactionWrapper2 = styled.div`
 display:flex;
 text-align:center;
 justify-content:center;
@@ -240,6 +305,6 @@ align-items:center;
 height:72vh;
 width: 33%;
 margin-left: 0vw;
-margin-left: 2vw;
+margin-right: -1.5vw;
 `
 export default StatsLanding;

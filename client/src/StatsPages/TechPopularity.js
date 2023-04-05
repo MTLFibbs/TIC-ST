@@ -12,7 +12,7 @@ import {
     Label
   } from "recharts";
 
-const TechPopularity = ({techCount, globalTechs, popularity, vpCount}) => {
+const TechPopularity = ({techCount, globalTechs, switcher}) => {
 
     const techs = globalTechs;
     const [data, setData] = useState(null);
