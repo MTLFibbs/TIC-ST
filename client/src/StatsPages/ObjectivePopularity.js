@@ -31,7 +31,9 @@ const ObjectivePopularity = ({techCount,objectiveCount, globalObjectives}) => {
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<sliced.length; i++){
-            formattedData.push({name: sliced[i].objectives, count: sliced[i].count});
+            if(!formattedData.find(({name}) => name === (sliced[i].objectives))){
+                formattedData.push({name: sliced[i].objectives, count: sliced[i].count});
+            }
         }
     }
 

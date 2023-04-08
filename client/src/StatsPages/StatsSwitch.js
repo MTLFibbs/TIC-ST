@@ -31,7 +31,7 @@ const StatsSwitch = ({selector, setSelector}) => {
             <FactionWrapper>
                 {factions.map((e,i)=> {
                     return(
-                        <SubSelectorWrapper key = {i} onClick = {()=> handleSelector(e)} >
+                        <SubSelectorWrapper key = {i} faction = {e} selector = {selector} onClick = {()=> handleSelector(e)} >
                             <SubSelectorText key = {e}>{e}</SubSelectorText>
                         </SubSelectorWrapper>
                     ) 
@@ -111,6 +111,8 @@ cursor:pointer;
     background-color:white;
     color:blue;
 }
+
+background-color: ${props => (props.faction === props.selector ? "green" : "transparent")};
 `
 
 const SelectorText = styled.div`

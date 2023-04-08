@@ -62,7 +62,6 @@ const ProfilePage = () => {
 };
 
 const PageWrapper = styled.div`
-background-color:pink;
 display:flex;
 justify-content:center;
 width:100vw;
@@ -72,26 +71,24 @@ height: 87vh;
 const ProfileWrapper = styled.div`
 display:flex;
 flex-direction: column;
-margin-top: 5vh;
+margin-top: 15vh;
 width: 50vw;
-height: 69vh;
+height: 45vh;
 border: 2px solid black;
 border-radius: 16px;
 `
 
 const ProfileTop = styled.div`
-background-color:lightblue;
 display:flex;
 flex-direction: row;
 justify-content:start;
 align-items:center;
 width: 100%;
-height: 30%;
+height: 15vh;
 border-bottom: 2px solid black;
 `
 
 const ImageWrapper = styled.div`
-background-color:blue;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -165,12 +162,11 @@ font-weight:bold;
 `
 
 const ProfileBot = styled.div`
-background-color:orange;
 display:flex;
 justify-content:space-around;
 align-items:center;
 width: 100%;
-height: 100%;
+height: 30vh;
 `
 
 export default ProfilePage;

@@ -29,7 +29,10 @@ const UnitPopularity = ({techCount,globalUnits, unitCount}) => {
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<sliced.length; i++){
-            formattedData.push({name: sliced[i].units, count: sliced[i].count});
+            if(!formattedData.find(({name}) => name === (sliced[i].units))){
+                formattedData.push({name: sliced[i].units, count: sliced[i].count});            
+            }
+
         }
     }
 

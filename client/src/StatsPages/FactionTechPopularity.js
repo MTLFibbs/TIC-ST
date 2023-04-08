@@ -59,7 +59,10 @@ const FactionTechPopularity = ({factionTechSpecific, factionTechs, selector, swi
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<dataArr.length; i++){
-            formattedData.push({name: dataArr[i].tech, "Count": dataArr[i].count});
+            if(!formattedData.find(({name}) => name === (dataArr[i].tech))){
+                formattedData.push({name: dataArr[i].tech, "Count": dataArr[i].count});
+            }
+
         }
     }
 

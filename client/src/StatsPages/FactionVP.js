@@ -58,10 +58,10 @@ const FactionVP = ({vpCount,techCount}) => {
         for(i=0; i<factions.length; i++){
             const sum = vpArr[i].pointsAccrued.reduce((partialSum, a) => partialSum + a, 0);
     
-            if((sum /vpArr[i].timesPlayed).toFixed(2) === "NaN"){
+            if((sum /vpArr[i].timesPlayed).toFixed(2) === "NaN" && !formattedData.find(({name}) => name === (factions[i]))){
                 formattedData.push({name: factions[i], "VP": "0"});
             }
-            else{
+            else if(!formattedData.find(({name}) => name === (factions[i]))){
                 formattedData.push({name: factions[i], "VP": (sum /vpArr[i].timesPlayed).toFixed(1)});
             }
         }

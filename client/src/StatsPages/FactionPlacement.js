@@ -64,7 +64,7 @@ const FactionPlacement = ({placement, selector, switcher}) => {
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<place.length; i++){
-            if(place[i] === "First"){
+            if(place[i] === "First" && !formattedData.find(({name}) => name === (place[i]))){
                 formattedData.push({
                     name: place[i], 
                     three: firstPlace.filter((v) => (v === "3")).length,
@@ -73,7 +73,7 @@ const FactionPlacement = ({placement, selector, switcher}) => {
                     six: firstPlace.filter((v) => (v === "6")).length,
                 });
             }
-            else if(place[i] === "Second"){
+            else if(place[i] === "Second" && !formattedData.find(({name}) => name === (place[i]))){
                 formattedData.push({
                     name: place[i], 
                     three: secondPlace.filter((v) => (v === "3")).length,
@@ -82,7 +82,7 @@ const FactionPlacement = ({placement, selector, switcher}) => {
                     six: secondPlace.filter((v) => (v === "6")).length,
                 });
             }
-            else if(place[i] === "Third"){
+            else if(place[i] === "Third" && !formattedData.find(({name}) => name === (place[i]))){
                 formattedData.push({
                     name: place[i], 
                     three: thirdPlace.filter((v) => (v === "3")).length,
@@ -91,7 +91,7 @@ const FactionPlacement = ({placement, selector, switcher}) => {
                     six: thirdPlace.filter((v) => (v === "6")).length,
                 });
             }
-            else if(place[i] === "Fourth"){
+            else if(place[i] === "Fourth" && !formattedData.find(({name}) => name === (place[i]))){
                 formattedData.push({
                     name: place[i], 
                     three: fourthPlace.filter((v) => (v === "3")).length,
@@ -100,7 +100,7 @@ const FactionPlacement = ({placement, selector, switcher}) => {
                     six: fourthPlace.filter((v) => (v === "6")).length,
                 });
             }
-            else if(place[i] === "Fifth"){
+            else if(place[i] === "Fifth" && !formattedData.find(({name}) => name === (place[i]))){
                 formattedData.push({
                     name: place[i], 
                     three: fifthPlace.filter((v) => (v === "3")).length,
@@ -109,7 +109,7 @@ const FactionPlacement = ({placement, selector, switcher}) => {
                     six: fifthPlace.filter((v) => (v === "6")).length,
                 });
             }
-            else if(place[i] === "Sixth"){
+            else if(place[i] === "Sixth" && !formattedData.find(({name}) => name === (place[i]))){
                 formattedData.push({
                     name: place[i], 
                     three: sixthPlace.filter((v) => (v === "3")).length,

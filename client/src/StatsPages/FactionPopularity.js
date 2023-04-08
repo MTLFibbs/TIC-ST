@@ -13,7 +13,7 @@ import {
   } from "recharts";
 
 
-const FactionPopularity = ({popularity, techCount}) => {
+const FactionPopularity = ({popularity, assign, setAssign, selector}) => {
 
     const factions = ["Arborec","Letnev","Muaat", 
         "Saar","Hacan", "Sol", "Creuss", "L1Z1X", 
@@ -26,10 +26,11 @@ const FactionPopularity = ({popularity, techCount}) => {
     const popularityArr = [];
     const formattedData = [];
 
-    const flatArr = popularity.flat();
+
 
 
     const handleCount = () => {
+        const flatArr = popularity.flat();
         let i = 0;
         for(i=0; i<factions.length; i++){
             popularityArr.push((((flatArr.filter((v) => (v === factions[i])).length) / popularity.length))*100);
@@ -39,16 +40,17 @@ const FactionPopularity = ({popularity, techCount}) => {
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<factions.length; i++){
-            formattedData.push({name: (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)), faction: factions[i], "%": popularityArr[i]});
+            if(!formattedData.find(({name}) => name === (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)))){
+                formattedData.push({name: (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)), faction: factions[i], "%": popularityArr[i]});
+            }
         }
-        setData(formattedData);
+        setData(formattedData)
     }
     
-
     useEffect(()=>{
         handleCount(); 
         handleFormat();
-    },[popularity,techCount])
+    },[selector])
 
     return (
         <Wrapper>

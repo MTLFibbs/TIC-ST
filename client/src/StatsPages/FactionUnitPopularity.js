@@ -59,7 +59,10 @@ const FactionUnitPopularity = ({factionUnitSpecific, factionUnits, selector, swi
     const handleFormat = () => {
         let i = 0;
         for(i=0; i<dataArr.length; i++){
-            formattedData.push({name: dataArr[i].unit, "Count": dataArr[i].count});
+            if(!formattedData.find(({name}) => name === (dataArr[i].unit))){
+                formattedData.push({name: dataArr[i].unit, "Count": dataArr[i].count});
+            }
+
         }
     }
 

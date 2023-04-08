@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { User, useAuth0 } from "@auth0/auth0-react";
 

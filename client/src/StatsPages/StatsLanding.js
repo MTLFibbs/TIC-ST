@@ -2,7 +2,7 @@ import styled from "styled-components";
 import StatsSwitch from "./StatsSwitch";
 import { useState, useEffect, useContext } from "react";
 import { User, useAuth0 } from "@auth0/auth0-react";
-
+import { LiveGameContext } from "../LiveGameContext";
 
 import FactionPopularity from "./FactionPopularity";
 import FactionVP from "./FactionVP";
@@ -15,6 +15,9 @@ import FactionTechPopularity from "./FactionTechPopularity";
 import FactionUnitPopularity from "./FactionUnitPopularity";
 
 const StatsLanding = () => {
+
+    const {assign} = useContext(LiveGameContext)
+    const {setAssign} = useContext(LiveGameContext)
 
     const [switcher, setSwitcher] = useState(false);
     const [selector, setSelector] = useState("global");
@@ -221,35 +224,35 @@ const StatsLanding = () => {
             : selector === ("global" || null)
             ?  
             <StatsWrapper>
-            <FactionPopularity popularity = {popularity} techCount = {techCount}/>
-            <FactionVP vpCount = {vpCount} techCount = {techCount} />
-            <TechPopularity globalTechs = {globalTechs} techCount = {techCount} switcher = {switcher}/>
-            <UnitPopularity techCount = {techCount} unitCount = {unitCount} globalUnits = {globalUnits}/>
-            <ObjectivePopularity techCount = {techCount}  globalObjectives={globalObjectives} objectiveCount={objectiveCount}/>
-            <SecretObjectivePopularity techCount = {techCount}  globalObjectives={globalSecret} objectiveCount={secretCount}/>
+            <FactionPopularity popularity = {popularity} assign = {assign} setAssign = {setAssign} selector = {selector}/>
+            <FactionVP vpCount = {vpCount}  />
+            <TechPopularity globalTechs = {globalTechs} techCount = {techCount} />
+            <UnitPopularity  unitCount = {unitCount} globalUnits = {globalUnits}/>
+            <ObjectivePopularity  globalObjectives={globalObjectives} objectiveCount={objectiveCount}/>
+            <SecretObjectivePopularity  globalObjectives={globalSecret} objectiveCount={secretCount}/>
             </StatsWrapper>  
 
             : selector === "user"
             ?
             <StatsWrapper>
-            <FactionPopularity popularity = {popularityUser} techCount = {techCountUser}/>
-            <FactionVP vpCount = {vpCountUser} techCount = {techCountUser} />
+            <FactionPopularity popularity = {popularityUser} />
+            <FactionVP vpCount = {vpCountUser}/>
             <TechPopularity globalTechs = {globalTechs} techCount = {techCountUser}/>
-            <UnitPopularity techCount = {techCountUser} unitCount = {unitCountUser} globalUnits = {globalUnits}/>
-            <ObjectivePopularity techCount = {techCountUser}  globalObjectives={globalObjectives} objectiveCount={objectiveCountUser}/>
-            <SecretObjectivePopularity techCount = {techCountUser}  globalObjectives={globalSecret} objectiveCount={secretCountUser}/>
+            <UnitPopularity  unitCount = {unitCountUser} globalUnits = {globalUnits}/>
+            <ObjectivePopularity globalObjectives={globalObjectives} objectiveCount={objectiveCountUser}/>
+            <SecretObjectivePopularity globalObjectives={globalSecret} objectiveCount={secretCountUser}/>
             </StatsWrapper>  
             : selector !== ("global" || null || "user")
             ?
             <WrapperWrapper>
                 <FactionWrapper1>
-                <FactionPlacement placement = {placement} selector = {selector} switcher = {switcher}/>
+                <FactionPlacement placement = {placement} selector = {selector} />
                 </FactionWrapper1>
                 <FactionWrapper2>
-                    <FactionTechPopularity selector = {selector} switcher = {switcher} factionTechSpecific = {factionTechSpecific} factionTechs = {factionTechs}/>
+                    <FactionTechPopularity selector = {selector} factionTechSpecific = {factionTechSpecific} factionTechs = {factionTechs}/>
                 </FactionWrapper2>
                 <FactionWrapper2>
-                    <FactionUnitPopularity selector = {selector} switcher = {switcher} factionUnitSpecific = {factionUnitSpecific} factionUnits = {factionUnits}/>
+                    <FactionUnitPopularity selector = {selector} factionUnitSpecific = {factionUnitSpecific} factionUnits = {factionUnits}/>
                 </FactionWrapper2>
             </WrapperWrapper>
 
