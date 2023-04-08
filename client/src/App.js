@@ -11,7 +11,7 @@ import LiveGameList from "./LiveGame/LiveGameList";
 import SpecificLiveGame from "./LiveGame/SpecificLiveGame"
 import { LiveGameProvider } from "./LiveGameContext";
 import LandingPage from "./LandingPage";
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./ProfilePage/ProfilePage";
 import StatsLanding from "./StatsPages/StatsLanding";
 
 const App = () => {

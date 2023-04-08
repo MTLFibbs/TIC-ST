@@ -109,7 +109,7 @@ express()
 .get("/api/get-faction-tech-popularity", getFactionTechPopularity)
 .get("/api/get-faction-units-popularity", getFactionUnitsPopularity)
 
-.get(`/api/get-completed-games`, getCompletedGames)
+.get(`/api/get-completed-games/:user`, getCompletedGames)
 
 
 // this is our catch all endpoint.

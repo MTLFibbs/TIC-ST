@@ -24,7 +24,7 @@ const getCompletedGames = async (req,res) => {
         await client.connect();
         const db = client.db("FinalProject");
 
-        const result = await db.collection("CompletedGames").find().project().toArray();
+        const result = await db.collection("CompletedGames").find({host: user}).project().toArray();
 
         res.status(200).json({status:200, data: result, message: "These are all completed games"});
 
