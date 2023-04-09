@@ -39,6 +39,7 @@ text-align:center;
 margin-top: 4vh;
 font-size: 1.5vw;
 text-decoration:none;
+color:white;
 `
 
 export default FavoriteTech;

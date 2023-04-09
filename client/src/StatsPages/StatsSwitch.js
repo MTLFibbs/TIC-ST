@@ -46,11 +46,11 @@ const StatsSwitch = ({selector, setSelector}) => {
 const Wrapper = styled.div`
 width: 100vw;
 height: 10vh;
-background-color:pink;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+background-color: #25282d;
 `
 
 const SelectorWrapper = styled.div`
@@ -60,14 +60,12 @@ justify-content:center;
 align-items:center;
 width: 100%;
 height: 5vh;
-background-color:orange;
 `
 const FactionWrapper = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
 width:100%;
-background-color:grey;
 `
 
 const WordWrapper = styled.div`
@@ -76,12 +74,13 @@ justify-content:center;
 align-items:center;
 height: 100%;
 width: 14vw;
+border-radius:16px;
 cursor:pointer;
 &:hover{
-    background-color:white;
+    background-color: #370D32;
     color:blue;
 }
-background-color: ${props => (props.selector === "global" ? "green" : "transparent")};
+background-color: ${props => (props.selector === "global" ? "#370D32" : "transparent")};
 `
 
 const WordWrapperUser = styled.div`
@@ -90,12 +89,13 @@ justify-content:center;
 align-items:center;
 height: 100%;
 width: 14vw;
+border-radius:16px;
 cursor:pointer;
 &:hover{
-    background-color:white;
+    background-color: #370D32;
     color:blue;
 }
-background-color: ${props => (props.selector === "user" ? "green" : "transparent")};
+background-color: ${props => (props.selector === "user" ? "#370D32" : "transparent")};
 `
 
 const SubSelectorWrapper = styled.div`
@@ -106,27 +106,28 @@ height: 4vh;
 width: 100%;
 margin-left: 0.6vw;
 margin-right: 0.6vw;
+border-radius:16px;
 cursor:pointer;
 &:hover{
-    background-color:white;
+    background-color: #370D32;
     color:blue;
 }
 
-background-color: ${props => (props.faction === props.selector ? "green" : "transparent")};
+background-color: ${props => (props.faction === props.selector ? "#370D32" : "transparent")};
 `
 
 const SelectorText = styled.div`
 margin-left:1vw;
 margin-right: 1vw;
 font-size:1vw;
-color:black;
+color:white;
 border-radius:8px;
 `
 const SubSelectorText = styled.div`
 margin-left:1vw;
 margin-right: 1vw;
 font-size:1vw;
-color:black;
+color:white;
 border-radius:8px;
 `
 export default StatsSwitch;

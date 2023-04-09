@@ -93,8 +93,8 @@ const FactionUnitPopularity = ({factionUnitSpecific, factionUnits, selector, swi
             >
                 
                 <CartesianGrid strokeDasharray="1 1"/>
-                <YAxis dataKey="name" type = "category" tick = {{fontSize: 14}} interval = {0}></YAxis>
-                <XAxis type = "number">
+                <YAxis dataKey="name" type = "category" tick = {{fontSize: 14}} interval = {0} stroke = "white"></YAxis>
+                <XAxis type = "number" stroke = "white">
                 </XAxis>
 
                 <Tooltip />
@@ -116,7 +116,8 @@ width: 30vw;
 height: 55vh;
 margin-top: 1vh;
 margin-bottom: 0vh;
-border: 2px solid black;
+border: 2px solid white;
+box-shadow: 2px 2px 2px white;
 border-radius: 16px;
 background-color:none;
 `
@@ -127,6 +128,7 @@ margin-bottom: 1vh;
 font-style:bold;
 font-size: 1.3vw;
 text-decoration: underline;
+color:white;
 `
 
 export default FactionUnitPopularity;

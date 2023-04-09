@@ -29,6 +29,7 @@ justify-content:center;
 align-items:center;
 border-bottom: none;
 text-decoration:none;
+
 `
 
 const ProfileTextOutput2 = styled.div`
@@ -39,6 +40,7 @@ text-align:center;
 margin-top: 4vh;
 font-size: 2vw;
 text-decoration:none;
+color:white;
 `
 
 export default FavoriteFaction;

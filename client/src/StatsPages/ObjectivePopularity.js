@@ -61,8 +61,8 @@ const ObjectivePopularity = ({techCount,objectiveCount, globalObjectives}) => {
             >
                 
                 <CartesianGrid strokeDasharray="1 1"/>
-                <YAxis dataKey="name" type = "category" tick = {{fontSize: 13}} interval = {0}></YAxis>
-                <XAxis  dataKey="count" type = "number">
+                <YAxis dataKey="name" type = "category" tick = {{fontSize: 13}} interval = {0} stroke = "white"></YAxis>
+                <XAxis  dataKey="count" type = "number" stroke = "white">
                 </XAxis>
 
                 <Tooltip />
@@ -82,9 +82,10 @@ flex-direction:column;
 width: 30vw;
 height: 35vh;
 margin-top: 1vh;
-border: 2px solid black;
+border: 2px solid white;
 border-radius: 16px;
 background-color:none;
+box-shadow: 2px 2px 2px white;
 `
 
 const TitleText = styled.div`
@@ -93,6 +94,7 @@ margin-bottom: 2vh;
 font-style:bold;
 font-size: 1.3vw;
 text-decoration: underline;
+color:white;
 `
 
 export default ObjectivePopularity;

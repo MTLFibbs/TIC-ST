@@ -66,6 +66,7 @@ display:flex;
 justify-content:center;
 width:100vw;
 height: 87vh;
+background-color: #25282d;
 `
 
 const ProfileWrapper = styled.div`
@@ -74,7 +75,8 @@ flex-direction: column;
 margin-top: 15vh;
 width: 50vw;
 height: 45vh;
-border: 2px solid black;
+border: 2px solid white;
+box-shadow: 2px 2px 2px white;
 border-radius: 16px;
 `
 
@@ -85,7 +87,9 @@ justify-content:start;
 align-items:center;
 width: 100%;
 height: 15vh;
-border-bottom: 2px solid black;
+border-bottom: 2px solid white;
+background-color: #370D32;
+border-radius: 16px;
 `
 
 const ImageWrapper = styled.div`
@@ -108,6 +112,7 @@ align-items:center;
 font-weight:bold;
 font-size:2vw;
 margin-top: 0vh;
+color:white;
 `
 
 const ProfileTextWrapper = styled.div`
@@ -116,7 +121,8 @@ justify-content:center;
 align-items:center;
 margin-top: 1vh;
 font-size: 1vw;
-border-bottom: 2px solid black;
+border-bottom: 2px solid white;
+color:white;
 `
 
 const ProfileTextOutput = styled.div`
@@ -125,29 +131,13 @@ justify-content:center;
 align-items:center;
 margin-top: 2vh;
 font-size: 4vw;
+color:white;
 `
 
-const ProfileTextOutput2 = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-margin-top: 4vh;
-font-size: 2vw;
-`
-const ProfileTextOutput3 = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-margin-top: 4vh;
-font-size: 1vw;
-inline-size: min-content;
-`
 
 const ProfileInfoWrapper = styled.div`
-background-color:white;
-border: 2px solid black;
+background-color: #370D32;
+border: 2px solid white;
 border-radius: 16px;
 display:flex;
 flex-direction:column;

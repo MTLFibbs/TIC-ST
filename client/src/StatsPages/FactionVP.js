@@ -93,8 +93,8 @@ const FactionVP = ({vpCount,techCount}) => {
             >
                 
                 <CartesianGrid strokeDasharray="3 3"/>
-                <YAxis dataKey="name" type = "category" tick = {{fontSize: 17}} interval = {0}></YAxis>
-                <XAxis scale = "auto" type = "number" domain = {[0,10]}>
+                <YAxis dataKey="name" type = "category" tick = {{fontSize: 17}} interval = {0} stroke = "white"></YAxis>
+                <XAxis scale = "auto" type = "number" domain = {[0,10]} stroke = "white">
                 </XAxis>
                 <Tooltip />
                 <Bar dataKey="VP" fill="#8884d8" />
@@ -115,9 +115,10 @@ flex-direction:column;
 width: 30vw;
 height: 35vh;
 margin-top: 1vh;
-border: 2px solid black;
+border: 2px solid white;
 border-radius: 16px;
 background-color:none;
+box-shadow: 2px 2px 2px white;
 `
 
 const TitleText = styled.div`
@@ -126,6 +127,7 @@ margin-bottom: 2vh;
 font-style:bold;
 font-size: 1.3vw;
 text-decoration: underline;
+color:white;
 `
 
 export default FactionVP;

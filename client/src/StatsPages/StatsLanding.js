@@ -266,6 +266,8 @@ const StatsLanding = () => {
 
 const Wrapper = styled.div`
 width:100%;
+height:90vh;
+background-color: #25282d;
 `
 const IntroText = styled.div`
 display:flex;
