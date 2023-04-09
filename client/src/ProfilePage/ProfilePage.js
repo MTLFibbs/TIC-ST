@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import FavoriteFaction from "./FavoriteFaction";
 import FavoriteUnit from "./FavoriteUnit";
 import FavoriteTech from "./FavoriteTech";
+import logo from "../Images/loader.gif"
 
 const ProfilePage = () => {
     const {loginWithRedirect, isAuthenticated, user} = useAuth0();
@@ -30,7 +31,7 @@ const ProfilePage = () => {
     return(
         <PageWrapper>
             {!userGameData
-                ? <p>LOADING</p>
+                ? <Loader src = {logo} alt = "Loading..."/>
                 :
                 <ProfileWrapper>
                 <ProfileTop>
@@ -104,7 +105,11 @@ border: 2px solid white;
 border-radius: 200px;
 width: 8vw;
 `
-
+const Loader = styled.img`
+width:30%;
+height:70%;
+margin-top: 15vh;
+`
 const ProfileTextName = styled.div`
 display:flex;
 justify-content:center;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
+import logo from "../Images/loader.gif"
 
 import { LiveGameContext } from "../LiveGameContext";
 import ObjectiveButtonWrapper from "./ObjectiveButtonWrapper";
@@ -55,7 +56,7 @@ const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
     return(
         <Wrapper>
         {!objectiveText
-            ?<Text>LOADING</Text>
+            ?<Text><Image src = {logo} alt = "Loading..."/></Text>
             :
             <>
             <LoadedText>{objectiveText[0].objectiveText}</LoadedText>
@@ -81,11 +82,18 @@ background-color: #25282d;
 }
 `
 const Text = styled.div`
+display:flex;
 justify-content:center;
 text-align:center;
 width:170px;
 overflow-wrap: break-word;
 `
+
+const Image = styled.img`
+width: 100%;
+margin-left: 2vw;
+`
+
 const LoadedText = styled.div`
 display:flex;
 height: 22vh;

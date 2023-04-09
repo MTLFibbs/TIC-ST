@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
+import logo from "../Images/loader.gif"
 
 import { LiveGameContext } from "../LiveGameContext";
 import LiveGamePlayerBox from "./LiveGamePlayerBox";
@@ -74,7 +75,7 @@ const SpecificLiveGame = () => {
     return(
         <Wrapper>
             {((!gameData && !objectiveData)|| (gameData && !objectiveData)|| (!gameData && objectiveData))
-            ? <p>LOADING</p>
+            ? <ImageWrapper><Image src = {logo} alt = "Loading..."/></ImageWrapper>
             :
             <>
             <PlayersWrapper>
@@ -134,12 +135,23 @@ const MiddleWrapper = styled.div`
 display:flex;
 flex-direction:column;
 `
-
+const ImageWrapper = styled.div`
+width:100%;
+height: 100%;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+`
 const SecretAndTechWrapper = styled.div`
 display:flex;
 flex-direction:row;
 `
-
+const Image = styled.img`
+display:flex;
+justify-content:center;
+align-items:center;
+`
 const FieldWrapper = styled.div`
 width:58vw;
 height:68vh;

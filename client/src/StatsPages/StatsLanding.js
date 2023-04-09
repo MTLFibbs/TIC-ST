@@ -3,6 +3,7 @@ import StatsSwitch from "./StatsSwitch";
 import { useState, useEffect, useContext } from "react";
 import { User, useAuth0 } from "@auth0/auth0-react";
 import { LiveGameContext } from "../LiveGameContext";
+import logo from "../Images/loader.gif"
 
 import FactionPopularity from "./FactionPopularity";
 import FactionVP from "./FactionVP";
@@ -220,7 +221,7 @@ const StatsLanding = () => {
             !factionUnits ||
             !factionUnitSpecific ||
             !techCount)
-            ?<IntroText>LOADING</IntroText>
+            ?<IntroText><Image src = {logo} alt = "Loading..."/></IntroText>
             : selector === ("global" || null)
             ?  
             <StatsWrapper>
@@ -275,6 +276,9 @@ justify-content:center;
 font:bold;
 font-size:2vw;
 `
+const Image = styled.img`
+`
+
 const StatsWrapper = styled.div`
 display:grid;
 text-align:center;

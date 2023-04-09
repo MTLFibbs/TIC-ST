@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LiveGameBox from "./LiveGameBox";
 import { User, useAuth0 } from "@auth0/auth0-react";
+import logo from "../Images/loader.gif"
 
 import LiveGameCreateButton from "./LiveGameCreateButton";
 
@@ -42,7 +43,7 @@ const LiveGameList = () => {
     return(
         <>
         {!liveGames
-        ? <Wrapper> LOADING </Wrapper>
+        ? <Wrapper> <Image src = {logo} alt = "Loading..." /> </Wrapper>
         : 
         <Wrapper>
         <ListBox>
@@ -81,6 +82,9 @@ align-items: center;
 justify-content:start;
 width:40vw;
 color:white;
+`
+
+const Image = styled.img`
 `
 
 const HeaderWrapper = styled.div`
