@@ -48,10 +48,11 @@ height: 2.2vh;
 margin-bottom: 0.4vh;
 margin-top: 0.4vh;
 background-color:transparent;
-border:1px solid black;
+border:1px solid white;
+color:white;
 cursor:pointer;
 &:hover{
-    background-color:pink;
+    background-color: #370D32;
 }
 margin-left: 0.2vw;
 margin-right: 0.2vw;
@@ -59,6 +60,7 @@ margin-right: 0.2vw;
 const TitleText = styled.div`
 margin-top :1vh;
 font-size: 1vw;
+color:white;
 `
 
 const PopUpHandler = styled.div`
@@ -80,10 +82,10 @@ z-index: 50;
 margin: auto;
 width: 80%;
 height: 80%;
-background-color: rgba(0 ,0 ,0 , 0.95);
+background-color: #25282d;
 color:white;
 border-radius: 8px;
-border: 2px solid black;
+border: 2px solid white;
 `
 
 const PopUpButton = styled.button`
@@ -98,11 +100,11 @@ margin-top: 54.5vh;
 margin-left: 75.5vw;
 font-size:0.8vw;
 color:white;
-border-color:black;
+border-color:white;
 background-color:rgb(0,200,0,0.5);
 cursor:pointer;
 &:hover{
-    background-color:pink;
+    background-color: #370D32;
 }
 &:disabled{
     background-color:rgb(200,0,0,0.5);

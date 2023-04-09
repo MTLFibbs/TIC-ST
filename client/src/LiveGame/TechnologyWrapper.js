@@ -27,13 +27,12 @@ justify-content:center;
 align-items:center;
 height:10vh;
 width: 15vw;
-border: 2px solid black;
+border: 2px solid white;
 border-radius:8px;
-box-shadow: 4px 5px 5px black;
+box-shadow: 2px 2px 2px white;
 font-style:bold;
 margin-left: 2vw;
 margin-top: -2vh;
-background-color: lightblue;
 `
 const TitleText = styled.div`
 display:flex;
@@ -41,6 +40,7 @@ justify-content:center;
 align-items:center;
 text-align:center;
 font-size: 0.9vw;
+color:white;
 `
 const ButtonWrapper = styled.div`
 display:flex;

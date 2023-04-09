@@ -42,7 +42,7 @@ const LiveGameList = () => {
     return(
         <>
         {!liveGames
-        ? <p>LOADING</p>
+        ? <Wrapper> LOADING </Wrapper>
         : 
         <Wrapper>
         <ListBox>
@@ -67,31 +67,31 @@ const LiveGameList = () => {
 const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
-align-items: center;
+align-items: start;
 justify-content:center;
-margin-top: 40px;
+padding-top: 3vh;
+background-color: #25282d;
+height:90vh;
 `
 
 const ListBox = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content:center;
+justify-content:start;
 width:40vw;
-color:black;
-background-color:pink;
+color:white;
 `
 
 const HeaderWrapper = styled.div`
-width:50%
-height:20%:
-background-color:orange;
+width:70%;
+height:10vh:
 margin-bottom: 2vh;
 `
 
 const HeaderText = styled.div`
 font-size: 2vw;
-margin:0;
+margin-bottom: 4vh;
 
 `
 

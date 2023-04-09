@@ -75,6 +75,10 @@ margin:0;
 font-size:1.3vw;
 padding-right:4px;
 padding-left:4px;
+background-color: #25282d;
+&:hover{
+    background-color: #370D32;
+}
 `
 const Text = styled.div`
 justify-content:center;

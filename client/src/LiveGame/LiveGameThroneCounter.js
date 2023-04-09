@@ -23,8 +23,8 @@ const LiveGameThroneCounter = ({gameData}) => {
 };
 
 const Wrapper = styled.div`
-border: 2px solid black;
-box-shadow: 4px 5px 5px black;
+border: 2px solid white;
+box-shadow: 2px 2px 2px white;
 border-radius: 8px;
 height: 40%;
 margin-bottom: 20px;
@@ -39,6 +39,7 @@ const TitleText = styled.div`
 font-weight:bold;
 font-size: 1.0vw;;
 margin-top: 0.5vh;
+color:white;
 `
 const PlayerBox = styled.div`
 display:grid;
@@ -50,10 +51,12 @@ height: 80%;
 margin-top: 1vh;
 margin-left: 1vw;
 font-size:1.3vw;
+color:white;
 `
 const PlayerNameText = styled.div`
 display:flex;
 justify-content:center;
+color:white;
 `
 const PlayerScoreText = styled.div`
 `

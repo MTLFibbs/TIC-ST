@@ -36,6 +36,8 @@ const Wrapper =styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
+background-color: #25282d;
+height:90vh;
 `
 
 const LoginWrapper = styled.div`
@@ -43,12 +45,13 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background-color:orange;
 width: 22vw;
 height: 16vh;
-border: 1px solid black;
+border: 2px solid white;
+box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+color:white;
 border-radius: 8px;
-margin-top: 22vh;
+margin-top: 0vh;
 `
 
 const TextWrapper = styled.div`

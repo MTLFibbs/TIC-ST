@@ -79,7 +79,7 @@ border-radius:8px;
 cursor:pointer;
 color:white;
 &:hover{
-    background-color:pink;
+    background-color: #370D32;
 }
 &:disabled{
     background-color:grey;

@@ -80,9 +80,10 @@ width: 1.4vw;
 height: 2.2vh;
 margin-bottom: 0.4vh;
 color:white;
+border-color:white;
 background-color:rgb(0, 150, 0, 1);
 &:hover{
-    background-color:pink;
+    background-color:lightgreen;
 }
 `
 const UnscoredButton = styled.button`
@@ -97,9 +98,10 @@ width: 1.4vw;
 height: 2.2vh;
 margin-bottom: 0.4vh;
 color:white;
+border-color:white;
 background-color:rgb(0, 0, 0, 0.3);
 &:hover{
-    background-color:pink;
+    background-color:lightgreen;
 }
 `
 

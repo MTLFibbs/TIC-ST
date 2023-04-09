@@ -15,14 +15,14 @@ const LoginButton = () => {
 
 const Login = styled.button`
 background-color: transparent;
-color:black;
-border: 2px solid black;
+color:white;
+border: 2px solid white;
 border-radius: 8px;
 width: 6vw;
 height: 4vh;
 cursor:pointer;
 &:hover{
-    background-color:pink;
+    background-color:#370D32;
 }
 `
 

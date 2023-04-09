@@ -66,9 +66,11 @@ cursor:pointer;
 width: 1.8vw;
 height: 2.2vh;
 margin-bottom: 0.4vh;
+border-color:white;
+color:white;
 background-color:transparent;
 &:hover{
-    background-color:pink;
+    background-color: purple;
 }
 `
 const TrueButton = styled.button`
@@ -79,9 +81,11 @@ cursor:pointer;
 width: 1.8vw;
 height: 2.2vh;
 margin-bottom: 0.4vh;
+border-color:white;
+color:white;
 background-color:rgb(50, 0, 50, 0.3);
 &:hover{
-    background-color:pink;
+    background-color: purple;
 }
 `
 export default ThroneButton;

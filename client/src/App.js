@@ -13,6 +13,7 @@ import { LiveGameProvider } from "./LiveGameContext";
 import LandingPage from "./LandingPage";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import StatsLanding from "./StatsPages/StatsLanding";
+import { createGlobalStyle } from "styled-components";
 
 const App = () => {
 
@@ -21,7 +22,6 @@ const App = () => {
   return (
     <>
     <BrowserRouter>
-      <GlobalStyles/>
       <Header/>
       <Routes>
         <Route path = "/" element = {<LandingPage/>}/>

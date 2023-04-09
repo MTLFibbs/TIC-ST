@@ -106,11 +106,11 @@ const ObjectiveTile = ({gameData, number, objectiveData, drawn}) => {
 };
 
 const Wrapper = styled.div`
-border: 2px solid black;
-box-shadow: 4px 5px 5px black;
+border: 2px solid white;
+box-shadow: 2px 2px 2px white;
 border-radius: 8px;
 &:hover{
-    background-color: pink;
+    background-color: #370D32;
 }
 `
 const ObjectiveNameBox = styled.div`
@@ -143,7 +143,7 @@ text-align:center;
 font-size:80%;
 `
 const ObjectiveBoxText = styled.button`
-height:96%;
+height:98%;
 width: 100%;
 font-size:1vw;
 background-color: transparent;
@@ -156,14 +156,15 @@ background: repeating-linear-gradient(
 transparent,
 transparent 4px,
 transparent 1px,
-green 7px
+gray 7px
 ),
 linear-gradient(
-to bottom,
+to top,
 transparent,
 transparent
 )
 }
+
 `
 const NameList = styled.select`
 list-style-type: none;

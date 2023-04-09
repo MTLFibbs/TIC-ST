@@ -113,11 +113,11 @@ const SpecificLiveGame = () => {
 const Wrapper = styled.div`
 display:flex;
 flex-direction:row;
-background-color:orange;
+background-color: #25282d;
+height:90vh;
 `
 
 const PlayersWrapper = styled.div`
-background-color: red;
 width:18vw;
 height:80vh;
 margin-top:4vh;
@@ -138,7 +138,6 @@ flex-direction:column;
 const SecretAndTechWrapper = styled.div`
 display:flex;
 flex-direction:row;
-background-color:pink;
 `
 
 const FieldWrapper = styled.div`
@@ -147,7 +146,6 @@ height:68vh;
 margin-left: 2vw;
 margin-right: 2vw;
 margin-top:4vh;
-background-color:blue;
 color:white;
 display:grid;
 grid-template-columns: repeat(5, 5fr);
@@ -158,7 +156,6 @@ grid-row-gap: 20px;
 
 const RoundWrapper = styled.div`
 position:absolute;
-background-color:violet;
 width: 18vw;
 height: 12vh;
 margin-top: 4vh;
@@ -166,7 +163,6 @@ margin-left: 81vw;
 `
 
 const ObjectivesWrapper = styled.div`
-background-color: blue;
 color:white;
 width: 100%;
 height: 100%;
@@ -176,7 +172,6 @@ const MecatolWrapper = styled.div`
 display:flex;
 flex-direction:column;
 justify-content:end;
-background-color:lightblue;
 width:18vw;
 height:80vh;
 margin-top:6vh;

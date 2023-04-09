@@ -60,15 +60,16 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 height:100%;
-width: 100%;
-border: 2px solid black;
+width: 94%;
+border: 2px solid white;
 border-radius:8px;
-box-shadow: 4px 5px 5px black;
+box-shadow: 2px 2px 2px white;
 font-size:2vw;
 font-style:bold;
 `
 const RoundText = styled.div`
 margin:0;
+color:white;
 `
 const RoundWrapper = styled.div`
 margin-bottom:0;
@@ -78,11 +79,12 @@ const RoundIncrementer = styled.button`
 width: 2.6vw;
 height: 3vh;
 color:black;
-border-color:black;
+border-color:white;
 cursor:pointer;
-background-color:rgb(0,200,0,0.5);
+background-color: #25282d;
+color:white;
 &:hover{
-    background-color:pink;
+    background-color:lightgreen;
 }
 &:disabled{
     background-color:rgb(200,0,0,0.5);
@@ -92,11 +94,12 @@ const RoundDecrementer = styled.button`
 height: 3vh;
 width:2.6vw;
 color:black;
-border-color:black;
+border-color:white;
 cursor:pointer;
-background-color:rgb(0,200,0,0.5);
+background-color: #25282d;
+color:white;
 &:hover{
-    background-color:pink;
+    background-color:red;
 }
 &:disabled{
     background-color:rgb(200,0,0,0.5);

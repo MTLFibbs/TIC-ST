@@ -3,57 +3,64 @@ import { NavLink, Link } from "react-router-dom"
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { User, useAuth0 } from "@auth0/auth0-react";
-
+import { IconHexagonLetterG } from '@tabler/icons-react';
 const Header = () => {
     const {loginWithRedirect, isAuthenticated, user} = useAuth0();
 
     return(
-        <Wrapper>
+        <>
         {isAuthenticated
         ?
-        <>
-        <HeaderBox to ={`/home`}> THIS IS A VERY NICE LOGGED IN HEADER </HeaderBox>
-        <LogWrapper>
-            <Link to = {`/profile/${user.nickname}`} >
-            <UserImage src = {user.picture} alt = {user?.nickname}/>
-            </Link>
-
-            <LogoutButton/>
-        </LogWrapper>
-        </>
-        :<>
-        <HeaderBox to ={`/`}> THIS IS A VERY NICE LOGGED OUT HEADER </HeaderBox>
-        </>
-        }
-
+        <Wrapper to = {"/home"}>
+            <HeaderBox> Galactic Companion </HeaderBox>
+            <LogWrapper>
+                <Link to = {`/profile/${user.nickname}`} >
+                <UserImage src = {user.picture} alt = {user?.nickname}/>
+                </Link>
+                <LogoutButton/>
+            </LogWrapper>
         </Wrapper>
-
+        :<Wrapper to ={"/"}>
+            <HeaderBox> Galactic Companion </HeaderBox>
+        </Wrapper>
+        }
+        </>
     )
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
 display: flex;
 flex-direction: row;
 align-items: center;
-justify-content:center;
+justify-content:space-between;
 padding-bottom: 70px;
 padding-top: 30px;
 margin-top: 0px;
 font-weight: bold;
-background-color: lightblue;
+background-color: #370D32;
+height: 10vh;
+
 `
 
-const HeaderBox = styled(Link)`
-background-color: orange;
+const HeaderBox = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+font-size:4vw;
+height: 10vh;
+margin-top: 3vh;
 `
 
 const LogWrapper = styled.div`
 display:flex;
+flex-direction:column;
 align-items: center;
 justify-content:center;
-background-color: pink;
 width: 8vw;
 height: 2vh;
+margin-top: 4vh;
 `
 
 const UserImage = styled.img`

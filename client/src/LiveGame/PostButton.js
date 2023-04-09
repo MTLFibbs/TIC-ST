@@ -98,9 +98,9 @@ justify-content:center;
 align-items:center;
 height:5vh;
 width: 10vw;
-border: 2px solid black;
+border: 2px solid white;
 border-radius:8px;
-box-shadow: 4px 5px 5px black;
+box-shadow: 2px 2px 2px white;
 font-style:bold;
 color:white;
 margin-left: 2vw;
@@ -142,10 +142,10 @@ z-index: 50;
 margin: auto;
 width: 40%;
 height: 40%;
-background-color: rgba(0 ,0 ,0 , 0.95);
+background-color: #370D32;
 color:white;
 border-radius: 8px;
-border: 2px solid black;
+border: 2px solid white;
 `
 
 const PopUpButton = styled.button`
@@ -164,7 +164,7 @@ border-color:white;
 background-color:rgb(200,0,0,0.5);
 cursor:pointer;
 &:hover{
-    background-color:pink;
+    background-color:red;
 }
 &:disabled{
     background-color:rgb(200,0,0,0.5);
@@ -186,7 +186,7 @@ border-color:white;
 background-color:rgb(0,200,0,0.5);
 cursor:pointer;
 &:hover{
-    background-color:pink;
+    background-color:lightgreen;
 }
 &:disabled{
     background-color:rgb(200,0,0,0.5);

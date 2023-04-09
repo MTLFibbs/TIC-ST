@@ -20,7 +20,10 @@ width:70%;
 `
 const PlayerNameText = styled.div`
 display:flex;
-justify-content:center;
+justify-content:start;
+align-items:center;
+text-align:center;
+font-size: 1vw;
 `
 const ButtonWrapper = styled.div`
 display:grid;

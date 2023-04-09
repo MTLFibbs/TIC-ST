@@ -24,10 +24,10 @@ const LiveGamePlayerBox = ({gameData, index}) => {
 const Wrapper = styled.div`
 width: 9vw;
 margin:0;
-border: 2px solid black;
-box-shadow: 4px 5px 5px black;
+border: 2px solid white;
+box-shadow: 2px 2px 2px white;
 border-radius: 8px;
-background-color:blue;
+color:black;
 `
 const PlayerNameBox = styled.div`
 display:flex;
@@ -45,14 +45,19 @@ justify-content:center;
 align-items:center;
 font-weight:bold;
 font-size:12vh;
+color:white;
 `
 
 const FactionImage = styled.img`
 `
 const PlayerNameText = styled.div`
+font-size: 1vw;
+color:white;
+
 `
 const PlayerFactionText = styled.div`
 font-size: 1vw;
+color:white;
 `
 const PlayerScoreText = styled.div`
 margin-bottom: -3vh;

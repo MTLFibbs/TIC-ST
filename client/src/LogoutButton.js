@@ -14,6 +14,13 @@ const LogoutButton = () => {
 };
 
 const Login = styled.button`
+background-color:transparent;
+border: 2px solid white;
+color:white;
+border-radius:8px;
+&:hover{
+    background-color: #370D32;
+}
 `
 
 export default LogoutButton;

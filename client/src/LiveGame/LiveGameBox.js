@@ -17,14 +17,14 @@ const LiveGameBox = ({liveGames}) => {
 
 const Wrapper = styled(Link)`
 margin-bottom: 20px;
-border: 1px solid black;
+border: 1px solid white;
 border-radius: 8px;
 width: 600px;
 height: 100px;
-box-shadow: 10px 5px 5px black;
+box-shadow: 2px 2px 2px white;
 cursor: pointer;
 &:hover{
-    background-color: lightblue;
+    background-color: #370D32;
 }
 `
 const GameName = styled.div`

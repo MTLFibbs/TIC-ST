@@ -20,6 +20,8 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
+background-color: #25282d;
+height:90vh;
 `
 
 const HeaderBox = styled.div`
@@ -30,11 +32,16 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
-width: 200px;
-height: 100px;
-margin-left: 30px;
-margin-right: 30px;
-border: 2px solid red;
+width: 20vw;
+height: 30vh;
+margin-left: 2vw;
+margin-right: 2vw;
+border: 2px solid white;
+color:white;
+border-radius: 16px;
+&:hover{
+    background-color: #370D32;
+}
 `
 
 export default Home;

@@ -23,66 +23,7 @@ const LiveGameCreateButton = ({factions}) => {
 
     });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        const ordered = Object.keys(form).sort().reduce(
-            (obj, key) => { 
-            obj[key] = form[key]; 
-            return obj;
-        }, 
-        {}
-        );
-        
-        const playerCount = ordered.playerAmount;
-        const gameName = ordered.gameName;
-        const host = ordered.host;
-        
-        const playerOne = form.player1;
-        const playerTwo = form.player2;
-        const playerThree = form.player3;
-        const playerFour = form.player4;
-        const playerFive = form.player5;
-        const playerSix = form.player6;
-        
-        const newSet = {$set:{gameName:gameName, host: host, playerCount:playerCount, 
-            players:{
-                [playerOne]:form.faction1,
-                [playerTwo]:form.faction2,
-                [playerThree]:form.faction3,
-                [playerFour]:form.faction4,
-                [playerFive]:form.faction5,
-                [playerSix]:form.faction6,
-            }
-        }};
-
-        console.log(newSet.$set);
-        
-        setIsFetching(true)
-
-        fetch(`/api/add-new-live-game`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newSet.$set)
-        })
-            .then(res => res.json())
-            .then((data) => {
-                if(data.status === 400 || data.status === 500){
-                    throw new Error(data.message);
-                }
-                else{
-                    navigate(`/home`)
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            setIsFetching(false);
-            
-    };
+    
 
 
     const handlePopup = (e) => {
@@ -91,6 +32,12 @@ const LiveGameCreateButton = ({factions}) => {
         }
         else if(show === true && e.target.id === "closeButton"){
             setShow(false);
+            setForm({
+                gameName:"",
+                host:`${user.nickname}`,
+                playerAmount:"3",
+                player1:`${user.nickname}`,
+            })
         }
     }
 
@@ -101,9 +48,7 @@ const LiveGameCreateButton = ({factions}) => {
             ?<PopUpHandler id = "popUpHandler">
                 <PopUp id = "popUp" >
                     <PopUpText>Game Setup</PopUpText>
-                    <LiveGameCreateForm isFetching = {isFetching} setIsFetching = {setIsFetching} form = {form} setForm = {setForm} factions = {factions}/>
-                    <PopUpPost form = "my-form" id = "postButton" onClick = {handleSubmit} type = "submit">Create</PopUpPost>
-                    <PopUpButton disabled = {isFetching === true} id = "closeButton" onClick = {(e) => handlePopup(e)}>Cancel</PopUpButton>
+                    <LiveGameCreateForm handlePopup = {handlePopup} isFetching = {isFetching} setIsFetching = {setIsFetching} form = {form} setForm = {setForm} factions = {factions}/>
                 </PopUp>
             </PopUpHandler>
             : <></>
@@ -120,13 +65,13 @@ justify-content:center;
 align-items:center;
 height:3vh;
 width: 4vw;
-border: 2px solid black;
+border: 2px solid white;
 border-radius:8px;
-box-shadow: 4px 5px 5px black;
+box-shadow: 2px 2px 2px white;
 font-style:bold;
 color:white;
 margin-left: 27vw;
-margin-top: -3vh;
+margin-top: -7.5vh;
 cursor:pointer;
 background-color: rgb(50,200,50,1);
 `
@@ -168,52 +113,11 @@ height: 120%;
 background-color: rgba(0 ,0 ,0 , 0.95);
 color:white;
 border-radius: 8px;
-border: 2px solid black;
+border: 2px solid white;
+background-color: #370D32;
 `
 
-const PopUpButton = styled.button`
-display:flex;
-position:absolute;
-justify-content:center;
-align-items:center;
-text-align:center;
-height: 4vh;
-width:8vw;
-margin-top: 83vh;
-margin-left:15vw;
-font-size:0.8vw;
-color:white;
-border-color:white;
-background-color:rgb(200,0,0,0.5);
-cursor:pointer;
-&:hover{
-    background-color:pink;
-}
-&:disabled{
-    background-color:rgb(200,0,0,0.5);
-}
-`
-const PopUpPost = styled.button`
-display:flex;
-position:absolute;
-justify-content:center;
-align-items:center;
-text-align:center;
-height: 4vh;
-width:8vw;
-margin-top: 83vh;
-margin-left:-15vw;
-font-size:0.8vw;
-color:white;
-border-color:white;
-background-color:rgb(0,200,0,0.5);
-cursor:pointer;
-&:hover{
-    background-color:pink;
-}
-&:disabled{
-    background-color:rgb(200,0,0,0.5);
-}
-`
+
+
 
 export default LiveGameCreateButton;

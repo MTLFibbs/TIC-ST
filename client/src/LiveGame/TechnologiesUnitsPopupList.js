@@ -49,7 +49,7 @@ display:flex;
 flex-direction:row;
 margin-top: 2vh;
 margin-right: 0vw;
-border: 2px solid white;
+
 border-radius: 8px;
 width:90%;
 height:89%;
@@ -72,7 +72,6 @@ grid-template-rows: repeat(4, 7vh);
 grid-gap: 5px;
 width:41vw;
 height:29.8vh;
-border: 1px solid white;
 border-radius:8px;
 `
 
@@ -83,7 +82,6 @@ grid-template-rows: repeat(4, 7vh);
 grid-gap: 5px;
 width:29.5vw;
 width:30.2vw;
-border: 1px solid white;
 border-radius:8px;
 `
 
@@ -95,7 +93,6 @@ grid-gap: 5px;
 width:41vw;
 height:22vh;
 margin-top: 0.6vh;
-border: 1px solid white;
 border-radius:8px;
 `
 const UnitWrapperUnique = styled.div`
@@ -106,7 +103,6 @@ grid-gap: 5px;
 width:30.2vw;
 height:22vh;
 margin-top: 0.6vh;
-border: 1px solid white;
 border-radius:8px;
 `
 

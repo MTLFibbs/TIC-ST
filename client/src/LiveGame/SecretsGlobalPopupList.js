@@ -25,7 +25,7 @@ justify-content:center;
 align-items:center;
 margin-top: 5vh;
 margin-right: 0vw;
-border: 2px solid white;
+
 border-radius: 8px;
 width: 91.5%;
 height: 40vh;

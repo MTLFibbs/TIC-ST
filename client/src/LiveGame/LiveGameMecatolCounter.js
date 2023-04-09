@@ -62,8 +62,8 @@ const LiveGameMecatolCounter = ({gameData}) => {
 };
 
 const Wrapper = styled.div`
-border: 2px solid black;
-box-shadow: 4px 5px 5px black;
+border: 2px solid white;
+box-shadow: 2px 2px 2px white;
 border-radius: 8px;
 height: 40%;
 margin-bottom: 20px;
@@ -76,8 +76,9 @@ align-items:center;
 `
 const TitleText = styled.div`
 font-weight:bold;
-font-size: 1.5vw;;
+font-size: 1.5vw;
 margin-top: 0.5vh;
+color:white;
 `
 const PlayerBox = styled.div`
 display:grid;
@@ -88,10 +89,10 @@ grid-template-rows: repeat(3,2fr);
 height: 80%;
 margin-top: 1vh;
 margin-left: 1vw;
-font-size:1.3vw;
+font-size:1vw;
 `
 const PlayerNameText = styled.div`
-
+color:white;
 `
 const PlayerScoreText = styled.div`
 `
@@ -107,17 +108,21 @@ const MapWrapper = styled.div`
 const ScoreIncrementer = styled.button`
 width: 1.6vw;
 cursor:pointer;
-background-color:transparent;
+background-color: #25282d;
+color:white;
+border-color:white;
 &:hover{
-    background-color:pink;
+    background-color:lightgreen;
 }
 `
 const ScoreDecrementer = styled.button`
 width:1.6vw;
 cursor:pointer;
-background-color:transparent;
+background-color: #25282d;
+color:white;
+border-color:white;
 &:hover{
-    background-color:pink;
+    background-color:red;
 }
 `
 
