@@ -65,7 +65,7 @@ const PageWrapper = styled.div`
 display:flex;
 justify-content:center;
 width:100vw;
-height: 87vh;
+height: 90vh;
 background-color: #25282d;
 `
 

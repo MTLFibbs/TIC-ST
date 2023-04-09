@@ -14,6 +14,7 @@ import LandingPage from "./LandingPage";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import StatsLanding from "./StatsPages/StatsLanding";
 import { createGlobalStyle } from "styled-components";
+import Footer from "./Footer";
 
 const App = () => {
 
@@ -37,6 +38,7 @@ const App = () => {
         :<></>
       }
       </Routes>
+      <Footer/>
     </BrowserRouter>
     </>
   );
