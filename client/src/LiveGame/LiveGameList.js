@@ -46,11 +46,13 @@ const LiveGameList = () => {
         ? <Wrapper> <Image src = {logo} alt = "Loading..." /> </Wrapper>
         : 
         <Wrapper>
+            <BoxWrapper>
+                <HeaderWrapper>
+                    <HeaderText>Live games hosted by {user.nickname}</HeaderText>
+                    <LiveGameCreateButton factions = {factions}/>
+                </HeaderWrapper>
+            </BoxWrapper>
         <ListBox>
-            <HeaderWrapper>
-                <HeaderText>Live games hosted by {user.nickname}</HeaderText>
-                <LiveGameCreateButton factions = {factions}/>
-            </HeaderWrapper>
         {liveGames.map((e, i) => {
             return(
             <LiveGameBox key = {i} liveGames = {liveGames[i]}/>
@@ -67,8 +69,8 @@ const LiveGameList = () => {
 
 const Wrapper = styled.div`
 display: flex;
-flex-direction: row;
-align-items: start;
+flex-direction: column;
+align-items: center;
 justify-content:center;
 padding-top: 3vh;
 background-color: #25282d;
@@ -80,7 +82,19 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content:start;
+width:50vw;
+height: 70vh;
+color:white;
+overflow-y:scroll;
+`
+
+const BoxWrapper = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content:start;
 width:40vw;
+height: 10vh;
 color:white;
 `
 

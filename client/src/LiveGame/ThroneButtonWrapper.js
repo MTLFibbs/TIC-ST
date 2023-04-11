@@ -4,7 +4,7 @@ import ThroneButton from "./ThroneButton";
 const ThroneButtonWrapper = ({name, gameData, index}) => {
     return(
         <MapWrapper >
-        <PlayerNameText >{name}</PlayerNameText>
+        <PlayerNameText >{name.charAt(0) + name.charAt(name.length-1)}</PlayerNameText>
         <ButtonWrapper>
             {gameData.players.filter(el => el.nickname !== name ).map((e,i) =>{
             return (

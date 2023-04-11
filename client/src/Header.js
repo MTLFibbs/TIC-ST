@@ -17,7 +17,7 @@ const Header = () => {
             <HeaderBox> Galactic Companion </HeaderBox>
             <LogWrapper>
                 <Link to = {`/profile/${user.nickname}`} >
-                <UserImage src = {user.picture} alt = {user?.nickname}/>
+                <UserImage src = {user.picture} alt = {user?.nickname} referrerpolicy="no-referrer" />
                 </Link>
                 <LogoutButton/>
             </LogWrapper>

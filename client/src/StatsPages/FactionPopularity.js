@@ -41,7 +41,7 @@ const FactionPopularity = ({popularity, assign, setAssign, selector}) => {
         let i = 0;
         for(i=0; i<factions.length; i++){
             if(!formattedData.find(({name}) => name === (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)))){
-                formattedData.push({name: (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)), faction: factions[i], "%": popularityArr[i]});
+                formattedData.push({name: (factions[i].charAt(0)+ factions[i].charAt(factions[i].length -1)), faction: factions[i], "%": popularityArr[i].toFixed(1)});
             }
         }
         setData(formattedData)

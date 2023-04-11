@@ -48,7 +48,7 @@ const LiveGameMecatolCounter = ({gameData}) => {
                 {gameData.players.map((e,i)=>{
                     return(
                         <MapWrapper key={i}>
-                        <PlayerNameText >{e.nickname}: {e.pointsOrigin.mecatolScore}</PlayerNameText>
+                        <PlayerNameText >{e.nickname.charAt(0) + e.nickname.charAt(e.nickname.length-1)}: {e.pointsOrigin.mecatolScore}</PlayerNameText>
                         <ScoreWrapper >
                             <ScoreDecrementer key = {`decrementer number ${i}`}  disabled = {e.pointsOrigin.mecatolScore === 0 || isFetching} onClick = {() => handleMecatolChange(decrement, e.nickname, e.pointsOrigin.mecatolScore)}> - </ScoreDecrementer>
                             <ScoreIncrementer key = {`incrementer number ${i}`} disabled = {e.pointsOrigin.mecatolScore === 10 || isFetching} onClick = {() => handleMecatolChange(increment, e.nickname, e.pointsOrigin.mecatolScore)}> + </ScoreIncrementer>
@@ -103,6 +103,7 @@ margin-bottom:0;
 `
 
 const MapWrapper = styled.div`
+overflow:hidden;
 `
 
 const ScoreIncrementer = styled.button`

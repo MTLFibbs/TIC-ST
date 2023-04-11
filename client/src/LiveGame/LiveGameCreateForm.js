@@ -159,7 +159,7 @@ const LiveGameCreateForm = ({factions,form,setForm, isFetching, setIsFetching, h
             })}
             </GridWrapper>
             <PopUpPost form = "my-form" id = "postButton" type = "submit">Create</PopUpPost>
-            <PopUpButton disabled = {isFetching === true} id = "closeButton" onClick = {(e) => handlePopup(e)}>Cancel</PopUpButton>
+            <PopUpButton disabled = {isFetching === true} id = "closeButton" type = "button" onClick = {(e) => handlePopup(e)}>Cancel</PopUpButton>
         </Wrapper>
     )
 };

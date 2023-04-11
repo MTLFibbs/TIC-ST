@@ -63,7 +63,7 @@ const addLiveGame = async (req,res) => {
             
         }}
         const result = await db.collection("LiveGames").insertOne(newSet.$set)
-        res.status(200).json({ status: 200, data: newSet.$set, message: `Live game with _id ${_id} added to the LiveGames collection` });
+        res.status(200).json({ status: 200, data: newSet.$set, message: `Live game added to the LiveGames collection` });
     }catch(err){
         console.log(err.stack);
         res.status(500).json({ status: 500, data: req.body, message: err.message });

@@ -32,6 +32,32 @@ const ProfilePage = () => {
         <PageWrapper>
             {!userGameData
                 ? <Loader src = {logo} alt = "Loading..."/>
+                : userGameData.length === 0
+                ?
+                <ProfileWrapper>
+                <ProfileTop>
+                    <ImageWrapper><Image src = {user.picture}/></ImageWrapper>
+                    <ProfileTextName> {user.nickname}</ProfileTextName>
+                </ProfileTop>
+                <ProfileBot>
+                <ProfileInfoWrapper>
+                        <ProfileTextWrapper><Bold>Games Played</Bold></ProfileTextWrapper>
+                        <ProfileTextOutput>0</ProfileTextOutput>
+                    </ProfileInfoWrapper>
+                    <ProfileInfoWrapper>
+                    <ProfileTextWrapper><Bold>Favorite Faction</Bold></ProfileTextWrapper>
+                        <ProfileTextOutput>None</ProfileTextOutput>
+                    </ProfileInfoWrapper>
+                    <ProfileInfoWrapper>
+                    <ProfileTextWrapper><Bold>Favorite Technology</Bold></ProfileTextWrapper>
+                        <ProfileTextOutput>None</ProfileTextOutput>
+                    </ProfileInfoWrapper>
+                    <ProfileInfoWrapper>
+                    <ProfileTextWrapper><Bold>Favorite Unit</Bold></ProfileTextWrapper>
+                        <ProfileTextOutput>None</ProfileTextOutput>
+                    </ProfileInfoWrapper>
+                </ProfileBot>
+                </ProfileWrapper>
                 :
                 <ProfileWrapper>
                 <ProfileTop>
@@ -56,7 +82,7 @@ const ProfilePage = () => {
                         <FavoriteUnit userGameData = {userGameData}/>
                     </ProfileInfoWrapper>
                 </ProfileBot>
-            </ProfileWrapper>
+                </ProfileWrapper>
             }
         </PageWrapper>
     )

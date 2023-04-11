@@ -93,7 +93,7 @@ const FactionTechPopularity = ({factionTechSpecific, factionTechs, selector, swi
             >
                 
                 <CartesianGrid strokeDasharray="1 1"/>
-                <YAxis dataKey="name" type = "category" tick = {{fontSize: 14}} interval = {0} stroke = "white"></YAxis>
+                <YAxis dataKey="name" type = "category" tick = {{fontSize: 12}} interval = {0} stroke = "white"></YAxis>
                 <XAxis type = "number" stroke = "white">
                 </XAxis>
 
