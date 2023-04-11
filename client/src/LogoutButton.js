@@ -20,6 +20,7 @@ background-color:transparent;
 border: 2px solid white;
 color:white;
 border-radius:8px;
+cursor:pointer;
 &:hover{
     background-color: #370D32;
 }
