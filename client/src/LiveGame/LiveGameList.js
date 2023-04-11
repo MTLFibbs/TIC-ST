@@ -85,7 +85,7 @@ justify-content:start;
 width:50vw;
 height: 70vh;
 color:white;
-overflow-y:scroll;
+overflow-y:auto;
 `
 
 const BoxWrapper = styled.div`
