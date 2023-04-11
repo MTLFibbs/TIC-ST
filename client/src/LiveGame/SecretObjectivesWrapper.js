@@ -4,7 +4,7 @@ import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
 import SecretsButton from "./SecretsButton";
-
+//This component houses the secret objectives list for each player
 const SecretObjectivesWrapper = ({gameData, secretData, secretsDrawn}) => {
     return (
         <Wrapper>

@@ -12,7 +12,7 @@ import {
     Label
   } from "recharts";
 
-
+//This component is a graph on the stats landing page in the main section
 const FactionVP = ({vpCount,techCount}) => {
 
     const factions = ["Arborec","Letnev","Muaat", 

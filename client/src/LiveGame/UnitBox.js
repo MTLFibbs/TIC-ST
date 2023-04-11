@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
-
+//This component houses the specific units and whether they are scored or not
 const UnitBox = ({gameData, playerIndex, unit}) => {
 
     const [fetchd, setFetchd] = useState(false);

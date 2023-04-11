@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
-
+//This component hosts the counting of the points from Mecatol Rex in the SpecificLiveGame
 const LiveGameMecatolCounter = ({gameData}) => {
 
     const [isFetching, setIsFetching] = useState(false);

@@ -14,7 +14,7 @@ import SecretObjectivesWrapper from "./SecretObjectivesWrapper";
 import TechnologyWrapper from "./TechnologyWrapper";
 import DeleteButton from "./DeleteButton";
 import PostButton from "./PostButton";
-
+//This component houses the structure for all other components in the live game
 const SpecificLiveGame = () => {
 
     const {assign} = useContext(LiveGameContext)

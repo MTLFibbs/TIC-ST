@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 import SecretsGlobalPopupList from "./SecretsGlobalPopupList";
-
+//This component opens the secret objectives popup for each player
 const SecretsButton = ({playerIndex, secretData, gameData, playerName, faction, nickname}) => {
     
     const [show, setShow] = useState(false);

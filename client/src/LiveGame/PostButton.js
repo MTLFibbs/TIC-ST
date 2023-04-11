@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LiveGameContext } from "../LiveGameContext";
-
+//This component lets the user post the game to CompletedGames upon double confirmation
 const PostButton = ({gameData}) => {
 
     const [isFetching, setIsFetching] = useState(false);

@@ -3,7 +3,7 @@ import LoginButton from "./LoginButton";
 import { User, useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-
+// This component is the page a user sees if they are not logged in upon accessing the website
 const LandingPage = () => { 
 
     const {loginWithRedirect, isAuthenticated, user} = useAuth0();

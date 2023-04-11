@@ -12,7 +12,7 @@ import {
     Label
   } from "recharts";
 
-
+//This component is a graph on the stats landing page in the faction subsection
 const FactionPlacement = ({placement, selector, switcher}) => {
 
     const place = ["First", "Second", "Third", "Fourth", "Fifth", "Sixth"];

@@ -5,7 +5,7 @@ import logo from "../Images/loader.gif"
 
 import { LiveGameContext } from "../LiveGameContext";
 import ObjectiveButtonWrapper from "./ObjectiveButtonWrapper";
-
+//This component is the tile that appears once an objective is selected 
 const ObjectiveSelectedTile = ({objective,gameData, open, setOpen}) => {
     
     const [objectiveText, setObjectiveText] = useState(null)

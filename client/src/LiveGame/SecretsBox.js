@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
-
+//This component houses the specific secret objectives and whether they are scored or not
 const SecretsBox = ({gameData, playerIndex, secret}) => {
 
     const [fetchz, setFetchz] = useState(false);

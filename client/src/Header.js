@@ -4,6 +4,8 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { User, useAuth0 } from "@auth0/auth0-react";
 import { IconHexagonLetterG } from '@tabler/icons-react';
+
+//This header redirects to the home page and contains the profile and log out buttons
 const Header = () => {
     const {loginWithRedirect, isAuthenticated, user} = useAuth0();
 

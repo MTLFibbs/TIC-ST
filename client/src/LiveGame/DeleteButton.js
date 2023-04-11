@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+//This component lets the user delete the live game upon double confirmation
 const DeleteButton = ({gameData}) => {
 
     const [isFetching, setIsFetching] = useState(false);

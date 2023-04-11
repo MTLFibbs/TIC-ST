@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LiveGameContext } from "../LiveGameContext";
 import { User, useAuth0 } from "@auth0/auth0-react";
 
-
+//This component is the form for the live game creation
 const LiveGameCreateForm = ({factions,form,setForm, isFetching, setIsFetching, handlePopup}) => {
 
     const { user} = useAuth0();

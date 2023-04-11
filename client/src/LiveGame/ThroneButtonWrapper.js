@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ThroneButton from "./ThroneButton";
-
+//This component houses the Throne Counter for each player
 const ThroneButtonWrapper = ({name, gameData, index}) => {
     return(
         <MapWrapper >

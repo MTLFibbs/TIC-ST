@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 import ThroneButtonWrapper from "./ThroneButtonWrapper";
-
+//This component hosts the counting of the points from Throne Support in the SpecificLiveGame
 const LiveGameThroneCounter = ({gameData}) => {
 
 

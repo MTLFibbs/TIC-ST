@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+//This component shows a player, their faction and their score 
 const LiveGamePlayerBox = ({gameData, index}) => {
     
     

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+//This component displays the most used unit by the player on their profile
 const FavoriteUnit = ({userGameData}) => {
     
     const mapped = userGameData.map((e,i) => {

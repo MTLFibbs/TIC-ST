@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ObjectiveButton from "./ObjectiveButton";
 import { useEffect, useState } from "react";
 
-
+//This component houses the player buttons for objective score attribution
 const ObjectiveButtonWrapper = ({objectiveTitle, objectiveValue, gameData}) => {
 
 

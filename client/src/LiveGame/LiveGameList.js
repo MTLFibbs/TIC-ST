@@ -6,7 +6,7 @@ import { User, useAuth0 } from "@auth0/auth0-react";
 import logo from "../Images/loader.gif"
 
 import LiveGameCreateButton from "./LiveGameCreateButton";
-
+//This component lists all LiveGameBoxes which each represent 1 live game
 const LiveGameList = () => {
     const {user} = useAuth0();
 

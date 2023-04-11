@@ -14,7 +14,8 @@ import SecretObjectivePopularity from "./SecretObjectivePopularity";
 import FactionPlacement from "./FactionPlacement";
 import FactionTechPopularity from "./FactionTechPopularity";
 import FactionUnitPopularity from "./FactionUnitPopularity";
-
+//This component is the stats landing page, it handles all fetch requests before displaying all the graphs, letting users switch between them with 0 latency
+//at the cost of increased initial load times
 const StatsLanding = () => {
 
     const {assign} = useContext(LiveGameContext)

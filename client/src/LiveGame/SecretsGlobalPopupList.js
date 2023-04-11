@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SecretsBox from "./SecretsBox";
-
+//This component is the wrapper around the list of secret objectives for each player
 const SecretsGlobalPopupList = ({playerIndex, secretData, gameData, playerName, nickname}) => {
     
     

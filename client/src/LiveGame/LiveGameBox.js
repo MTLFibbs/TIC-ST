@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom"
-
+//This component is listed in LiveGamelist and is clickable to send the user to the specified live game
 const LiveGameBox = ({liveGames}) => {
     return(
         <Wrapper to = {`/livegame/${liveGames._id}`}>

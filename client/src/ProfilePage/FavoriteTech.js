@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+//This component displays the most used technology by the player on their profile
 const FavoriteTech = ({userGameData}) => {
     
     const mapped = userGameData.map((e,i) => {

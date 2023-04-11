@@ -5,7 +5,7 @@ import { LiveGameContext } from "../LiveGameContext";
 import { User, useAuth0 } from "@auth0/auth0-react";
 
 import LiveGameCreateForm from "./LiveGameCreateForm";
-
+//This component houses the form for the live game creation
 const LiveGameCreateButton = ({factions}) => {
     
     const {user} = useAuth0();

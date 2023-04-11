@@ -1,6 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 
+
+//This component is the log out button for the Auth0 integration of the profile
 const LogoutButton = () => {
     const {logout, isAuthenticated} = useAuth0();
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 import TechnologyButton from "./TechnologyButton";
-
+//This component houses the tech and unit list for each player
 const TechnologyWrapper = ({gameData, techData, unitData}) => {
 
     return (

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
-
+//This component increments and decrements the round counter
 const RoundCounter = ({gameData}) => {
     
     const [isFetch, setIsFetch] = useState(false);

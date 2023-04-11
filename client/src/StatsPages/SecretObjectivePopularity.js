@@ -11,7 +11,7 @@ import {
     ResponsiveContainer,
     Label
   } from "recharts";
-
+//This component is a graph on the stats landing page in the main section
 const SecretObjectivePopularity = ({techCount,objectiveCount, globalObjectives}) => {
 
     const objectives = globalObjectives.map ((e,i) => {

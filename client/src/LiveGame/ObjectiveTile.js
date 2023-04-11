@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import Select from 'react-select'
 import ObjectiveSelectedTile from "./ObjectiveSelectedTile";
-
+//This component is the objective tile when no objectives are selected
 const ObjectiveTile = ({gameData, number, objectiveData, drawn}) => {
 
     const {assign} = useContext(LiveGameContext)

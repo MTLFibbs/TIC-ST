@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import UnitBox from "./UnitBox";
 import TechBox from "./TechBox";
-
+//This component is the wrapper around the list of units and technologies for each player
 const TechnologiesUnitsPopupList = ({playerIndex, techData, faction, unitData, gameData}) => {
     
     

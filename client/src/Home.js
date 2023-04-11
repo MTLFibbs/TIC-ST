@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom"
 import { LiveGameProvider } from './LiveGameContext';
 import { useAuth0 } from "@auth0/auth0-react";
 
-
+//This component is what a user sees if they are logged in while trying to access the website
 const Home = () => {
     const {user} = useAuth0();
     return(
@@ -39,6 +39,7 @@ margin-right: 2vw;
 border: 2px solid white;
 color:white;
 border-radius: 16px;
+font-size:2vw;
 &:hover{
     background-color: #370D32;
 }

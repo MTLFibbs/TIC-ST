@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
-
+//This button handles the attribution of objectives to all players in the live game
 const ObjectiveButton = ({index, objectiveValue, nickname,gameData,scorerName, objective}) => {
     
     const [fetcherino, setFetcherino] = useState(false)

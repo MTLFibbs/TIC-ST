@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
-
+//This component attributes the score of support for all players
 const ThroneButton = ({index,nickname,supportedName, supporterName, gameData}) =>{
 
     const [fetches, setFetches] = useState(false);

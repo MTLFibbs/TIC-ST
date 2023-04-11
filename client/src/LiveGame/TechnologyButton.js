@@ -4,7 +4,7 @@ import { LiveGameContext } from "../LiveGameContext";
 import { useEffect, useState } from "react";
 
 import TechnologiesGlobalPopupList from "./TechnologiesUnitsPopupList";
-
+//This component opens the technologies popup for each player
 const TechnologyButton = ({playerIndex, gameData, playerName, nickname, techData, faction, unitData}) => {
     
     const [show, setShow] = useState(false);

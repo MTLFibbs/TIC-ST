@@ -11,7 +11,7 @@ import {
     ResponsiveContainer,
     Label
   } from "recharts";
-
+//This component is a graph on the stats landing page in the faction subsection
 const FactionTechPopularity = ({factionTechSpecific, factionTechs, selector, switcher}) => {
 
     const [data, setData] = useState(null);

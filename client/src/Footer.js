@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+//This footer contains a link to my github and linkedin as well as my name and date I made the website
+
 const Footer = () => {
     
     return(

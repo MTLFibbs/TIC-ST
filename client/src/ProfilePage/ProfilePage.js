@@ -6,7 +6,7 @@ import FavoriteFaction from "./FavoriteFaction";
 import FavoriteUnit from "./FavoriteUnit";
 import FavoriteTech from "./FavoriteTech";
 import logo from "../Images/loader.gif"
-
+//This is the landing page of the profile
 const ProfilePage = () => {
     const {loginWithRedirect, isAuthenticated, user} = useAuth0();
     

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+//This component displays the most used faction by the player on their profile
 const FavoriteFaction = ({userGameData}) => {
     
     const mapped = userGameData.map((e,i) => {

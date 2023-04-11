@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom"
 import { useState, useEffect, useContext } from "react";
 import { User, useAuth0 } from "@auth0/auth0-react";
-
+//This component lets the users switch between what is displayed on the stats landing page
 const StatsSwitch = ({selector, setSelector}) => {
 
     const factions = ["Arborec","Letnev","Muaat", 
@@ -14,9 +14,6 @@ const StatsSwitch = ({selector, setSelector}) => {
     const handleSelector = (selectorValue) => {
         setSelector(selectorValue)
     }
-
-
-
 
     return(
         <Wrapper>
