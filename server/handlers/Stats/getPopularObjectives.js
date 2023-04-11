@@ -12,7 +12,7 @@ const options = {
     useUnifiedTopology: true,
   };
 
-  // this endpoints gets a list of all techs
+  // this endpoints gets a list of all objectives researched in a game divided within objects in an array
 
   const getPopularObjectives = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);

@@ -44,8 +44,7 @@ const patchLiveGame = async (req,res) =>{
         const mappedPlayerCheck = playerCheck[0].players.map((e,i) => e.pointsOrigin.publicObjectives).flat();
 
         
-        //res.status(201).json({ status: 201, data: secretsPlayerCheck, message: `TEST`});
-
+        //If the updated variable is the objective, we check if it is trying to be added or removed to then add or substract points to the players that had this objective selected or not
         if(gameObjective){
             if(targetIncluded.includes(gameObjective) === true && manip ==="push"){
                 res.status(400).json({ status: 400, data: {Objective:gameObjective, alreadyIncludedObjectives: targetIncluded}, message: `Objective ${gameObjective} cannot be added to live game ${_id} as it already exists within the game`});
@@ -69,6 +68,7 @@ const patchLiveGame = async (req,res) =>{
             }
             
         }
+        //If the variable is to score Mecatol Rex points, we check the total amount of points the player has and whether to add or substract to the value
         else if(mecatolScore || mecatolScore === 0){
             if(mecatolScore >= 10){
                 res.status(400).json({ status: 400, data: {score: mecatolScore, player: player}, message: `A player can only score 10 points with Mecatol Rex`});
@@ -78,6 +78,7 @@ const patchLiveGame = async (req,res) =>{
             res.status(201).json({ status: 201, data: {result: result, player: nickname}, message: `Mecatol score for player ${nickname} updated in live game ${_id}`});
             }
         }
+        //If the variable is for the throne support, we check whether the supporter has already supported another player and whether to add or remove a point
         else if(supporter && supported){
             const throneCheck = await db.collection("LiveGames").find({_id:_id}).project({"drawnObjectives":0,"drawnSecretObjectives":0, "_id":0, "host":0, "gameName":0, "playerCount":0,"roundCount":0, "players":0 }).toArray();
             if(manip === "push"){
@@ -96,6 +97,7 @@ const patchLiveGame = async (req,res) =>{
                 res.status(201).json({ status: 201, data: {result:result, supporter: supporter, supported: supported}, message: `Supporter ${supporter} removed from the throne array of player ${supported}`});
             }
         }
+        //If the variable is to score an objective, we check whether it is to add or remove the score and the assignation of the objective in the scored array
         else if(scorer && scored){
             if(manip === "push" && objectiveValue === 2){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].pointsOrigin.publicObjectives": scored}}, {arrayFilters:[{"elem.nickname":{$eq:scorer}}]});
@@ -116,10 +118,12 @@ const patchLiveGame = async (req,res) =>{
                 res.status(201).json({ status: 201, data: {result:result, objective: scored, player: scorer}, message: `Objective ${scored} removed from the public objectives array of player ${scorer}`});
             }
         }
+        //If the variable is for the round, we check to either increment or decrement it
         else if(round || round === 0){
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{roundCount: round}});
             res.status(201).json({ status: 201, data: {result: result,}, message: `Round updated to ${round} in live game ${_id}`});
         }
+        //If the variable is for unit research, we check to whether push or pull it from the specified player's array
         else if(unit){
             if(manip === "push"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].unitsUpgraded": unit}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
@@ -132,6 +136,7 @@ const patchLiveGame = async (req,res) =>{
                 res.status(201).json({ status: 201, data: {result:result, unit: unit, player: player}, message: `Unit ${unit} removed from the unit array of player ${player}`});
             }
         }
+        //If the variable is for tech research, we check to whether push or pull it from the specified player's array
         else if(tech){
             if(manip === "push"){
                 const result = await db.collection("LiveGames").updateOne({_id: _id},{$push:{"players.$[elem].techsUpgraded": tech}}, {arrayFilters:[{"elem.nickname":{$eq:player}}]});
@@ -144,6 +149,7 @@ const patchLiveGame = async (req,res) =>{
                 res.status(201).json({ status: 201, data: {result:result, tech: tech, player: player}, message: `Tech ${tech} removed from the tech array of player ${player}`});
             }
         }
+        //If the manip is to score secret objectives, we check to whether push or pull it from the specified player's array
         else if(secret){
             const secretsPlayerCheck = playerCheck[0].players[playerIndex].pointsOrigin.secretObjectives
             if(manip === "push"){
@@ -165,6 +171,7 @@ const patchLiveGame = async (req,res) =>{
                 res.status(201).json({ status: 201, data: {result:result, secret: secret, player: player}, message: `Secret objective ${secret} removed from the objectives array of player ${player}`});
             }
         }
+        //If the manip is to update or lock in points, we make sure to set the points to the specified amount
         else if(points){
             const result = await db.collection("LiveGames").updateOne({_id:_id},{$set:{"players.$[elem].points": points}},{arrayFilters:[{"elem.nickname":{$eq:nickname}}]})
             res.status(201).json({status: 201, data: result, message:`Points updated to ${points} for player ${nickname}`});

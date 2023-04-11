@@ -13,7 +13,7 @@ const options = {
   };
 
 
-  //This endpoint gets an array of the points values of each player
+  //This endpoint gets an array of the points values of each player in each game
 
 const getFactionVP = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);

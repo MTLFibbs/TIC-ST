@@ -13,7 +13,7 @@ const options = {
   };
 
 
-  //This endpoint gets an array of all factions and their average pickrate
+  //This endpoint gets an array of all factions and their average pickrate separated in an array per game
 
 const getFactionPopularity = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);

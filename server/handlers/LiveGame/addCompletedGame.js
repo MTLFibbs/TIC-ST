@@ -12,7 +12,7 @@ const options = {
     useUnifiedTopology: true,
   };
 
-//This endpoint   
+//This endpoint transfers the specific document from the LiveGames collection to the CompletedGames collection while checking if it passes point requirements
 const addCompletedGame = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);
 

@@ -12,7 +12,7 @@ const options = {
     useUnifiedTopology: true,
   };
 
-  // this endpoints gets a list of all techs
+  // this endpoints gets a list of all secret objectives for games containing the specified :user
 
   const getPopularSecretObjectivesUser = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);

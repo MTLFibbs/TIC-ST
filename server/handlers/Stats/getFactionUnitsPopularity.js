@@ -11,7 +11,7 @@ const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   };
-
+// This endpoint gets an array of all games with each object being the faction and their researched units
 const getFactionUnitsPopularity = async (req,res) => {
     const client = new MongoClient(MONGO_URI,options);
     

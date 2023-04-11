@@ -44,13 +44,14 @@ const StatsSwitch = ({selector, setSelector}) => {
 };
 
 const Wrapper = styled.div`
-width: 100vw;
+width: 99vw;
 height: 10vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 background-color: #25282d;
+box-shadow: inset 0 0 10px black;
 `
 
 const SelectorWrapper = styled.div`
@@ -104,8 +105,8 @@ justify-content:center;
 align-items:center;
 height: 4vh;
 width: 100%;
-margin-left: 0.6vw;
-margin-right: 0.6vw;
+margin-left: 0.2vw;
+margin-right: 0.2vw;
 border-radius:16px;
 cursor:pointer;
 &:hover{
